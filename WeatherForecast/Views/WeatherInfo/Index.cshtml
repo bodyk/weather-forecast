@@ -36,40 +36,41 @@
                 </tr>
             </table>
         </div>
+        <div id="cityInputForm">
+            @using (Html.BeginForm("Index", "WeatherInfo"))
+            {
 
-        @using (Html.BeginForm("Index", "WeatherInfo"))
-        {
-            <div>
-                @Html.TextBox("city", null, new { @class = "" })
-            </div>
-            <input type="submit" value="Show city weather" class="btn-success" />
-        }
+                <div id="cityEditDiv">
+                    @Html.TextBox("city", null, new { @class = "form-control col-xs-12", id = "cityEdit" })
+                </div>
+                <div id="citySubmitDiv">
+                    <input type="submit" value="Show weather" class="form-control btn-success" id="btnShow" />
+                </div>
 
-        @if (@Model?.weatherInfo?.cnt != 0)
-        {
-            <div>
-                <table class="table table-striped">
-                    <tr>
-                        <th>@Html.ActionLink("Current Day", "Index", new { time = 1, city = @Model?.weatherInfo?.city?.name })</th>
-                        <th>@Html.ActionLink("3 Days", "Index", new { time = 3, city = @Model?.weatherInfo?.city?.name })</th>
-                        <th>@Html.ActionLink("7 Days", "Index", new { time = 7, city = @Model?.weatherInfo?.city?.name })</th>
-                    </tr>
-                </table>
-            </div>
-        }
+            }
+        </div>
     </div>
     @if (@Model?.weatherInfo?.cnt != 0)
     {
-        <h3>City:</h3>
-        <h2>@cityName</h2>
+        <h3>City: @cityName</h3>
 
-        <h3>Country code:</h3>
-        <h2>@countryCode</h2>
+        <h3>Country code: @countryCode</h3>
+
+        <div>
+            <table class="table table-striped">
+                <tr>
+                    <th>@Html.ActionLink("Current Day", "Index", new { time = 1, city = @Model?.weatherInfo?.city?.name })</th>
+                    <th>@Html.ActionLink("3 Days", "Index", new { time = 3, city = @Model?.weatherInfo?.city?.name })</th>
+                    <th>@Html.ActionLink("7 Days", "Index", new { time = 7, city = @Model?.weatherInfo?.city?.name })</th>
+                </tr>
+            </table>
+        </div>
+        <h4>Weather forecast for @Model.weatherInfo.cnt days</h4>
         <div class="divParent">
             @foreach (var info in @Model.weatherInfo.list)
             {
-                    <table class="table table-responsive">
-                        <thead>
+                <table class="table table-condensed">
+                    <thead>
                         <tr>
                             <th>
                                 <script> document.write(timeConverter(@info.dt)) </script>
@@ -78,30 +79,32 @@
                                 <img src="@($"http://openweathermap.org/img/w/{@info.weather[0].icon}.png")" alt="@info.weather[0].description" />
                             </th>
                         </tr>
-                        </thead>
-                        <tbody>
+                    </thead>
+                    <tbody>
                         <tr>
-                            <td>Temperature:</td>
-                            <td>@info.temp.day</td>
+                            <td class="divTableKey">Temperature:</td>
+                            <td class="divTableValue">@info.temp.day °С</td>
                         </tr>
                         <tr>
-                            <td>Humidity:</td>
-                            <td>@info.humidity</td>
+                            <td class="divTableKey">Humidity:</td>
+                            <td class="divTableValue">@info.humidity %</td>
                         </tr>
                         <tr>
-                            <td>Pressure:</td>
-                            <td>@info.pressure</td>
+                            <td class="divTableKey">Pressure:</td>
+                            <td class="divTableValue">@info.pressure hPa</td>
                         </tr>
                         <tr>
-                            <td>Wind Speed:</td>
-                            <td>@info.speed</td>
+                            <td class="divTableKey">Wind Speed:</td>
+                            <td class="divTableValue">@info.speed meter/sec</td>
                         </tr>
                         <tr>
-                            <td>Clouds:</td>
-                            <td>@info.clouds</td>
+                            <td class="divTableKey">Clouds:</td>
+                            <td class="divTableValue">@info.clouds %</td>
                         </tr>
-                        </tbody>
-                    </table>
+                    </tbody>
+                </table>
+
+                <hr class="half-rule" />
             }
         </div>
     }
