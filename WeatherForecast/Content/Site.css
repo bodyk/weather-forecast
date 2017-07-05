@@ -22,3 +22,36 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.divTable {
+    display: table;
+    width: 100%;
+    border: black;
+    border-style: solid;
+    border-width: medium;
+}
+
+.divTableRow {
+    display: table-cell;
+}
+
+.divTableHeading {
+    background-color: #EEE;
+    display: table-header-group;
+}
+
+.divTableCell, .divTableHead {
+    border: 1px solid #000080;
+    display: table-row;
+    padding: 3px 10px;
+    float: left;
+}
+
+.divParent {
+    display: flex;
+    flex-direction: row;
+}
+
+.divParent > .divTableCell {
+    flex-grow: 1;
+}

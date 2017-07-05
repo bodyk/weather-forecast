@@ -23,79 +23,86 @@
         return time;
     }
 </script>
-
-<div id="apiDiv">
-    <h4>Select the City for Weather Report</h4>
-    <div>
-        @Html.ActionLink("Kiev", "Index", new { city = "Kiev" })<br />
-        @Html.ActionLink("Lviv", "Index", new { city = "Lviv" })<br />
-        @Html.ActionLink("Kharkiv", "Index", new { city = "Kharkiv" })<br />
-        @Html.ActionLink("Dnipropetrovsk", "Index", new { city = "Dnipropetrovsk" })<br />
-        @Html.ActionLink("Odessa", "Index", new { city = "Odessa" })<br />
-    </div>
-
-    @using (Html.BeginForm("Index", "WeatherInfo"))
-    {
-        <div>
-            @Html.TextBox("city", null)
+<div>
+    <div class="well well-sm">
+        <h4>Select the City for Weather Report</h4>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <tr>
+                    <th>@Html.ActionLink("Kiev", "Index", new { city = "Kiev" })</th>
+                    <th>@Html.ActionLink("Lviv", "Index", new { city = "Lviv" })</th>
+                    <th>@Html.ActionLink("Kharkiv", "Index", new { city = "Kharkiv" })</th>
+                    <th>@Html.ActionLink("Dnipropetrovsk", "Index", new { city = "Dnipropetrovsk" })</th>
+                    <th>@Html.ActionLink("Odessa", "Index", new { city = "Odessa" })</th>
+                </tr>
+            </table>
         </div>
-        <input type="submit" value="Submit" />
-    }
 
+        @using (Html.BeginForm("Index", "WeatherInfo"))
+        {
+            <div>
+                @Html.TextBox("city", null, new { @class = "" })
+            </div>
+            <input type="submit" value="Show city weather" class="btn-success" />
+        }
+
+        @if (@Model?.weatherInfo?.cnt != 0)
+        {
+            <div>
+                <table class="table table-striped">
+                    <tr>
+                        <th>@Html.ActionLink("Current Day", "Index", new { time = 1, city = @Model?.weatherInfo?.city?.name })</th>
+                        <th>@Html.ActionLink("3 Days", "Index", new { time = 3, city = @Model?.weatherInfo?.city?.name })</th>
+                        <th>@Html.ActionLink("7 Days", "Index", new { time = 7, city = @Model?.weatherInfo?.city?.name })</th>
+                    </tr>
+                </table>
+            </div>
+        }
+    </div>
     @if (@Model?.weatherInfo?.cnt != 0)
     {
-        <div>
-            @Html.ActionLink("Current Day", "Index", new { time = 1, city = @Model?.weatherInfo?.city?.name })<br />
-            @Html.ActionLink("3 Days", "Index", new { time = 3, city = @Model?.weatherInfo?.city?.name })<br />
-            @Html.ActionLink("7 Days", "Index", new { time = 7, city = @Model?.weatherInfo?.city?.name })<br />
+        <h3>City:</h3>
+        <h2>@cityName</h2>
+
+        <h3>Country code:</h3>
+        <h2>@countryCode</h2>
+        <div class="divParent">
+            @foreach (var info in @Model.weatherInfo.list)
+            {
+                <div class="divTableCell">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>
+                                <script> document.write(timeConverter(@info.dt)) </script>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Temperature:</td>
+                            <td>@info.temp.day</td>
+                        </tr>
+                        <tr>
+                            <td>Humidity:</td>
+                            <td>@info.humidity</td>
+                        </tr>
+                        <tr>
+                            <td>Pressure:</td>
+                            <td>@info.pressure</td>
+                        </tr>
+                        <tr>
+                            <td>Wind Speed:</td>
+                            <td>@info.speed</td>
+                        </tr>
+                        <tr>
+                            <td>Clouds:</td>
+                            <td>@info.clouds</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            }
         </div>
-        <table>
-            <tr>
-                <th>Weather Description</th>
-            </tr>
-            <tr>
-                <td>City:</td>
-                <td>@cityName</td>
-            </tr>
-            <tr>
-                <td>Country code:</td>
-                <td>@countryCode</td>
-            </tr>
-            <tr>
-                @foreach (var info in @Model.weatherInfo.list)
-                {
-                    <tr>
-                        <td><hr/></td>
-                    </tr>
-                    <tr>
-                        <td>Dt:</td>
-                        <td>
-                            <script> document.write(timeConverter(@info.dt)) </script>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Temperature:</td>
-                        <td>@info.temp.day</td>
-                    </tr>
-                    <tr>
-                        <td>Humidity:</td>
-                        <td>@info.humidity</td>
-                    </tr>
-                    <tr>
-                        <td>Pressure:</td>
-                        <td>@info.pressure</td>
-                    </tr>
-                    <tr>
-                        <td>Wind Speed:</td>
-                        <td>@info.speed</td>
-                    </tr>
-                    <tr>
-                        <td>Clouds:</td>
-                        <td>@info.clouds</td>
-                    </tr>
-                }
-
-            </table>
     }
-
 </div>
