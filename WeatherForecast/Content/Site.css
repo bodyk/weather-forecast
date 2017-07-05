@@ -22,3 +22,61 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.divTableRow {
+    display: table-cell;
+}
+
+.divTableHeading {
+    background-color: #EEE;
+    display: table-header-group;
+}
+
+.divTableCell, .divTableHead {
+    border: 1px solid #000080;
+    display: table-row;
+    margin: auto;
+    width: calc(100% - 40px);
+}
+
+.divParent {
+    font-size: 150%;
+}
+
+.divTableKey {
+    width: 100%;
+    text-align: left;
+}
+
+.divTableValue {
+    width: 100%;
+    text-align: left;
+}
+
+.cityInputForm {
+    text-align: center;
+}
+
+#cityEditDiv, #citySubmitDiv {
+    display: inline-block;
+    text-align: center;
+}
+
+hr.half-rule {
+    height: 30px;
+    border-style: solid;
+    border-color: #8c8b8b;
+    border-width: 1px 0 0 0;
+    border-radius: 20px;
+}
+
+hr.half-rule:before {
+    display: block;
+    content: "";
+    height: 30px;
+    margin-top: -31px;
+    border-style: solid;
+    border-color: #8c8b8b;
+    border-width: 0 0 1px 0;
+    border-radius: 20px;
+}
