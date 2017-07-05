@@ -43,15 +43,11 @@ textarea {
 .divTableCell, .divTableHead {
     border: 1px solid #000080;
     display: table-row;
-    padding: 3px 10px;
-    float: left;
+    margin: auto;
+    width: calc(100% - 40px);
 }
 
 .divParent {
     display: flex;
-    flex-direction: row;
-}
-
-.divParent > .divTableCell {
-    flex-grow: 1;
+    flex-direction: column;
 }

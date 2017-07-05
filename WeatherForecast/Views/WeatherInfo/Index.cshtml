@@ -25,7 +25,6 @@
 </script>
 <div>
     <div class="well well-sm">
-        <h4>Select the City for Weather Report</h4>
         <div class="table-responsive">
             <table class="table table-striped">
                 <tr>
@@ -69,12 +68,14 @@
         <div class="divParent">
             @foreach (var info in @Model.weatherInfo.list)
             {
-                <div class="divTableCell">
-                    <table>
+                    <table class="table table-responsive">
                         <thead>
                         <tr>
                             <th>
                                 <script> document.write(timeConverter(@info.dt)) </script>
+                            </th>
+                            <th>
+                                <img src="@($"http://openweathermap.org/img/w/{@info.weather[0].icon}.png")" alt="@info.weather[0].description" />
                             </th>
                         </tr>
                         </thead>
@@ -101,7 +102,6 @@
                         </tr>
                         </tbody>
                     </table>
-                </div>
             }
         </div>
     }
