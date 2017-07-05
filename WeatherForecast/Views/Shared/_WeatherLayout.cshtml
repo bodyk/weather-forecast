@@ -1,0 +1,29 @@
+﻿
+@model WeatherForecast.Models.WeatherInfo
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var apiResponse = Model?.apiResponse ?? "";
+}
+<div id="apiDiv">
+    <h4>Select the City for Weather Report</h4>
+
+    @{
+        List<SelectListItem> listItems = new List<SelectListItem>();
+
+        foreach (var city in Model.strartupCities)
+        {
+            listItems.Add(new SelectListItem() { Text = city, Value = city });
+        }
+    }
+
+    @using (Html.BeginForm("Index", "WeatherInfo"))
+    {
+        <div class="col-md-4">
+            @Html.DropDownList("city", @listItems, "Select city")
+        </div>
+        <input type="submit" value="Submit" />
+    }
+
+    @RenderBody()
+</div>

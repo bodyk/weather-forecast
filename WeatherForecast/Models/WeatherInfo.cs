@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using WeatherForecast.HelperClasses;
 
 namespace WeatherForecast.Models
 {
@@ -10,6 +9,15 @@ namespace WeatherForecast.Models
     {
         public string apiResponse { get; set; } = "";
 
-        public List<RootWeatherInfo> infos { get; set; } = new List<RootWeatherInfo>();
+        public RootWeatherInfo weatherInfo { get; set; } = new RootWeatherInfo();
+
+        public List<string> strartupCities = new List<string>
+        {
+            "Kiev",
+            "Lviv",
+            "Kharkiv",
+            "Dnipropetrovsk",
+            "Odessa"
+        };
     }
 }
