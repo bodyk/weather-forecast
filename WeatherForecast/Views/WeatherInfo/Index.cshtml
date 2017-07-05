@@ -6,17 +6,32 @@
     ViewBag.Title = "Index";
 
     string cityName = @Model?.weatherInfo?.city?.name ?? "";
-    int population = @Model?.weatherInfo?.city?.population ?? 0;
+    string countryCode = @Model?.weatherInfo?.city?.country ?? "";
 }
 
+<script>
+    function timeConverter(unixTimestamp) {
+        var a = new Date(unixTimestamp * 1000);
+        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        var year = a.getFullYear();
+        var month = months[a.getMonth()];
+        var date = a.getDate();
+        var hour = a.getHours();
+        var min = a.getMinutes();
+        var sec = a.getSeconds();
+        var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
+        return time;
+    }
+</script>
+
 <div id="apiDiv">
-<h4>Select the City for Weather Report</h4>
+    <h4>Select the City for Weather Report</h4>
     <div>
-            @Html.ActionLink("Kiev", "Index", new { city = "Kiev" })<br/>
-            @Html.ActionLink("Lviv", "Index", new { city = "Lviv" })<br />
-            @Html.ActionLink("Kharkiv", "Index", new { city = "Kharkiv" })<br />
-            @Html.ActionLink("Dnipropetrovsk", "Index", new { city = "Dnipropetrovsk" })<br />
-            @Html.ActionLink("Odessa", "Index", new { city = "Odessa" })<br />
+        @Html.ActionLink("Kiev", "Index", new { city = "Kiev" })<br />
+        @Html.ActionLink("Lviv", "Index", new { city = "Lviv" })<br />
+        @Html.ActionLink("Kharkiv", "Index", new { city = "Kharkiv" })<br />
+        @Html.ActionLink("Dnipropetrovsk", "Index", new { city = "Dnipropetrovsk" })<br />
+        @Html.ActionLink("Odessa", "Index", new { city = "Odessa" })<br />
     </div>
 
     @using (Html.BeginForm("Index", "WeatherInfo"))
@@ -26,7 +41,7 @@
         </div>
         <input type="submit" value="Submit" />
     }
-    
+
     @if (@Model?.weatherInfo?.cnt != 0)
     {
         <div>
@@ -43,25 +58,24 @@
                 <td>@cityName</td>
             </tr>
             <tr>
-                <td>Population:</td>
-                <td>@population</td>
+                <td>Country code:</td>
+                <td>@countryCode</td>
             </tr>
             <tr>
-                <td>Population:</td>
                 @foreach (var info in @Model.weatherInfo.list)
                 {
-                    <td><hr/></td>
                     <tr>
-                        <td>Clouds:</td>
-                        <td>@info.clouds</td>
-                    </tr>
-                    <tr>
-                        <td>Deg:</td>
-                        <td>@info.deg</td>
+                        <td><hr/></td>
                     </tr>
                     <tr>
                         <td>Dt:</td>
-                        <td>@info.dt</td>
+                        <td>
+                            <script> document.write(timeConverter(@info.dt)) </script>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Temperature:</td>
+                        <td>@info.temp.day</td>
                     </tr>
                     <tr>
                         <td>Humidity:</td>
@@ -72,12 +86,16 @@
                         <td>@info.pressure</td>
                     </tr>
                     <tr>
-                        <td>Speed:</td>
+                        <td>Wind Speed:</td>
                         <td>@info.speed</td>
                     </tr>
+                    <tr>
+                        <td>Clouds:</td>
+                        <td>@info.clouds</td>
+                    </tr>
                 }
-            </tr>
-        </table>
-    }    
+
+            </table>
+    }
 
 </div>
