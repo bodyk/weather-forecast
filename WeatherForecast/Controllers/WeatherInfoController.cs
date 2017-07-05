@@ -21,30 +21,10 @@ namespace WeatherForecast.Controllers
             _infoService = new WeatherInfoService();
         }
 
-        // GET: OpenWeatherMap
-        public ActionResult Index()
+        public ActionResult Index(WeatherInfo weatherInfo, string city, int time = 1)
         {
-            var weatherInfo = _infoService.GetInfos();
+            weatherInfo.weatherInfo = _infoService.GetInfoByCity(city, time);
             return View(weatherInfo);
-        }
-
-        [HttpPost]
-        public ActionResult Index(WeatherInfo weatherInfo, string city)
-        {
-            if (city != null)
-            {
-                weatherInfo.weatherInfo = _infoService.GetInfoByCity(city, 1);
-                return View("CurrentDayWeather", weatherInfo);
-            }
-            else
-            {
-                if (Request.Form["submit"] != null)
-                {
-                    weatherInfo.apiResponse = "► Select City";
-                }
-                return View();
-            }
-            
         }
 
     }

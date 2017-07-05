@@ -2,7 +2,82 @@
 @model WeatherForecast.Models.WeatherInfo
 
 @{
-    Layout = "~/Views/Shared/_WeatherLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Index";
-    var apiResponse = Model?.apiResponse ?? "";
+
+    string cityName = @Model?.weatherInfo?.city?.name ?? "";
+    int population = @Model?.weatherInfo?.city?.population ?? 0;
 }
+
+<div id="apiDiv">
+<h4>Select the City for Weather Report</h4>
+    <div>
+            @Html.ActionLink("Kiev", "Index", new { city = "Kiev" })<br/>
+            @Html.ActionLink("Lviv", "Index", new { city = "Lviv" })<br />
+            @Html.ActionLink("Kharkiv", "Index", new { city = "Kharkiv" })<br />
+            @Html.ActionLink("Dnipropetrovsk", "Index", new { city = "Dnipropetrovsk" })<br />
+            @Html.ActionLink("Odessa", "Index", new { city = "Odessa" })<br />
+    </div>
+
+    @using (Html.BeginForm("Index", "WeatherInfo"))
+    {
+        <div>
+            @Html.TextBox("city", null)
+        </div>
+        <input type="submit" value="Submit" />
+    }
+    
+    @if (@Model?.weatherInfo?.cnt != 0)
+    {
+        <div>
+            @Html.ActionLink("Current Day", "Index", new { time = 1, city = @Model?.weatherInfo?.city?.name })<br />
+            @Html.ActionLink("3 Days", "Index", new { time = 3, city = @Model?.weatherInfo?.city?.name })<br />
+            @Html.ActionLink("7 Days", "Index", new { time = 7, city = @Model?.weatherInfo?.city?.name })<br />
+        </div>
+        <table>
+            <tr>
+                <th>Weather Description</th>
+            </tr>
+            <tr>
+                <td>City:</td>
+                <td>@cityName</td>
+            </tr>
+            <tr>
+                <td>Population:</td>
+                <td>@population</td>
+            </tr>
+            <tr>
+                <td>Population:</td>
+                @foreach (var info in @Model.weatherInfo.list)
+                {
+                    <td><hr/></td>
+                    <tr>
+                        <td>Clouds:</td>
+                        <td>@info.clouds</td>
+                    </tr>
+                    <tr>
+                        <td>Deg:</td>
+                        <td>@info.deg</td>
+                    </tr>
+                    <tr>
+                        <td>Dt:</td>
+                        <td>@info.dt</td>
+                    </tr>
+                    <tr>
+                        <td>Humidity:</td>
+                        <td>@info.humidity</td>
+                    </tr>
+                    <tr>
+                        <td>Pressure:</td>
+                        <td>@info.pressure</td>
+                    </tr>
+                    <tr>
+                        <td>Speed:</td>
+                        <td>@info.speed</td>
+                    </tr>
+                }
+            </tr>
+        </table>
+    }    
+
+</div>

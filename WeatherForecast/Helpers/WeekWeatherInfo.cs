@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace WeatherForecast.Models
+namespace WeatherForecast.Helpers
 {
-    public class RootWeatherInfo
+    public class WeekWeatherInfo
     {
         public City city { get; set; }
         public string cod { get; set; }
