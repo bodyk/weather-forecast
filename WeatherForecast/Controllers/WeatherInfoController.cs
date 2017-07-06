@@ -23,7 +23,14 @@ namespace WeatherForecast.Controllers
 
         public ActionResult Index(WeatherInfo weatherInfo, string city, int time = 1)
         {
-            weatherInfo.weatherInfo = _infoService.GetInfoByCity(city, time);
+            try
+            {
+                weatherInfo.detailedWeatherInfo = _infoService.GetInfoByCity(city, time);
+            }
+            catch (Exception)
+            {
+                return View("Error");
+            }
             return View(weatherInfo);
         }
 

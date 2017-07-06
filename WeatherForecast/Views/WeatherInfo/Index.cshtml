@@ -5,8 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Index";
 
-    string cityName = @Model?.weatherInfo?.city?.name ?? "";
-    string countryCode = @Model?.weatherInfo?.city?.country ?? "";
+    string cityName = @Model?.detailedWeatherInfo?.city?.name ?? "";
+    string countryCode = @Model?.detailedWeatherInfo?.city?.country ?? "";
 }
 
 <script>
@@ -50,15 +50,15 @@
             }
         </div>
     </div>
-    @if (@Model?.weatherInfo?.cnt != 0)
+    @if (@Model?.detailedWeatherInfo?.cnt != 0)
     {
 
         <div>
             <table class="table table-striped">
                 <tr>
-                    <th>@Html.ActionLink("Current Day", "Index", new { time = 1, city = @Model?.weatherInfo?.city?.name })</th>
-                    <th>@Html.ActionLink("3 Days", "Index", new { time = 3, city = @Model?.weatherInfo?.city?.name })</th>
-                    <th>@Html.ActionLink("7 Days", "Index", new { time = 7, city = @Model?.weatherInfo?.city?.name })</th>
+                    <th>@Html.ActionLink("Current Day", "Index", new { time = 1, city = @Model?.detailedWeatherInfo?.city?.name })</th>
+                    <th>@Html.ActionLink("3 Days", "Index", new { time = 3, city = @Model?.detailedWeatherInfo?.city?.name })</th>
+                    <th>@Html.ActionLink("7 Days", "Index", new { time = 7, city = @Model?.detailedWeatherInfo?.city?.name })</th>
                 </tr>
             </table>
         </div>
@@ -71,9 +71,9 @@
                 </tr>
             </table>
         </div>
-        <h4>Weather forecast for @Model.weatherInfo.cnt days</h4>
+        <h4>Weather forecast for @Model.detailedWeatherInfo.cnt days</h4>
         <div class="divParent">
-            @foreach (var info in @Model.weatherInfo.list)
+            @foreach (var info in @Model.detailedWeatherInfo.list)
                 {
                 <table class="table table-condensed">
                     <thead>

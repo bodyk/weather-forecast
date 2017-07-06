@@ -149,7 +149,7 @@
     <Compile Include="Helpers\Coord.cs" />
     <Compile Include="Helpers\CurrentDayWeather.cs" />
     <Compile Include="Helpers\ListWeather.cs" />
-    <Compile Include="Helpers\WeekWeatherInfo.cs" />
+    <Compile Include="Helpers\DetailedWeatherInfo.cs" />
     <Compile Include="Helpers\Weather.cs" />
     <Compile Include="Models\WeatherInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -195,7 +195,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\OpenWeatherMap\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
