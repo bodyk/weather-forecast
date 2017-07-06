@@ -25,10 +25,10 @@ namespace WeatherForecast.Services
             return weatherInfo;
         }
 
-        public WeekWeatherInfo GetInfoByCity(string cityName, int countDays)
+        public DetailedWeatherInfo GetInfoByCity(string cityName, int countDays)
         {
-            WeekWeatherInfo rootObject = new WeekWeatherInfo();
-            if (cityName != null)
+            DetailedWeatherInfo rootObject = new DetailedWeatherInfo();
+            if (!string.IsNullOrEmpty(cityName))
             {
                 /*Calling API http://openweathermap.org/api */
                 string apiKey = "af9f860fa9d00a8c953339a9a354d6b4";
@@ -44,7 +44,7 @@ namespace WeatherForecast.Services
                 /*End*/
 
                 /*http://json2csharp.com*/
-                rootObject = JsonConvert.DeserializeObject<WeekWeatherInfo>(apiResponse);
+                rootObject = JsonConvert.DeserializeObject<DetailedWeatherInfo>(apiResponse);
             }
 
             return rootObject;

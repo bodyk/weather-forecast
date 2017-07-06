@@ -8,6 +8,6 @@ namespace WeatherForecast.Models
 {
     public class WeatherInfo
     {
-        public WeekWeatherInfo weatherInfo { get; set; } = new WeekWeatherInfo();
+        public DetailedWeatherInfo detailedWeatherInfo { get; set; } = new DetailedWeatherInfo();
     }
 }

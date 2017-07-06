@@ -28,7 +28,6 @@ textarea {
 }
 
 .divTableHeading {
-    background-color: #EEE;
     display: table-header-group;
 }
 
@@ -79,4 +78,39 @@ hr.half-rule:before {
     border-color: #8c8b8b;
     border-width: 0 0 1px 0;
     border-radius: 20px;
+}
+
+table {
+    color: #333;
+    font-family: Helvetica, Arial, sans-serif;
+    width: 640px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background-color: cadetblue;
+}
+
+td, th {
+    height: 30px;
+}
+
+td {
+    background: #FAFAFA;
+    text-align: center;
+}
+
+tr:nth-child(even) td {
+    background: #F1F1F1;
+}
+
+tr:nth-child(odd) td {
+    background: #FEFEFE;
+}
+
+tr td:hover {
+    background: #666;
+    color: #FFF;
+}
+
+#countryCode {
+    text-align: right;
 }
