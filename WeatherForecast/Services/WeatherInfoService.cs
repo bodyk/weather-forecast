@@ -28,7 +28,7 @@ namespace WeatherForecast.Services
         public WeekWeatherInfo GetInfoByCity(string cityName, int countDays)
         {
             WeekWeatherInfo rootObject = new WeekWeatherInfo();
-            if (cityName != null)
+            if (!string.IsNullOrEmpty(cityName))
             {
                 /*Calling API http://openweathermap.org/api */
                 string apiKey = "af9f860fa9d00a8c953339a9a354d6b4";

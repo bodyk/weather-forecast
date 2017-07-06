@@ -41,7 +41,7 @@
             {
 
                 <div id="cityEditDiv">
-                    @Html.TextBox("city", null, new { @class = "form-control col-xs-12", id = "cityEdit" })
+                    @Html.TextBox("city", null, new { @class = "form-control col-xs-12", id = "cityEdit", required = "required" })
                 </div>
                 <div id="citySubmitDiv">
                     <input type="submit" value="Show weather" class="form-control btn-success" id="btnShow" />
@@ -52,9 +52,6 @@
     </div>
     @if (@Model?.weatherInfo?.cnt != 0)
     {
-        <h3>City: @cityName</h3>
-
-        <h3>Country code: @countryCode</h3>
 
         <div>
             <table class="table table-striped">
@@ -65,10 +62,19 @@
                 </tr>
             </table>
         </div>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <tr>
+                    <th><h3>@cityName</h3></th>
+
+                    <th id="countryCode"><h3>@countryCode</h3></th>
+                </tr>
+            </table>
+        </div>
         <h4>Weather forecast for @Model.weatherInfo.cnt days</h4>
         <div class="divParent">
             @foreach (var info in @Model.weatherInfo.list)
-            {
+                {
                 <table class="table table-condensed">
                     <thead>
                         <tr>
@@ -76,7 +82,8 @@
                                 <script> document.write(timeConverter(@info.dt)) </script>
                             </th>
                             <th>
-                                <img src="@($"http://openweathermap.org/img/w/{@info.weather[0].icon}.png")" alt="@info.weather[0].description" />
+                                <img src="@($"http://openweathermap.org/img/w/{@info.weather[0].icon}.png")"
+                                     alt="@info.weather[0].description" />
                             </th>
                         </tr>
                     </thead>
@@ -104,7 +111,7 @@
                     </tbody>
                 </table>
 
-                <hr class="half-rule" />
+                    <hr class="half-rule" />
             }
         </div>
     }
