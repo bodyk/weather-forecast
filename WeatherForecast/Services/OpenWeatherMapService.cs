@@ -13,21 +13,18 @@ using WeatherForecast.Models;
 
 namespace WeatherForecast.Services
 {
-    public class WeatherInfoService
+    public class OpenWeatherMapService : IWeatherService
     {
-        private WeatherInfo weatherInfo;
+        private readonly WeatherInfo _weatherInfo;
 
-        private static HttpClient _client;
-
-        public WeatherInfoService()
+        public OpenWeatherMapService()
         {
-            weatherInfo = new WeatherInfo();
-            _client = new HttpClient();
+            _weatherInfo = new WeatherInfo();
         }
 
         public WeatherInfo GetInfos()
         {
-            return weatherInfo;
+            return _weatherInfo;
         }
 
         public async Task<DetailedWeatherInfo> GetInfoByCity(string cityName, int countDays)

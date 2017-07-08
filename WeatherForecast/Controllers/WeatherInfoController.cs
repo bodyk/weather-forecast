@@ -15,12 +15,11 @@ namespace WeatherForecast.Controllers
 {
     public class WeatherInfoController : Controller
     {
-        private readonly WeatherInfoService _infoService;
+        private readonly IWeatherService _infoService;
 
-        public WeatherInfoController()
+        public WeatherInfoController(IWeatherService serviceParam)
         {
-            _infoService = new WeatherInfoService();
-            
+            _infoService = serviceParam;
         }
 
         public async Task<ActionResult> Index(WeatherInfo weatherInfo, string city, int time = 1)
