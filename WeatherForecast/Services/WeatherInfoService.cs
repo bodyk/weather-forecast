@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using Newtonsoft.Json;
 using WeatherForecast.Helpers;
@@ -15,9 +17,12 @@ namespace WeatherForecast.Services
     {
         private WeatherInfo weatherInfo;
 
+        private static HttpClient _client;
+
         public WeatherInfoService()
         {
             weatherInfo = new WeatherInfo();
+            _client = new HttpClient();
         }
 
         public WeatherInfo GetInfos()
@@ -25,26 +30,25 @@ namespace WeatherForecast.Services
             return weatherInfo;
         }
 
-        public DetailedWeatherInfo GetInfoByCity(string cityName, int countDays)
+        public async Task<DetailedWeatherInfo> GetInfoByCity(string cityName, int countDays)
         {
             DetailedWeatherInfo rootObject = new DetailedWeatherInfo();
             if (!string.IsNullOrEmpty(cityName))
             {
-                /*Calling API http://openweathermap.org/api */
-                string apiKey = "af9f860fa9d00a8c953339a9a354d6b4";
-                HttpWebRequest apiRequest = 
-                    WebRequest.Create($"http://api.openweathermap.org/data/2.5/forecast/daily?q={cityName}&appid={apiKey}&units=metric&cnt={countDays}") as HttpWebRequest;
-
-                string apiResponse = "";
-                using (HttpWebResponse response = apiRequest.GetResponse() as HttpWebResponse)
+                using (HttpClient client = new HttpClient())
                 {
-                    StreamReader reader = new StreamReader(response.GetResponseStream());
-                    apiResponse = reader.ReadToEnd();
-                }
-                /*End*/
+                    var apiKey = System.Web.Configuration.WebConfigurationManager.AppSettings["apiKey"]; ;
+                    var response = await client.GetAsync($"http://api.openweathermap.org/data/2.5/forecast/daily?q={cityName}&appid={apiKey}&units=metric&cnt={countDays}");
 
-                /*http://json2csharp.com*/
-                rootObject = JsonConvert.DeserializeObject<DetailedWeatherInfo>(apiResponse);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var responseContent = response.Content;
+
+                        string responseString = responseContent.ReadAsStringAsync().Result;
+
+                        rootObject = JsonConvert.DeserializeObject<DetailedWeatherInfo>(responseString);
+                    }
+                }
             }
 
             return rootObject;

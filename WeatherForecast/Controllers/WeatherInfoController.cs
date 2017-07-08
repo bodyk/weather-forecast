@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
@@ -19,13 +20,23 @@ namespace WeatherForecast.Controllers
         public WeatherInfoController()
         {
             _infoService = new WeatherInfoService();
+            
         }
 
-        public ActionResult Index(WeatherInfo weatherInfo, string city, int time = 1)
+        public async Task<ActionResult> Index(WeatherInfo weatherInfo, string city, int time = 1)
         {
+            ViewBag.StartupCities = new List<string>
+            {
+                "Kiev",
+                "Lviv",
+                "Kharkiv",
+                "Dnipropetrovsk",
+                "Odessa"
+            };
+
             try
             {
-                weatherInfo.detailedWeatherInfo = _infoService.GetInfoByCity(city, time);
+                weatherInfo.detailedWeatherInfo = await _infoService.GetInfoByCity(city, time);
             }
             catch (Exception)
             {
