@@ -28,11 +28,10 @@
         <div class="table-responsive">
             <table class="table table-striped">
                 <tr>
-                    <th>@Html.ActionLink("Kiev", "Index", new { city = "Kiev" })</th>
-                    <th>@Html.ActionLink("Lviv", "Index", new { city = "Lviv" })</th>
-                    <th>@Html.ActionLink("Kharkiv", "Index", new { city = "Kharkiv" })</th>
-                    <th>@Html.ActionLink("Dnipropetrovsk", "Index", new { city = "Dnipropetrovsk" })</th>
-                    <th>@Html.ActionLink("Odessa", "Index", new { city = "Odessa" })</th>
+                    @foreach (var city in @ViewBag.StartupCities as List<string>)
+                    {
+                        <th>@Html.ActionLink(city, "Index", new { city = @city })</th>
+                    }
                 </tr>
             </table>
         </div>
