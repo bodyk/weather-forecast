@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
-using WeatherForecast.Helpers;
+using WeatherForecast.Models;
 
 namespace WeatherForecast.Services
 {
     public interface IWeatherService
     {
-        Task<DetailedWeatherInfo> GetInfoByCity(string cityName, int countDays);
+        Task<IDetailedWeatherInfo> GetInfoByCity(string cityName, int countDays);
     }
 }
