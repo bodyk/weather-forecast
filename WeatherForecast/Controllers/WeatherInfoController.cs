@@ -16,13 +16,15 @@ namespace WeatherForecast.Controllers
     public class WeatherInfoController : Controller
     {
         private readonly IWeatherService _infoService;
+        private IDetailedWeatherInfo _detailedInfo;
 
-        public WeatherInfoController(IWeatherService serviceParam)
+        public WeatherInfoController(IWeatherService serviceParam, IDetailedWeatherInfo detailedInfo)
         {
             _infoService = serviceParam;
+            _detailedInfo = detailedInfo;
         }
 
-        public async Task<ActionResult> Index(WeatherInfo weatherInfo, string city, int time = 1)
+        public async Task<ActionResult> Index(string city, int time = 1)
         {
             ViewBag.StartupCities = new List<string>
             {
@@ -35,13 +37,13 @@ namespace WeatherForecast.Controllers
 
             try
             {
-                weatherInfo.detailedWeatherInfo = await _infoService.GetInfoByCity(city, time);
+                _detailedInfo = await _infoService.GetInfoByCity(city, time);
             }
             catch (Exception)
             {
                 return View("Error");
             }
-            return View(weatherInfo);
+            return View(_detailedInfo);
         }
 
         public ActionResult About()

@@ -162,10 +162,11 @@
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\Coord.cs" />
     <Compile Include="Models\CurrentDayWeather.cs" />
+    <Compile Include="Models\IDetailedWeatherInfo.cs" />
     <Compile Include="Models\ListWeather.cs" />
-    <Compile Include="Models\DetailedWeatherInfo.cs" />
+    <Compile Include="Models\OpenWeatherDetailedInfo.cs" />
+    <Compile Include="Models\SingleDayInfo.cs" />
     <Compile Include="Models\Weather.cs" />
-    <Compile Include="Models\WeatherInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IWeatherService.cs" />
     <Compile Include="Services\OpenWeatherMapService.cs" />
