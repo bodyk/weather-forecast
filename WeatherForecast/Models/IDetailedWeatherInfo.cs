@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using WeatherForecast.Models.OpenWeatherMapModels;
 
 namespace WeatherForecast.Models
 {
     public interface IDetailedWeatherInfo
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns>Detailed weather info by several days</returns>
-        List<SingleDayInfo> GetWeatherParams();
+        int Id { get; set; }
 
-        string GetCityName();
+        ICollection<SingleDayInfo> WeatherParams { get; set; }
 
-        string GetCountryCode();
+        string CityName { get; set; }
 
-        int GetForecastCountDays();
+        string CountryCode { get; set; }
+
+        int CountForecastDays { get; set; }
     }
 }

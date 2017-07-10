@@ -1,14 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Web;
 using System.Web.Configuration;
 
-namespace WeatherForecast.Models
+namespace WeatherForecast.Models.OpenWeatherMapModels
 {
     public class OpenWeatherDetailedInfo : IDetailedWeatherInfo
     {
+        public int Id { get; set; }
+
+        public string CityName
+        {
+            get
+            {
+                return city?.Name ?? "";
+            }
+            set
+            {
+                if (city != null && city.Name != null)
+                {
+                    city.Name = value;
+                }
+            }
+        }
+
+        public string CountryCode
+        {
+            get
+            {
+                return city?.country ?? "";
+            }
+            set
+            {
+                if (city != null && city.country != null)
+                {
+                    city.country = value;
+                }
+            }
+        }
+        public int CountForecastDays
+        {
+            get
+            {
+                return cnt;
+            }
+            set
+            {
+                cnt = value;
+            }
+        }
         public City city { get; set; }
         public string cod { get; set; }
         public double message { get; set; }
@@ -22,8 +62,19 @@ namespace WeatherForecast.Models
         /// Detailed daily weather
         /// </summary>
         public List<ListWeather> list { get; set; }
+        public ICollection<SingleDayInfo> WeatherParams
+        {
+            get
+            {
+                return GetWeatherParams();
+            }
+            set
+            {
 
-        public List<SingleDayInfo> GetWeatherParams()
+            }
+        }
+
+        private List<SingleDayInfo> GetWeatherParams()
         {
             var allDaysWeather = new List<SingleDayInfo>();
             if (list == null)
@@ -62,16 +113,6 @@ namespace WeatherForecast.Models
             return $"{WebConfigurationManager.AppSettings["iconPath"]}" +
                    $"{iconName}" +
                    $"{WebConfigurationManager.AppSettings["iconExtension"]}";
-        }
-
-        public string GetCityName()
-        {
-            return city?.name ?? "";
-        }
-
-        public string GetCountryCode()
-        {
-            return city?.country ?? "";
         }
 
         public int GetForecastCountDays()

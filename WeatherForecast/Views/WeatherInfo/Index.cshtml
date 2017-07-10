@@ -4,8 +4,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Index";
 
-    string cityName = @Model?.GetCityName();
-    string countryCode = @Model?.GetCountryCode();
+    string cityName = @Model.CityName;
+    string countryCode = @Model.CountryCode;
 }
 <div>
     <div class="well well-sm">
@@ -33,7 +33,7 @@
             }
         </div>
     </div>
-    @if (@Model?.GetWeatherParams().Count != 0)
+    @if (@Model.WeatherParams.Count != 0)
     {
 
         <div>
@@ -54,9 +54,9 @@
                 </tr>
             </table>
         </div>
-        <h4>Weather forecast for @Model.GetForecastCountDays() days</h4>
+        <h4>Weather forecast for @Model.CountForecastDays days</h4>
         <div class="divParent">
-            @foreach (var dayWeather in @Model.GetWeatherParams())
+            @foreach (var dayWeather in @Model.WeatherParams)
                 {
                 <table class="table table-condensed">
                     <thead>
