@@ -11,6 +11,6 @@ namespace WeatherForecast.Models
         }
 
         public DbSet<City> Cities { get; set; }
-        //public DbSet<IDetailedWeatherInfo> Infos { get; set; }
+        public DbSet<WeatherEntity> Infos { get; set; }
     }
 }
