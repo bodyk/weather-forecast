@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Web.Configuration;
+using WeatherForecast.Models.Interfaces;
 
 namespace WeatherForecast.Models.OpenWeatherMapModels
 {
@@ -17,7 +19,7 @@ namespace WeatherForecast.Models.OpenWeatherMapModels
             }
             set
             {
-                if (city != null && city.Name != null)
+                if (city?.Name != null)
                 {
                     city.Name = value;
                 }
@@ -32,7 +34,7 @@ namespace WeatherForecast.Models.OpenWeatherMapModels
             }
             set
             {
-                if (city != null && city.country != null)
+                if (city?.country != null)
                 {
                     city.country = value;
                 }
@@ -49,6 +51,18 @@ namespace WeatherForecast.Models.OpenWeatherMapModels
                 cnt = value;
             }
         }
+
+        public WeatherEntity GetEntity()
+        {
+            return new WeatherEntity()
+            {
+                CityName = CityName,
+                CountForecastDays = CountForecastDays,
+                CountryCode = CountryCode,
+                DayInfoEntities = WeatherParams
+            };
+        }
+
         public City city { get; set; }
         public string cod { get; set; }
         public double message { get; set; }
@@ -62,7 +76,7 @@ namespace WeatherForecast.Models.OpenWeatherMapModels
         /// Detailed daily weather
         /// </summary>
         public List<ListWeather> list { get; set; }
-        public ICollection<SingleDayInfo> WeatherParams
+        public ICollection<SingleDayInfoEntity> WeatherParams
         {
             get
             {
@@ -74,29 +88,21 @@ namespace WeatherForecast.Models.OpenWeatherMapModels
             }
         }
 
-        private List<SingleDayInfo> GetWeatherParams()
+        private List<SingleDayInfoEntity> GetWeatherParams()
         {
-            var allDaysWeather = new List<SingleDayInfo>();
+            var allDaysWeather = new List<SingleDayInfoEntity>();
             if (list == null)
                 return allDaysWeather;
-            foreach (var info in list)
+            allDaysWeather.AddRange(list.Select(info => new SingleDayInfoEntity
             {
-                SingleDayInfo dayInfo = new SingleDayInfo
-                {
-                    Date = UnixTimeStampToDateTime(info.dt),
-                    IconPath = FormIconPath(info.weather[0].icon),
-                    DayInfo = new Dictionary<string, string>
-                    {
-                        {"Temperature", $@"{info.temp.day.ToString(CultureInfo.InvariantCulture)} °С"},
-                        {"Humidity", $"{info.humidity.ToString()} %"},
-                        {"Pressure", $"{info.pressure.ToString(CultureInfo.InvariantCulture)} hPa"},
-                        {"Wind Speed", $"{info.speed.ToString(CultureInfo.InvariantCulture)} meter/sec"},
-                        {"Clouds", $"{info.clouds.ToString(CultureInfo.InvariantCulture)} %"}
-                    }
-                };
-
-                allDaysWeather.Add(dayInfo);
-            }
+                Date = UnixTimeStampToDateTime(info.dt),
+                IconPath = FormIconPath(info.weather[0].icon),
+                Temperature = info.temp.day.ToString(CultureInfo.InvariantCulture),
+                Humidity = info.humidity.ToString(),
+                Pressure = info.pressure.ToString(CultureInfo.InvariantCulture),
+                WindSpeed = info.speed.ToString(CultureInfo.InvariantCulture),
+                Clouds = info.clouds.ToString(CultureInfo.InvariantCulture)
+            }));
 
             return allDaysWeather;
         }

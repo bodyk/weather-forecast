@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using WeatherForecast.Models;
+using WeatherForecast.Models.Implementations;
+using WeatherForecast.Models.Interfaces;
 using WeatherForecast.Models.OpenWeatherMapModels;
 using WeatherForecast.Services;
 
@@ -32,7 +34,7 @@ namespace WeatherForecast.Infrastructure
         {
             kernel.Bind<IWeatherService>().To<OpenWeatherMapService>();
             kernel.Bind<IDetailedWeatherInfo>().To<OpenWeatherDetailedInfo>();
-            kernel.Bind<IWeatherRepository>().To<WeatherRepository>();
+            kernel.Bind<IWeatherRepository>().To<OpenWeatherRepository>();
         }
     }
 }

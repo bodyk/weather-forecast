@@ -168,6 +168,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CitiesController.cs" />
+    <Compile Include="Controllers\HistoryController.cs" />
     <Compile Include="Controllers\WeatherInfoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -181,24 +182,36 @@
     <Compile Include="Migrations\201707111303543_AddTables.Designer.cs">
       <DependentUpon>201707111303543_AddTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201707111719321_AddRequestHistoryInfo.cs" />
+    <Compile Include="Migrations\201707111719321_AddRequestHistoryInfo.Designer.cs">
+      <DependentUpon>201707111719321_AddRequestHistoryInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707111725579_AddHistoryWithVirtual.cs" />
+    <Compile Include="Migrations\201707111725579_AddHistoryWithVirtual.Designer.cs">
+      <DependentUpon>201707111725579_AddHistoryWithVirtual.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707111819407_ExtendSingleDayInfoEntity.cs" />
+    <Compile Include="Migrations\201707111819407_ExtendSingleDayInfoEntity.Designer.cs">
+      <DependentUpon>201707111819407_ExtendSingleDayInfoEntity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\WeatherRepository.cs" />
-    <Compile Include="Models\IWeatherRepository.cs" />
+    <Compile Include="Models\Implementations\OpenWeatherRepository.cs" />
+    <Compile Include="Models\Interfaces\IWeatherRepository.cs" />
     <Compile Include="Models\OpenWeatherMapModels\City.cs" />
     <Compile Include="Models\OpenWeatherMapModels\Coord.cs" />
     <Compile Include="Models\OpenWeatherMapModels\CurrentDayWeather.cs" />
-    <Compile Include="Models\IDetailedWeatherInfo.cs" />
+    <Compile Include="Models\Interfaces\IDetailedWeatherInfo.cs" />
     <Compile Include="Models\OpenWeatherMapModels\ListWeather.cs" />
     <Compile Include="Models\OpenWeatherMapModels\OpenWeatherDetailedInfo.cs" />
-    <Compile Include="Models\OpenWeatherMapModels\SingleDayInfo.cs" />
     <Compile Include="Models\OpenWeatherMapModels\Weather.cs" />
+    <Compile Include="Models\RequestHistoryEntity.cs" />
     <Compile Include="Models\SingleDayInfoEntity.cs" />
     <Compile Include="Models\WeatherEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IWeatherService.cs" />
     <Compile Include="Services\OpenWeatherMapService.cs" />
-    <Compile Include="Models\WeatherCitiesInitializer.cs" />
-    <Compile Include="Models\WeatherContext.cs" />
+    <Compile Include="Models\Implementations\WeatherCitiesInitializer.cs" />
+    <Compile Include="Models\Implementations\WeatherContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -217,6 +230,7 @@
     <Content Include="Views\Cities\Details.cshtml" />
     <Content Include="Views\Cities\Edit.cshtml" />
     <Content Include="Views\Cities\Index.cshtml" />
+    <Content Include="Views\History\Index.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -287,6 +301,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201707111303543_AddTables.resx">
       <DependentUpon>201707111303543_AddTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707111719321_AddRequestHistoryInfo.resx">
+      <DependentUpon>201707111719321_AddRequestHistoryInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707111725579_AddHistoryWithVirtual.resx">
+      <DependentUpon>201707111725579_AddHistoryWithVirtual.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707111819407_ExtendSingleDayInfoEntity.resx">
+      <DependentUpon>201707111819407_ExtendSingleDayInfoEntity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using WeatherForecast.Models;
+using WeatherForecast.Models.Interfaces;
 
 namespace WeatherForecast.Services
 {

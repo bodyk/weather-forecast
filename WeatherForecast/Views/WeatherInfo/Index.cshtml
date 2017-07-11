@@ -1,5 +1,6 @@
-﻿@using WeatherForecast.Models.OpenWeatherMapModels
-@model WeatherForecast.Models.IDetailedWeatherInfo
+﻿@using WeatherForecast.Models.Interfaces
+@using WeatherForecast.Models.OpenWeatherMapModels
+@model WeatherForecast.Models.Interfaces.IDetailedWeatherInfo
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -15,7 +16,7 @@
                 <tr>
                     @foreach (var city in (List<City>)@ViewBag.StartupCities)
                     {
-                        <th>@Html.ActionLink(city.Name, "Index", new { cityID = city.Id }, null)</th>
+                        <th>@Html.ActionLink(city.Name, "Index", new { customCityName = city.Name }, null)</th>
                     }
                     <th>@Html.ActionLink("Edit", "Index", "Cities")</th>
                 </tr>
@@ -26,7 +27,7 @@
             {
 
                 <div id="cityEditDiv">
-                    @Html.TextBox("city.Name", null, new { @class = "form-control col-xs-12", id = "cityEdit", required = "required" })
+                    @Html.TextBox("customCityName", @cityName, new { @class = "form-control col-xs-12", id = "cityEdit", required = "required" })
                 </div>
                 <div id="citySubmitDiv">
                     <input type="submit" value="Show weather" class="form-control btn-success" id="btnShow" />
@@ -41,9 +42,9 @@
         <div>
             <table class="table table-striped">
                 <tr>
-                    <th>@Html.ActionLink("Current Day", "Index", new { time = 1, cityID = @ViewBag.CurrentCityId })</th>
-                    <th>@Html.ActionLink("3 Days", "Index", new { time = 3, cityID = @ViewBag.CurrentCityId })</th>
-                    <th>@Html.ActionLink("7 Days", "Index", new { time = 7, cityID = @ViewBag.CurrentCityId })</th>
+                    <th>@Html.ActionLink("Current Day", "Index", new { time = 1, customCityName = cityName })</th>
+                    <th>@Html.ActionLink("3 Days", "Index", new { time = 3, customCityName = cityName })</th>
+                    <th>@Html.ActionLink("7 Days", "Index", new { time = 7, customCityName = cityName })</th>
                 </tr>
             </table>
         </div>
@@ -72,13 +73,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var wetherParam in @dayWeather.DayInfo)
-                        {
-                            <tr>
-                                <td class="divTableKey">@wetherParam.Key:</td>
-                                <td class="divTableValue">@wetherParam.Value</td>
-                            </tr>
-                        }
+                    <tr>
+                        <td class="divTableKey">Temperature:</td>
+                        <td class="divTableValue">@dayWeather.Temperature</td>
+                    </tr>
+                    <tr>
+                        <td class="divTableKey">Humidity:</td>
+                        <td class="divTableValue">@dayWeather.Humidity</td>
+                    </tr>
+                    <tr>
+                        <td class="divTableKey">Pressure:</td>
+                        <td class="divTableValue">@dayWeather.Pressure</td>
+                    </tr>
+                    <tr>
+                        <td class="divTableKey">WindSpeed:</td>
+                        <td class="divTableValue">@dayWeather.WindSpeed</td>
+                    </tr>
+                    <tr>
+                        <td class="divTableKey">Clouds:</td>
+                        <td class="divTableValue">@dayWeather.Clouds</td>
+                    </tr>
                     </tbody>
                 </table>
 

@@ -1,6 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using WeatherForecast.Models.Implementations;
 using WeatherForecast.Models.OpenWeatherMapModels;
 
 namespace WeatherForecast.Models
@@ -14,5 +15,6 @@ namespace WeatherForecast.Models
 
         public DbSet<City> Cities { get; set; }
         public DbSet<WeatherEntity> Infos { get; set; }
+        public DbSet<RequestHistoryEntity> HistoryOfRequests { get; set; }
     }
 }

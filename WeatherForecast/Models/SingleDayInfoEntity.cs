@@ -18,5 +18,9 @@ namespace WeatherForecast.Models
         public string WindSpeed { get; set; }
 
         public string Clouds { get; set; }
+
+        public string Date { get; set; }
+
+        public string IconPath { get; set; }
     }
 }

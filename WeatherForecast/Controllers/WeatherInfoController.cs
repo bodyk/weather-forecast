@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using WeatherForecast.Models;
+using WeatherForecast.Models.Interfaces;
 using WeatherForecast.Models.OpenWeatherMapModels;
 using WeatherForecast.Services;
 
@@ -22,18 +23,14 @@ namespace WeatherForecast.Controllers
             _repository = repository;
         }
 
-        public async Task<ActionResult> Index(int? cityId, int time = 1)
+        public async Task<ActionResult> Index(string customCityName, int time = 1)
         {
             ViewBag.StartupCities = _repository.GetAllCities();
 
             try
             {
-                var city = _repository.FindCity(cityId);
-                if (city != null)
-                {
-                    ViewBag.CurrentCityId = city.Id;
-                    _detailedInfo = await _infoService.GetInfoByCity(city.Name, time);
-                }
+                _detailedInfo = await _infoService.GetInfoByCity(customCityName, time);
+                _repository.AddHistoryItem(new RequestHistoryEntity(){RequestTime = DateTime.Now, });
             }
             catch (Exception)
             {

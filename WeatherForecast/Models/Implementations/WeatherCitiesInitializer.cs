@@ -2,7 +2,7 @@
 using System.Data.Entity;
 using WeatherForecast.Models.OpenWeatherMapModels;
 
-namespace WeatherForecast.Models
+namespace WeatherForecast.Models.Implementations
 {
     public class WeatherCitiesInitializer : CreateDatabaseIfNotExists<WeatherContext>
     {

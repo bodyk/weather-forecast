@@ -17,5 +17,10 @@ namespace WeatherForecast.Models
         public int CountForecastDays { get; set; }
 
         public ICollection<SingleDayInfoEntity> DayInfoEntities { get; set; }
+
+        public int HistoryId { get; set; }
+
+        [ForeignKey("HistoryId")]
+        public virtual RequestHistoryEntity HistoryInfo { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WeatherForecast.Models;
+using WeatherForecast.Models.Interfaces;
 using WeatherForecast.Models.OpenWeatherMapModels;
 
 namespace WeatherForecast.Controllers
@@ -27,13 +28,13 @@ namespace WeatherForecast.Controllers
         }
 
         // GET: Cities/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(string cityName)
         {
-            if (id == null)
+            if (cityName == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            City city = _repository.FindCity(id);
+            City city = _repository.FindCity(cityName);
             if (city == null)
             {
                 return HttpNotFound();
@@ -64,13 +65,13 @@ namespace WeatherForecast.Controllers
         }
 
         // GET: Cities/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(string cityName)
         {
-            if (id == null)
+            if (cityName == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            City city = _repository.FindCity(id);
+            City city = _repository.FindCity(cityName);
             if (city == null)
             {
                 return HttpNotFound();
@@ -94,13 +95,13 @@ namespace WeatherForecast.Controllers
         }
 
         // GET: Cities/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(string cityName)
         {
-            if (id == null)
+            if (cityName == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            City city = _repository.FindCity(id);
+            City city = _repository.FindCity(cityName);
             if (city == null)
             {
                 return HttpNotFound();
@@ -111,9 +112,9 @@ namespace WeatherForecast.Controllers
         // POST: Cities/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(string cityName)
         {
-            _repository.RemoveCity(id);
+            _repository.RemoveCity(cityName);
             return RedirectToAction("Index");
         }
     }
