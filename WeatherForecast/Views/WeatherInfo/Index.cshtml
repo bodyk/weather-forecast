@@ -1,4 +1,5 @@
-﻿@model WeatherForecast.Models.IDetailedWeatherInfo
+﻿@using WeatherForecast.Models.OpenWeatherMapModels
+@model WeatherForecast.Models.IDetailedWeatherInfo
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -12,9 +13,9 @@
         <div class="table-responsive">
             <table class="table table-striped">
                 <tr>
-                    @foreach (var city in (List<string>)@ViewBag.StartupCities)
+                    @foreach (var city in (List<City>)@ViewBag.StartupCities)
                     {
-                        <th>@Html.ActionLink(city, "Index", new { city = @city })</th>
+                        <th>@Html.ActionLink(city.Name, "Index", new { cityID = city.Id }, null)</th>
                     }
                 </tr>
             </table>
@@ -24,7 +25,7 @@
             {
 
                 <div id="cityEditDiv">
-                    @Html.TextBox("city", null, new { @class = "form-control col-xs-12", id = "cityEdit", required = "required" })
+                    @Html.TextBox("city.Name", null, new { @class = "form-control col-xs-12", id = "cityEdit", required = "required" })
                 </div>
                 <div id="citySubmitDiv">
                     <input type="submit" value="Show weather" class="form-control btn-success" id="btnShow" />

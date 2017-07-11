@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using WeatherForecast.Models;
+using WeatherForecast.Models.OpenWeatherMapModels;
 using WeatherForecast.Services;
 
 namespace WeatherForecast.Controllers
@@ -21,13 +22,17 @@ namespace WeatherForecast.Controllers
             _context = context;
         }
 
-        public async Task<ActionResult> Index(string city, int time = 1)
+        public async Task<ActionResult> Index(int? cityId, int time = 1)
         {
-            ViewBag.StartupCities = _context.Cities.Select(c => c.Name).ToList();
+            ViewBag.StartupCities = _context.Cities.ToList();
 
             try
             {
-                _detailedInfo = await _infoService.GetInfoByCity(city, time);
+                var city = _context.Cities.FirstOrDefault(c => c.Id == cityId);
+                if (city != null)
+                {
+                    _detailedInfo = await _infoService.GetInfoByCity(city.Name, time);
+                }
             }
             catch (Exception)
             {
