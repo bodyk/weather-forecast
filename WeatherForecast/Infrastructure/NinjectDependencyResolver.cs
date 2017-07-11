@@ -32,7 +32,7 @@ namespace WeatherForecast.Infrastructure
         {
             kernel.Bind<IWeatherService>().To<OpenWeatherMapService>();
             kernel.Bind<IDetailedWeatherInfo>().To<OpenWeatherDetailedInfo>();
-            kernel.Bind<IDbContext>().To<WeatherContext>();
+            kernel.Bind<IWeatherRepository>().To<WeatherRepository>();
         }
     }
 }

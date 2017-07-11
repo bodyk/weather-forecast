@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,9 +7,12 @@ using WeatherForecast.Models.OpenWeatherMapModels;
 
 namespace WeatherForecast.Models
 {
-    public interface IDbContext
+    public interface IWeatherRepository
     {
-        DbSet<City> Cities { get; set; }
-        DbSet<WeatherEntity> Infos { get; set; }
+        void AddCity(City item);
+        IEnumerable<City> GetAllCities();
+        City FindCity(int? key);
+        void RemoveCity(int? key);
+        void UpdateCity(City item);
     }
 }

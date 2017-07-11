@@ -13,22 +13,22 @@ namespace WeatherForecast.Controllers
     {
         private readonly IWeatherService _infoService;
         private IDetailedWeatherInfo _detailedInfo;
-        private readonly IDbContext _context;
+        private readonly IWeatherRepository _repository;
 
-        public WeatherInfoController(IWeatherService serviceParam, IDetailedWeatherInfo detailedInfo, IDbContext context)
+        public WeatherInfoController(IWeatherService serviceParam, IDetailedWeatherInfo detailedInfo, IWeatherRepository repository)
         {
             _infoService = serviceParam;
             _detailedInfo = detailedInfo;
-            _context = context;
+            _repository = repository;
         }
 
         public async Task<ActionResult> Index(int? cityId, int time = 1)
         {
-            ViewBag.StartupCities = _context.Cities.ToList();
+            ViewBag.StartupCities = _repository.GetAllCities();
 
             try
             {
-                var city = _context.Cities.FirstOrDefault(c => c.Id == cityId);
+                var city = _repository.FindCity(cityId);
                 if (city != null)
                 {
                     ViewBag.CurrentCityId = city.Id;

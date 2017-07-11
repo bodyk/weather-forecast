@@ -1,14 +1,15 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.Migrations;
+using System.Linq;
 using WeatherForecast.Models.OpenWeatherMapModels;
 
 namespace WeatherForecast.Models
 {
-    public class WeatherContext : DbContext, IDbContext
+    public class WeatherContext : DbContext
     {
         public WeatherContext() : base()
         {
             Database.SetInitializer(new WeatherCitiesInitializer());
-            Database.Initialize(true);
         }
 
         public DbSet<City> Cities { get; set; }
