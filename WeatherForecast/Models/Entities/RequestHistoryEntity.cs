@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace WeatherForecast.Models
+namespace WeatherForecast.Models.Entities
 {
     public class RequestHistoryEntity
     {
@@ -11,6 +12,6 @@ namespace WeatherForecast.Models
 
         public DateTime RequestTime { get; set; }
 
-        public virtual ICollection<WeatherEntity> WeatherEntities { get; set; }
+        public virtual WeatherEntity WeatherEntity { get; set; }
     }
 }

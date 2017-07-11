@@ -15,9 +15,12 @@ namespace WeatherForecast.Controllers
         {
             _repository = repository;
         }
-        // GET: History
-        public ActionResult Index()
+
+        // GET: History/Index
+        public ActionResult Index(bool bClear = false)
         {
+            if (bClear)
+                _repository.ClearHistory();
             return View(_repository.GetHistory());
         }
     }

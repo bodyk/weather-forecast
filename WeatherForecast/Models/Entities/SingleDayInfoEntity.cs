@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace WeatherForecast.Models
+namespace WeatherForecast.Models.Entities
 {
     public class SingleDayInfoEntity
     {

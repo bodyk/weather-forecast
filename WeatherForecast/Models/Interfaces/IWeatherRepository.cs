@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using WeatherForecast.Models.Entities;
 using WeatherForecast.Models.OpenWeatherMapModels;
 
 namespace WeatherForecast.Models.Interfaces

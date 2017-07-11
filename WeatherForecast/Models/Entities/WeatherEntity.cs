@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
-namespace WeatherForecast.Models
+namespace WeatherForecast.Models.Entities
 {
     public class WeatherEntity
     {
@@ -18,9 +15,6 @@ namespace WeatherForecast.Models
 
         public ICollection<SingleDayInfoEntity> DayInfoEntities { get; set; }
 
-        public int HistoryId { get; set; }
-
-        [ForeignKey("HistoryId")]
         public virtual RequestHistoryEntity HistoryInfo { get; set; }
     }
 }

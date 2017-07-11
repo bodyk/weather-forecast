@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using WeatherForecast.Models;
+using WeatherForecast.Models.Entities;
 using WeatherForecast.Models.Interfaces;
 using WeatherForecast.Models.OpenWeatherMapModels;
 using WeatherForecast.Services;
@@ -29,8 +30,11 @@ namespace WeatherForecast.Controllers
 
             try
             {
-                _detailedInfo = await _infoService.GetInfoByCity(customCityName, time);
-                _repository.AddHistoryItem(new RequestHistoryEntity(){RequestTime = DateTime.Now, });
+                if (customCityName != null)
+                {
+                    _detailedInfo = await _infoService.GetInfoByCity(customCityName, time);
+                    _repository.AddHistoryItem(new RequestHistoryEntity() { RequestTime = DateTime.Now, WeatherEntity = _detailedInfo.GetEntity() });
+                }
             }
             catch (Exception)
             {

@@ -1,33 +1,31 @@
-﻿
-@model ICollection<WeatherForecast.Models.RequestHistoryEntity>
+﻿@using WeatherForecast.Models.Entities
 
-    @{
-        ViewBag.Title = "Index";
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }
+@model ICollection<WeatherForecast.Models.Entities.RequestHistoryEntity>
 
-    <h2>Index</h2>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
+@Html.ActionLink("Clear History", "Index", "History", new { bClear = true }, null)
+<br/>
+@if (Model.Count != 0)
+{
     <table>
-        <thead>
+        <tr>
+            <td>Time</td>
+            <td>RequestInfo</td> 
+        </tr>
+        @foreach (var historyItem in Model)
+        {
             <tr>
-                <td>Time</td>
+                <td>
+                    @historyItem.RequestTime
+                </td>
+                <td>
+                    @historyItem.WeatherEntity.CityName
+                </td>
             </tr>
-            <tr>
-                <td>RequestInfo</td>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var historyItem in Model)
-            {
-                <tr>
-                    <td>
-                        @historyItem.RequestTime
-                    </td>
-                    <td>
-                        @historyItem.WeatherEntities.Count
-                    </td>
-                </tr>
-            }
-        </tbody>
+        }
     </table>
+}

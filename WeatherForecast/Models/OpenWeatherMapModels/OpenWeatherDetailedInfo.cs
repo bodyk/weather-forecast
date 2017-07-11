@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Web.Configuration;
+using WeatherForecast.Models.Entities;
 using WeatherForecast.Models.Interfaces;
 
 namespace WeatherForecast.Models.OpenWeatherMapModels
