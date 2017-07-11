@@ -192,7 +192,6 @@
     <Compile Include="Models\OpenWeatherMapModels\Weather.cs" />
     <Compile Include="Models\SingleDayInfoEntity.cs" />
     <Compile Include="Models\WeatherEntity.cs" />
-    <Compile Include="Models\WeatherEntityConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IWeatherService.cs" />
     <Compile Include="Services\OpenWeatherMapService.cs" />

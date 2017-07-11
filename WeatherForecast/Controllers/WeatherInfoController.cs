@@ -31,6 +31,7 @@ namespace WeatherForecast.Controllers
                 var city = _context.Cities.FirstOrDefault(c => c.Id == cityId);
                 if (city != null)
                 {
+                    ViewBag.CurrentCityId = city.Id;
                     _detailedInfo = await _infoService.GetInfoByCity(city.Name, time);
                 }
             }

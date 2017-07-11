@@ -40,9 +40,9 @@
         <div>
             <table class="table table-striped">
                 <tr>
-                    <th>@Html.ActionLink("Current Day", "Index", new { time = 1, city = cityName })</th>
-                    <th>@Html.ActionLink("3 Days", "Index", new { time = 3, city = cityName })</th>
-                    <th>@Html.ActionLink("7 Days", "Index", new { time = 7, city = cityName })</th>
+                    <th>@Html.ActionLink("Current Day", "Index", new { time = 1, cityID = @ViewBag.CurrentCityId })</th>
+                    <th>@Html.ActionLink("3 Days", "Index", new { time = 3, cityID = @ViewBag.CurrentCityId })</th>
+                    <th>@Html.ActionLink("7 Days", "Index", new { time = 7, cityID = @ViewBag.CurrentCityId })</th>
                 </tr>
             </table>
         </div>
