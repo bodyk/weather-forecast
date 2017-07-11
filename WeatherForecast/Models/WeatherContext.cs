@@ -8,6 +8,7 @@ namespace WeatherForecast.Models
         public WeatherContext() : base()
         {
             Database.SetInitializer(new WeatherCitiesInitializer());
+            Database.Initialize(true);
         }
 
         public DbSet<City> Cities { get; set; }
