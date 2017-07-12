@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
-using Newtonsoft.Json;
 using WeatherForecast.Models;
+using WeatherForecast.Models.Entities;
+using WeatherForecast.Models.Interfaces;
+using WeatherForecast.Models.OpenWeatherMapModels;
 using WeatherForecast.Services;
 
 namespace WeatherForecast.Controllers
@@ -17,29 +15,31 @@ namespace WeatherForecast.Controllers
     {
         private readonly IWeatherService _infoService;
         private IDetailedWeatherInfo _detailedInfo;
+        private readonly IWeatherRepository _repository;
 
-        public WeatherInfoController(IWeatherService serviceParam, IDetailedWeatherInfo detailedInfo)
+        public WeatherInfoController(IWeatherService serviceParam, IDetailedWeatherInfo detailedInfo, IWeatherRepository repository)
         {
             _infoService = serviceParam;
             _detailedInfo = detailedInfo;
+            _repository = repository;
         }
 
-        public async Task<ActionResult> Index(string city, int time = 1)
+        public async Task<ActionResult> Index(string customCityName, int time = 1)
         {
-            ViewBag.StartupCities = new List<string>
-            {
-                "Kiev",
-                "Lviv",
-                "Kharkiv",
-                "Dnipropetrovsk",
-                "Odessa"
-            };
+            ViewBag.StartupCities = _repository.GetAllCities();
 
             try
             {
-                _detailedInfo = await _infoService.GetInfoByCity(city, time);
+                if (customCityName != null)
+                {
+                    _detailedInfo = await _infoService.GetInfoByCity(customCityName, time);
+                    _repository.AddHistoryItem(new RequestHistoryEntity()
+                    {
+                        RequestTime = DateTime.Now, WeatherEntity = _detailedInfo.GetEntity()
+                    });
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return View("Error");
             }

@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
+﻿using Newtonsoft.Json;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using System.Web;
-using Newtonsoft.Json;
-using WeatherForecast.Models;
 using System.Web.Configuration;
+using WeatherForecast.Models;
+using WeatherForecast.Models.Interfaces;
+using WeatherForecast.Models.OpenWeatherMapModels;
 
 namespace WeatherForecast.Services
 {

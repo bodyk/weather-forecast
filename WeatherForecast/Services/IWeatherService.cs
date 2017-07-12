@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
+﻿using System.Threading.Tasks;
 using WeatherForecast.Models;
+using WeatherForecast.Models.Interfaces;
 
 namespace WeatherForecast.Services
 {
