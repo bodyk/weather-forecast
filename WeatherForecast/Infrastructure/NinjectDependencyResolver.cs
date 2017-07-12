@@ -1,8 +1,7 @@
-﻿using Ninject;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using WeatherForecast.Models;
+using Ninject;
 using WeatherForecast.Models.Implementations;
 using WeatherForecast.Models.Interfaces;
 using WeatherForecast.Models.OpenWeatherMapModels;
@@ -12,7 +11,7 @@ namespace WeatherForecast.Infrastructure
 {
     public class NinjectDependencyResolver : IDependencyResolver
     {
-        private IKernel kernel;
+        private readonly IKernel kernel;
 
         public NinjectDependencyResolver(IKernel kernelParam)
         {

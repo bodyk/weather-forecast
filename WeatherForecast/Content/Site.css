@@ -1,9 +1,10 @@
 ﻿body {
-    padding-top: 50px;
     padding-bottom: 20px;
+    padding-top: 50px;
 }
 
 /* Set padding to keep content from hitting the edges */
+
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
@@ -12,24 +13,18 @@
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
-.dl-horizontal dt {
-    white-space: normal;
-}
+
+.dl-horizontal dt { white-space: normal; }
 
 /* Set width on the form input elements since they're 100% wide by default */
+
 input,
 select,
-textarea {
-    max-width: 280px;
-}
+textarea { max-width: 280px; }
 
-.divTableRow {
-    display: table-cell;
-}
+.divTableRow { display: table-cell; }
 
-.divTableHeading {
-    display: table-header-group;
-}
+.divTableHeading { display: table-header-group; }
 
 .divTableCell, .divTableHead {
     border: 1px solid #000080;
@@ -38,23 +33,19 @@ textarea {
     width: calc(100% - 40px);
 }
 
-.divParent {
-    font-size: 150%;
-}
+.divParent { font-size: 150%; }
 
 .divTableKey {
-    width: 100%;
     text-align: left;
+    width: 100%;
 }
 
 .divTableValue {
-    width: 100%;
     text-align: left;
+    width: 100%;
 }
 
-.cityInputForm {
-    text-align: center;
-}
+.cityInputForm { text-align: center; }
 
 #cityEditDiv, #citySubmitDiv {
     display: inline-block;
@@ -62,55 +53,47 @@ textarea {
 }
 
 hr.half-rule {
-    height: 30px;
-    border-style: solid;
     border-color: #8c8b8b;
-    border-width: 1px 0 0 0;
     border-radius: 20px;
+    border-style: solid;
+    border-width: 1px 0 0 0;
+    height: 30px;
 }
 
 hr.half-rule:before {
-    display: block;
+    border-color: #8c8b8b;
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 0 0 1px 0;
     content: "";
+    display: block;
     height: 30px;
     margin-top: -31px;
-    border-style: solid;
-    border-color: #8c8b8b;
-    border-width: 0 0 1px 0;
-    border-radius: 20px;
 }
 
 table {
+    background-color: cadetblue;
+    border-collapse: collapse;
+    border-spacing: 0;
     color: #333;
     font-family: Helvetica, Arial, sans-serif;
     width: 640px;
-    border-collapse: collapse;
-    border-spacing: 0;
-    background-color: cadetblue;
 }
 
-td, th {
-    height: 30px;
-}
+td, th { height: 30px; }
 
 td {
     background: #FAFAFA;
     text-align: center;
 }
 
-tr:nth-child(even) td {
-    background: #F1F1F1;
-}
+tr:nth-child(even) td { background: #F1F1F1; }
 
-tr:nth-child(odd) td {
-    background: #FEFEFE;
-}
+tr:nth-child(odd) td { background: #FEFEFE; }
 
 tr td:hover {
     background: #666;
     color: #FFF;
 }
 
-#countryCode {
-    text-align: right;
-}
+#countryCode { text-align: right; }

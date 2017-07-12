@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using WeatherForecast.Models;
 using WeatherForecast.Models.Entities;
 using WeatherForecast.Models.Interfaces;
-using WeatherForecast.Models.OpenWeatherMapModels;
 using WeatherForecast.Services;
 
 namespace WeatherForecast.Controllers
@@ -14,10 +10,11 @@ namespace WeatherForecast.Controllers
     public class WeatherInfoController : Controller
     {
         private readonly IWeatherService _infoService;
-        private IDetailedWeatherInfo _detailedInfo;
         private readonly IWeatherRepository _repository;
+        private IDetailedWeatherInfo _detailedInfo;
 
-        public WeatherInfoController(IWeatherService serviceParam, IDetailedWeatherInfo detailedInfo, IWeatherRepository repository)
+        public WeatherInfoController(IWeatherService serviceParam, IDetailedWeatherInfo detailedInfo,
+            IWeatherRepository repository)
         {
             _infoService = serviceParam;
             _detailedInfo = detailedInfo;
@@ -33,13 +30,14 @@ namespace WeatherForecast.Controllers
                 if (customCityName != null)
                 {
                     _detailedInfo = await _infoService.GetInfoByCity(customCityName, time);
-                    _repository.AddHistoryItem(new RequestHistoryEntity()
+                    _repository.AddHistoryItem(new RequestHistoryEntity
                     {
-                        RequestTime = DateTime.Now, WeatherEntity = _detailedInfo.GetEntity()
+                        RequestTime = DateTime.Now,
+                        WeatherEntity = _detailedInfo.GetEntity()
                     });
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return View("Error");
             }
@@ -59,8 +57,5 @@ namespace WeatherForecast.Controllers
 
             return View();
         }
-
     }
-
-    
 }

@@ -10,52 +10,51 @@ namespace WeatherForecast.Models.OpenWeatherMapModels
 {
     public class OpenWeatherDetailedInfo : IDetailedWeatherInfo
     {
+        public City city { get; set; }
+        public string cod { get; set; }
+        public double message { get; set; }
+
+        /// <summary>
+        ///     Number of lines returned by this API call
+        /// </summary>
+        public int cnt { get; set; }
+
+        /// <summary>
+        ///     Detailed daily weather
+        /// </summary>
+        public List<ListWeather> list { get; set; }
+
         public int Id { get; set; }
 
         public string CityName
         {
-            get
-            {
-                return city?.Name ?? "";
-            }
+            get { return city?.Name ?? ""; }
             set
             {
                 if (city?.Name != null)
-                {
                     city.Name = value;
-                }
             }
         }
 
         public string CountryCode
         {
-            get
-            {
-                return city?.country ?? "";
-            }
+            get { return city?.country ?? ""; }
             set
             {
                 if (city?.country != null)
-                {
                     city.country = value;
-                }
             }
         }
+
         public int CountForecastDays
         {
-            get
-            {
-                return cnt;
-            }
-            set
-            {
-                cnt = value;
-            }
+            get { return cnt; }
+            set { cnt = value; }
         }
 
         public WeatherEntity GetEntity()
         {
-            return new WeatherEntity()
+            return new WeatherEntity
             {
                 CityName = CityName,
                 CountForecastDays = CountForecastDays,
@@ -63,20 +62,6 @@ namespace WeatherForecast.Models.OpenWeatherMapModels
                 DayInfoEntities = GetWeatherParams()
             };
         }
-
-        public City city { get; set; }
-        public string cod { get; set; }
-        public double message { get; set; }
-
-        /// <summary>
-        /// Number of lines returned by this API call
-        /// </summary>
-        public int cnt { get; set; }
-
-        /// <summary>
-        /// Detailed daily weather
-        /// </summary>
-        public List<ListWeather> list { get; set; }
 
         public List<SingleDayInfoEntity> GetWeatherParams()
         {
@@ -99,7 +84,7 @@ namespace WeatherForecast.Models.OpenWeatherMapModels
 
         private string UnixTimeStampToDateTime(double unixTimeStamp)
         {
-            var dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+            var dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
             dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
             return dtDateTime.ToString(CultureInfo.InvariantCulture);
         }

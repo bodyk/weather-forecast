@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Web;
 
 namespace WeatherForecast.Models.Entities
 {
@@ -16,6 +11,7 @@ namespace WeatherForecast.Models.Entities
 
         [ForeignKey("WeatherEntity")]
         public int WeatherEntity_Id { get; set; }
+
         public virtual WeatherEntity WeatherEntity { get; set; }
     }
 }

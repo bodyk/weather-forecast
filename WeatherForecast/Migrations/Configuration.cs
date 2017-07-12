@@ -1,11 +1,8 @@
+using System.Data.Entity.Migrations;
+using WeatherForecast.Models.Implementations;
+
 namespace WeatherForecast.Migrations
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-    using WeatherForecast.Models.Implementations;
-
     internal sealed class Configuration : DbMigrationsConfiguration<WeatherContext>
     {
         public Configuration()

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Migrations;
 using System.Linq;
 using WeatherForecast.Models.Entities;
 using WeatherForecast.Models.Interfaces;
@@ -16,6 +15,7 @@ namespace WeatherForecast.Models.Implementations
         {
             _context = context;
         }
+
         public void AddCity(City item)
         {
             _context.Cities.Add(item);
@@ -24,7 +24,7 @@ namespace WeatherForecast.Models.Implementations
 
         public IEnumerable<City> GetAllCities()
         {
-            return _context.Cities.ToList();
+            return _context.Cities?.ToList();
         }
 
         public City FindCity(string cityName)
