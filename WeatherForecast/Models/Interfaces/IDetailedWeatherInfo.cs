@@ -8,7 +8,7 @@ namespace WeatherForecast.Models.Interfaces
     {
         int Id { get; set; }
 
-        ICollection<SingleDayInfoEntity> WeatherParams { get; set; }
+        List<SingleDayInfoEntity> GetWeatherParams();
 
         string CityName { get; set; }
 

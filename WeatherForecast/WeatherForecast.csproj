@@ -174,10 +174,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
-    <Compile Include="Migrations\201707112020467_HistoryWithOneRequestInfo.cs" />
-    <Compile Include="Migrations\201707112020467_HistoryWithOneRequestInfo.Designer.cs">
-      <DependentUpon>201707112020467_HistoryWithOneRequestInfo.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Implementations\OpenWeatherRepository.cs" />
     <Compile Include="Models\Interfaces\IWeatherRepository.cs" />
@@ -278,11 +274,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201707112020467_HistoryWithOneRequestInfo.resx">
-      <DependentUpon>201707112020467_HistoryWithOneRequestInfo.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -4,16 +4,17 @@ namespace WeatherForecast.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using WeatherForecast.Models.Implementations;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<WeatherForecast.Models.WeatherContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<WeatherContext>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             ContextKey = "WeatherForecast.Models.WeatherContext";
         }
 
-        protected override void Seed(WeatherForecast.Models.WeatherContext context)
+        protected override void Seed(WeatherContext context)
         {
             //  This method will be called after migrating to the latest version.
 

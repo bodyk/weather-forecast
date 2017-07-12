@@ -36,7 +36,7 @@
             }
         </div>
     </div>
-    @if (@Model.WeatherParams.Count != 0)
+    @if (@Model.GetWeatherParams().Count != 0)
     {
 
         <div>
@@ -59,7 +59,7 @@
         </div>
         <h4>Weather forecast for @Model.CountForecastDays days</h4>
         <div class="divParent">
-            @foreach (var dayWeather in @Model.WeatherParams)
+            @foreach (var dayWeather in @Model.GetWeatherParams())
                 {
                 <table class="table table-condensed">
                     <thead>

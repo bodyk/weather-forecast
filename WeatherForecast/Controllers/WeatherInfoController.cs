@@ -33,10 +33,13 @@ namespace WeatherForecast.Controllers
                 if (customCityName != null)
                 {
                     _detailedInfo = await _infoService.GetInfoByCity(customCityName, time);
-                    _repository.AddHistoryItem(new RequestHistoryEntity() { RequestTime = DateTime.Now, WeatherEntity = _detailedInfo.GetEntity() });
+                    _repository.AddHistoryItem(new RequestHistoryEntity()
+                    {
+                        RequestTime = DateTime.Now, WeatherEntity = _detailedInfo.GetEntity()
+                    });
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return View("Error");
             }

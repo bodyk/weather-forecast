@@ -60,7 +60,7 @@ namespace WeatherForecast.Models.OpenWeatherMapModels
                 CityName = CityName,
                 CountForecastDays = CountForecastDays,
                 CountryCode = CountryCode,
-                DayInfoEntities = WeatherParams
+                DayInfoEntities = GetWeatherParams()
             };
         }
 
@@ -77,19 +77,8 @@ namespace WeatherForecast.Models.OpenWeatherMapModels
         /// Detailed daily weather
         /// </summary>
         public List<ListWeather> list { get; set; }
-        public ICollection<SingleDayInfoEntity> WeatherParams
-        {
-            get
-            {
-                return GetWeatherParams();
-            }
-            set
-            {
 
-            }
-        }
-
-        private List<SingleDayInfoEntity> GetWeatherParams()
+        public List<SingleDayInfoEntity> GetWeatherParams()
         {
             var allDaysWeather = new List<SingleDayInfoEntity>();
             if (list == null)

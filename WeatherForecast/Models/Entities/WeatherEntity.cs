@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WeatherForecast.Models.Entities
 {
     public class WeatherEntity
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         public string CityName { get; set; }
@@ -13,8 +16,10 @@ namespace WeatherForecast.Models.Entities
 
         public int CountForecastDays { get; set; }
 
-        public ICollection<SingleDayInfoEntity> DayInfoEntities { get; set; }
+        [ForeignKey("DayInfoEntities")]
+        public int DayInfoEntities_Id { get; set; }
 
-        public virtual RequestHistoryEntity HistoryInfo { get; set; }
+        [Required]
+        public virtual ICollection<SingleDayInfoEntity> DayInfoEntities { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WeatherForecast.Models.Entities;
 using WeatherForecast.Models.Interfaces;
 
 namespace WeatherForecast.Controllers
@@ -21,6 +22,13 @@ namespace WeatherForecast.Controllers
         {
             if (bClear)
                 _repository.ClearHistory();
+            var h = _repository.GetHistory();
+            foreach (var requestHistoryEntity in h)
+            {
+                var ent = requestHistoryEntity.WeatherEntity;
+                var time = requestHistoryEntity.RequestTime;
+                var dinfos = ent.DayInfoEntities;
+            }
             return View(_repository.GetHistory());
         }
     }

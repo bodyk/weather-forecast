@@ -1,11 +1,11 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using WeatherForecast.Models.Entities;
-using WeatherForecast.Models.Implementations;
 using WeatherForecast.Models.OpenWeatherMapModels;
 
-namespace WeatherForecast.Models
+namespace WeatherForecast.Models.Implementations
 {
     public class WeatherContext : DbContext
     {
@@ -20,9 +20,7 @@ namespace WeatherForecast.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<WeatherEntity>()
-                .HasOptional(w => w.HistoryInfo)
-                .WithRequired(h => h.WeatherEntity);
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
     }
 }
