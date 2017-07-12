@@ -27,21 +27,6 @@ namespace WeatherForecast.Controllers
             return View(_repository.GetAllCities().ToList());
         }
 
-        // GET: Cities/Details/5
-        public ActionResult Details(string cityName)
-        {
-            if (cityName == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            City city = _repository.FindCity(cityName);
-            if (city == null)
-            {
-                return HttpNotFound();
-            }
-            return View(city);
-        }
-
         // GET: Cities/Create
         public ActionResult Create()
         {

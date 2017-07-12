@@ -23,10 +23,10 @@
 <br/>
 @if (Model.Count != 0)
 {
-    <table>
+    <table class="table">
         <tr>
             <td>Time</td>
-            <td>RequestInfo</td> 
+            <td colspan="2">RequestInfo</td> 
         </tr>
         @foreach (var historyItem in Model)
         {
@@ -72,24 +72,24 @@
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td class="divTableKey">Temperature:</td>
-                                            <td class="divTableValue">@dayWeather.Temperature</td>
+                                            <td>Temperature:</td>
+                                            <td>@dayWeather.Temperature °C</td>
                                         </tr>
                                         <tr>
-                                            <td class="divTableKey">Humidity:</td>
-                                            <td class="divTableValue">@dayWeather.Humidity</td>
+                                            <td>Humidity:</td>
+                                            <td>@dayWeather.Humidity %</td>
                                         </tr>
                                         <tr>
-                                            <td class="divTableKey">Pressure:</td>
-                                            <td class="divTableValue">@dayWeather.Pressure</td>
+                                            <td>Pressure:</td>
+                                            <td>@dayWeather.Pressure hPa</td>
                                         </tr>
                                         <tr>
-                                            <td class="divTableKey">WindSpeed:</td>
-                                            <td class="divTableValue">@dayWeather.WindSpeed</td>
+                                            <td>WindSpeed:</td>
+                                            <td>@dayWeather.WindSpeed meter/sec</td>
                                         </tr>
                                         <tr>
-                                            <td class="divTableKey">Clouds:</td>
-                                            <td class="divTableValue">@dayWeather.Clouds</td>
+                                            <td>Clouds:</td>
+                                            <td>@dayWeather.Clouds %</td>
                                         </tr>
                                         </tbody>
                                     </table>

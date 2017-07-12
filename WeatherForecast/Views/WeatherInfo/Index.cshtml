@@ -14,11 +14,11 @@
         <div class="table-responsive">
             <table class="table table-striped">
                 <tr>
-                    @foreach (var city in (List<City>)@ViewBag.StartupCities)
+                    @foreach (var city in (List<City>) @ViewBag.StartupCities)
                     {
-                        <th>@Html.ActionLink(city.Name, "Index", new { customCityName = city.Name }, null)</th>
+                        <th>@Html.ActionLink(city.Name, "Index", new {customCityName = city.Name}, null)</th>
                     }
-                    <th>@Html.ActionLink("Edit", "Index", "Cities")</th>
+                    <th style="background: gold">@Html.ActionLink("✎", "Index", "Cities")</th>
                 </tr>
             </table>
         </div>
@@ -75,23 +75,23 @@
                     <tbody>
                     <tr>
                         <td class="divTableKey">Temperature:</td>
-                        <td class="divTableValue">@dayWeather.Temperature</td>
+                        <td class="divTableValue">@dayWeather.Temperature °C</td>
                     </tr>
                     <tr>
                         <td class="divTableKey">Humidity:</td>
-                        <td class="divTableValue">@dayWeather.Humidity</td>
+                        <td class="divTableValue">@dayWeather.Humidity %</td>
                     </tr>
                     <tr>
                         <td class="divTableKey">Pressure:</td>
-                        <td class="divTableValue">@dayWeather.Pressure</td>
+                        <td class="divTableValue">@dayWeather.Pressure hPa</td>
                     </tr>
                     <tr>
                         <td class="divTableKey">WindSpeed:</td>
-                        <td class="divTableValue">@dayWeather.WindSpeed</td>
+                        <td class="divTableValue">@dayWeather.WindSpeed meter/sec</td>
                     </tr>
                     <tr>
                         <td class="divTableKey">Clouds:</td>
-                        <td class="divTableValue">@dayWeather.Clouds</td>
+                        <td class="divTableValue">@dayWeather.Clouds %</td>
                     </tr>
                     </tbody>
                 </table>

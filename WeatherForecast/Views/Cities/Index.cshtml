@@ -25,10 +25,13 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { cityName = item.Name }) |
-            @Html.ActionLink("Details", "Details", new { cityName = item.Name }) |
             @Html.ActionLink("Delete", "Delete", new { cityName = item.Name })
         </td>
     </tr>
 }
 
 </table>
+
+<div>
+    @Html.ActionLink("Back to Weather Forecast", "Index", "WeatherInfo")
+</div>
