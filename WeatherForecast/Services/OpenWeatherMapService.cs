@@ -16,7 +16,7 @@ namespace WeatherForecast.Services
                 using (var client = new HttpClient())
                 {
                     var apiKey = WebConfigurationManager.AppSettings["apiKey"];
-                    ;
+
                     var response = await client.GetAsync(
                         $"http://api.openweathermap.org/data/2.5/forecast/daily?q={cityName}&appid={apiKey}&units=metric&cnt={countDays}");
 
