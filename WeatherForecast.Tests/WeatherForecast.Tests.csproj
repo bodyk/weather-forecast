@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers.Tests\CitiesControllerTests.cs" />
+    <Compile Include="Controllers.Tests\HistoryControllerTests.cs" />
     <Compile Include="Controllers.Tests\WeatherInfoControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service.Tests\OpenWeatherMapServiceTests.cs" />
