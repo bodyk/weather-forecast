@@ -17,14 +17,11 @@ namespace WeatherForecast.Controllers
         {
             if (bClear)
                 _repository.ClearHistory();
-            var h = _repository.GetHistory();
-            foreach (var requestHistoryEntity in h)
-            {
-                var ent = requestHistoryEntity.WeatherEntity;
-                var time = requestHistoryEntity.RequestTime;
-                var dinfos = ent.DayInfoEntities;
-            }
-            return View(_repository.GetHistory());
+            var history = _repository.GetHistory();
+            if (history == null)
+                return HttpNotFound();
+
+            return View(history);
         }
     }
 }
