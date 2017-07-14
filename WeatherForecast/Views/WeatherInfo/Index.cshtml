@@ -1,20 +1,19 @@
-﻿@using WeatherForecast.Models.Interfaces
-@using WeatherForecast.Models.OpenWeatherMapModels
+﻿@using WeatherForecast.Models.OpenWeatherMapModels
 @model WeatherForecast.Models.Interfaces.IDetailedWeatherInfo
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Index";
 
-    string cityName = @Model.CityName;
-    string countryCode = @Model.CountryCode;
+    var cityName = Model.CityName;
+    var countryCode = Model.CountryCode;
 }
 <div>
     <div class="well well-sm">
         <div class="table-responsive">
             <table class="table table-striped">
                 <tr>
-                    @foreach (var city in (List<City>) @ViewBag.StartupCities)
+                    @foreach (var city in (List<City>) ViewBag.StartupCities)
                     {
                         <th>@Html.ActionLink(city.Name, "Index", new {customCityName = city.Name}, null)</th>
                     }
@@ -25,52 +24,53 @@
         <div id="cityInputForm">
             @using (Html.BeginForm("Index", "WeatherInfo"))
             {
-
                 <div id="cityEditDiv">
-                    @Html.TextBox("customCityName", @cityName, new { @class = "form-control col-xs-12", id = "cityEdit", required = "required" })
+                    @Html.TextBox("customCityName", cityName, new {@class = "form-control col-xs-12", id = "cityEdit", required = "required"})
                 </div>
                 <div id="citySubmitDiv">
-                    <input type="submit" value="Show weather" class="form-control btn-success" id="btnShow" />
+                    <input type="submit" value="Show weather" class="form-control btn-success" id="btnShow"/>
                 </div>
-
             }
         </div>
     </div>
-    @if (@Model.GetWeatherParams().Count != 0)
+    @if (Model.GetWeatherParams().Count != 0)
     {
-
         <div>
             <table class="table table-striped">
                 <tr>
-                    <th>@Html.ActionLink("Current Day", "Index", new { time = 1, customCityName = cityName })</th>
-                    <th>@Html.ActionLink("3 Days", "Index", new { time = 3, customCityName = cityName })</th>
-                    <th>@Html.ActionLink("7 Days", "Index", new { time = 7, customCityName = cityName })</th>
+                    <th>@Html.ActionLink("Current Day", "Index", new {time = 1, customCityName = cityName})</th>
+                    <th>@Html.ActionLink("3 Days", "Index", new {time = 3, customCityName = cityName})</th>
+                    <th>@Html.ActionLink("7 Days", "Index", new {time = 7, customCityName = cityName})</th>
                 </tr>
             </table>
         </div>
         <div class="table-responsive">
             <table class="table table-striped">
                 <tr>
-                    <th><h3>@cityName</h3></th>
+                    <th>
+                        <h3>@cityName</h3>
+                    </th>
 
-                    <th id="countryCode"><h3>@countryCode</h3></th>
+                    <th id="countryCode">
+                        <h3>@countryCode</h3>
+                    </th>
                 </tr>
             </table>
         </div>
         <h4>Weather forecast for @Model.CountForecastDays days</h4>
         <div class="divParent">
-            @foreach (var dayWeather in @Model.GetWeatherParams())
-                {
+            @foreach (var dayWeather in Model.GetWeatherParams())
+            {
                 <table class="table table-condensed">
                     <thead>
-                        <tr>
-                            <th>
-                                @dayWeather.Date
-                            </th>
-                            <th>
-                                <img src="@($"{dayWeather.IconPath}")" />
-                            </th>
-                        </tr>
+                    <tr>
+                        <th>
+                            @dayWeather.Date
+                        </th>
+                        <th>
+                            <img src="@($"{dayWeather.IconPath}")"/>
+                        </th>
+                    </tr>
                     </thead>
                     <tbody>
                     <tr>
@@ -96,7 +96,7 @@
                     </tbody>
                 </table>
 
-                <hr class="half-rule" />
+                <hr class="half-rule"/>
             }
         </div>
     }

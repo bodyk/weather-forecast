@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using WeatherForecast.Models;
 using WeatherForecast.Models.Interfaces;
 using WeatherForecast.Models.OpenWeatherMapModels;
 
@@ -53,14 +47,10 @@ namespace WeatherForecast.Controllers
         public ActionResult Edit(string cityName)
         {
             if (cityName == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            City city = _repository.FindCity(cityName);
+            var city = _repository.FindCity(cityName);
             if (city == null)
-            {
                 return HttpNotFound();
-            }
             return View(city);
         }
 
@@ -83,19 +73,16 @@ namespace WeatherForecast.Controllers
         public ActionResult Delete(string cityName)
         {
             if (cityName == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            City city = _repository.FindCity(cityName);
+            var city = _repository.FindCity(cityName);
             if (city == null)
-            {
                 return HttpNotFound();
-            }
             return View(city);
         }
 
         // POST: Cities/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string cityName)
         {

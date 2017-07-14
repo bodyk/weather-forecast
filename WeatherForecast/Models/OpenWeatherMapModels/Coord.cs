@@ -3,12 +3,12 @@
     public class Coord
     {
         /// <summary>
-        /// City geo location, longitude
+        ///     City geo location, longitude
         /// </summary>
         public double lon { get; set; }
 
         /// <summary>
-        /// City geo location, latitude
+        ///     City geo location, latitude
         /// </summary>
         public double lat { get; set; }
     }

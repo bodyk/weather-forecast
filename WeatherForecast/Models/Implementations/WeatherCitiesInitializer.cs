@@ -10,11 +10,11 @@ namespace WeatherForecast.Models.Implementations
         {
             IList<City> defaultCities = new List<City>
             {
-                new City{ Name = "Kiev"} ,
-                new City{ Name = "Lviv"} ,
-                new City{ Name = "Kharkiv"} ,
-                new City{ Name = "Dnipropetrovsk"} ,
-                new City{ Name = "Odessa"}
+                new City {Name = "Kiev"},
+                new City {Name = "Lviv"},
+                new City {Name = "Kharkiv"},
+                new City {Name = "Dnipropetrovsk"},
+                new City {Name = "Odessa"}
             };
 
             context.Cities.AddRange(defaultCities);

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using WeatherForecast.Models.Entities;
-using WeatherForecast.Models.OpenWeatherMapModels;
 
 namespace WeatherForecast.Models.Interfaces
 {
@@ -8,13 +7,13 @@ namespace WeatherForecast.Models.Interfaces
     {
         int Id { get; set; }
 
-        List<SingleDayInfoEntity> GetWeatherParams();
-
         string CityName { get; set; }
 
         string CountryCode { get; set; }
 
         int CountForecastDays { get; set; }
+
+        List<SingleDayInfoEntity> GetWeatherParams();
 
         WeatherEntity GetEntity();
     }
