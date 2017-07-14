@@ -6,20 +6,15 @@ namespace WeatherForecast.Models.Entities
 {
     public class WeatherEntity
     {
-        /*[Key]
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }*/
+        public int DayInfoEntities_Id { get; set; }
 
         public string CityName { get; set; }
 
         public string CountryCode { get; set; }
 
         public int CountForecastDays { get; set; }
-
-        //[ForeignKey("DayInfoEntities")]
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int DayInfoEntities_Id { get; set; }
 
         [Required]
         public virtual ICollection<SingleDayInfoEntity> DayInfoEntities { get; set; }
