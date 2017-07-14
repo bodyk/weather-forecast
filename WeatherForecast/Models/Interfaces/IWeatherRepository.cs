@@ -13,6 +13,8 @@ namespace WeatherForecast.Models.Interfaces
         void UpdateCity(City item);
         void AddHistoryItem(RequestHistoryEntity item);
         void ClearHistory();
+        void AddWeatherEntity(WeatherEntity weather);
+        IEnumerable<WeatherEntity> GetWeatherInfo();
         ICollection<RequestHistoryEntity> GetHistory();
     }
 }

@@ -60,9 +60,20 @@ namespace WeatherForecast.Models.Implementations
             _context.SaveChanges();
         }
 
+        public void AddWeatherEntity(WeatherEntity weather)
+        {
+            _context.Infos.Add(weather);
+            _context.SaveChanges();
+        }
+
+        public IEnumerable<WeatherEntity> GetWeatherInfo()
+        {
+            return _context.Infos?.ToList();
+        }
+
         public ICollection<RequestHistoryEntity> GetHistory()
         {
-            return _context.HistoryOfRequests.ToList();
+            return _context.HistoryOfRequests?.ToList();
         }
     }
 }
