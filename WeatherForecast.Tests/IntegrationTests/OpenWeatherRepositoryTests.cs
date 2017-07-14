@@ -128,7 +128,7 @@ namespace WeatherForecast.Tests.IntegrationTests
 
             _repository.AddHistoryItem(new RequestHistoryEntity()
             {
-                Id = 2, WeatherEntity = new WeatherEntity(), RequestTime = DateTime.Now, WeatherEntity_Id = 1
+                WeatherEntity_Id = 1
             });
 
             //Act

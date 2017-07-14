@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using Moq;
 using NUnit.Framework;
@@ -11,7 +7,7 @@ using WeatherForecast.Models.Entities;
 using WeatherForecast.Models.Interfaces;
 using WeatherForecast.Models.OpenWeatherMapModels;
 
-namespace WeatherForecast.Tests.Controllers.Tests
+namespace WeatherForecast.Tests.UnitTests.Controllers.Tests
 {
     [TestFixture]
     class HistoryControllerTests
