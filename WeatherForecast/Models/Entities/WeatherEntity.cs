@@ -6,9 +6,9 @@ namespace WeatherForecast.Models.Entities
 {
     public class WeatherEntity
     {
-        [Key]
+        /*[Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int Id { get; set; }*/
 
         public string CityName { get; set; }
 
@@ -16,7 +16,9 @@ namespace WeatherForecast.Models.Entities
 
         public int CountForecastDays { get; set; }
 
-        [ForeignKey("DayInfoEntities")]
+        //[ForeignKey("DayInfoEntities")]
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DayInfoEntities_Id { get; set; }
 
         [Required]

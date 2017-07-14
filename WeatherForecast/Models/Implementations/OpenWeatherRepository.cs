@@ -16,15 +16,16 @@ namespace WeatherForecast.Models.Implementations
             _context = context;
         }
 
-        public void AddCity(City item)
+        public City AddCity(City item)
         {
-            _context.Cities.Add(item);
+            var city = _context.Cities.Add(item);
             _context.SaveChanges();
+            return city;
         }
 
         public IEnumerable<City> GetAllCities()
         {
-            return _context.Cities?.ToList();
+            return _context?.Cities?.ToList();
         }
 
         public City FindCity(string cityName)

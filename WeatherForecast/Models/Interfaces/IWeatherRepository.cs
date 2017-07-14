@@ -6,7 +6,7 @@ namespace WeatherForecast.Models.Interfaces
 {
     public interface IWeatherRepository
     {
-        void AddCity(City item);
+        City AddCity(City item);
         IEnumerable<City> GetAllCities();
         City FindCity(string cityName);
         void RemoveCity(string cityName);

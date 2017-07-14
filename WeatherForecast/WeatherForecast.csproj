@@ -177,7 +177,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Implementations\OpenWeatherRepository.cs" />
     <Compile Include="Models\Interfaces\IWeatherRepository.cs" />
     <Compile Include="Models\OpenWeatherMapModels\City.cs" />

@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Data.Common;
+using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using WeatherForecast.Models.Entities;
 using WeatherForecast.Models.OpenWeatherMapModels;
@@ -10,6 +11,12 @@ namespace WeatherForecast.Models.Implementations
         public WeatherContext()
         {
             Database.SetInitializer(new WeatherCitiesInitializer());
+        }
+
+        public WeatherContext(DbConnection connection)
+            : base(connection, true)
+        {
+            
         }
 
         public DbSet<City> Cities { get; set; }
