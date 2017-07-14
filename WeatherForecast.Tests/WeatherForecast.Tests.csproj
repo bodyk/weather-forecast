@@ -184,7 +184,6 @@
   <ItemGroup>
     <Compile Include="UnitTests\Controllers.Tests\CitiesControllerTests.cs" />
     <Compile Include="UnitTests\Controllers.Tests\HistoryControllerTests.cs" />
-    <Compile Include="UnitTests\Controllers.Tests\WeatherInfoControllerTests.cs" />
     <Compile Include="IntegrationTests\OpenWeatherRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,6 +1,9 @@
-﻿using Effort;
+﻿using System;
+using System.Collections.Generic;
+using Effort;
 using NUnit.Framework;
 using System.Linq;
+using WeatherForecast.Models.Entities;
 using WeatherForecast.Models.Implementations;
 using WeatherForecast.Models.Interfaces;
 using WeatherForecast.Models.OpenWeatherMapModels;
@@ -21,7 +24,7 @@ namespace WeatherForecast.Tests.IntegrationTests
         }
 
         [Test]
-        public void GetAllCities_Returns_empty_cities_collection_When_not_add_cities_before()
+        public void GetAllCities_When_not_add_cities_before_Then_Returns_empty_collection()
         {
             // Arrange
             // Empty
@@ -34,7 +37,7 @@ namespace WeatherForecast.Tests.IntegrationTests
         }
 
         [Test]
-        public void GetAllCities_Returns_exactly_one_city_instance_When_Call_AddCity_funtion_once()
+        public void GetAllCities_When_call_AddCity_funtion_once_Thenn_Returns_exactly_one_city_instance()
         {
 
             // Arrange
@@ -95,6 +98,62 @@ namespace WeatherForecast.Tests.IntegrationTests
 
             // Assert
             Assert.AreEqual(city, returnedCity);
+        }
+
+        [Test]
+        public void GetHistory_When_not_add_history_before_Then_Returns_empty_collection()
+        {
+            // Arrange
+            // Empty
+
+            //Act
+            var history = _repository.GetHistory();
+
+            // Assert
+            Assert.AreEqual(0, history.Count);
+        }
+
+        [Test]
+        public void GetHistory_When_Call_AddHistoryItem_funtion_once_Then_Returns_exactly_one_history_instance()
+        {
+            // Arrange
+            _repository.AddWeatherEntity(new WeatherEntity()
+            {
+                DayInfoEntities_Id = 1,
+                CityName = "Lviv",
+                CountryCode = "UA",
+                CountForecastDays = 1,
+                DayInfoEntities = new List<SingleDayInfoEntity>()
+            });
+
+            _repository.AddHistoryItem(new RequestHistoryEntity()
+            {
+                Id = 2, WeatherEntity = new WeatherEntity(), RequestTime = DateTime.Now, WeatherEntity_Id = 1
+            });
+
+            //Act
+            var history = _repository.GetHistory();
+
+            // Assert
+            Assert.AreEqual(1, history.Count);
+        }
+
+        [Test]
+        public void ClearHistory_When_clear_not_empty_history_collection_Then_history_info_correctly_updated()
+        {
+            // Arrange
+            _repository.AddWeatherEntity(new WeatherEntity()
+            {
+                DayInfoEntities_Id = 1, CityName = "Lviv", CountryCode = "UA",
+                CountForecastDays = 1, DayInfoEntities = new List<SingleDayInfoEntity>()
+            });
+            _repository.AddHistoryItem(new RequestHistoryEntity(){WeatherEntity_Id = 1});
+
+            //Act
+            _repository.ClearHistory();
+
+            // Assert
+            Assert.AreEqual(0, _repository.GetHistory().Count);
         }
     }
 }
