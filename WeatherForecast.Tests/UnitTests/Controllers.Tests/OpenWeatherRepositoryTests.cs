@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Effort;
 using NUnit.Framework;
-using System.Linq;
+using WeatherForecast.Controllers;
 using WeatherForecast.Models.Entities;
 using WeatherForecast.Models.Implementations;
 using WeatherForecast.Models.Interfaces;
 using WeatherForecast.Models.OpenWeatherMapModels;
 
-namespace WeatherForecast.Tests.IntegrationTests
+namespace WeatherForecast.Tests.UnitTests.Controllers.Tests
 {
     class OpenWeatherRepositoryTests
     {
         private WeatherContext _context;
         private IWeatherRepository _repository;
+
 
         [SetUp]
         public void TestSetup()
@@ -144,10 +148,13 @@ namespace WeatherForecast.Tests.IntegrationTests
             // Arrange
             _repository.AddWeatherEntity(new WeatherEntity()
             {
-                DayInfoEntities_Id = 1, CityName = "Lviv", CountryCode = "UA",
-                CountForecastDays = 1, DayInfoEntities = new List<SingleDayInfoEntity>()
+                DayInfoEntities_Id = 1,
+                CityName = "Lviv",
+                CountryCode = "UA",
+                CountForecastDays = 1,
+                DayInfoEntities = new List<SingleDayInfoEntity>()
             });
-            _repository.AddHistoryItem(new RequestHistoryEntity(){WeatherEntity_Id = 1});
+            _repository.AddHistoryItem(new RequestHistoryEntity() { WeatherEntity_Id = 1 });
 
             //Act
             _repository.ClearHistory();

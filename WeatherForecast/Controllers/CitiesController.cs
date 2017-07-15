@@ -86,7 +86,9 @@ namespace WeatherForecast.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string cityName)
         {
-            _repository.RemoveCity(cityName);
+            if (cityName != null)
+                _repository.RemoveCity(cityName);
+
             return RedirectToAction("Index");
         }
     }
