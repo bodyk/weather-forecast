@@ -4,8 +4,9 @@ using System.Web.Configuration;
 using Newtonsoft.Json;
 using WeatherForecast.Models.Interfaces;
 using WeatherForecast.Models.OpenWeatherMapModels;
+using WeatherForecast.Services.Interfaces;
 
-namespace WeatherForecast.Services
+namespace WeatherForecast.Services.Implementations
 {
     public class OpenWeatherMapService : IWeatherService
     {

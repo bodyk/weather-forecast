@@ -177,7 +177,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
-    <Compile Include="Models\Implementations\OpenWeatherRepository.cs" />
+    <Compile Include="Models\Implementations\CityRepository.cs" />
+    <Compile Include="Models\Implementations\RequestHistoryRepository.cs" />
+    <Compile Include="Models\Implementations\UnitOfWork.cs" />
+    <Compile Include="Models\Implementations\WeatherRepository.cs" />
+    <Compile Include="Models\Interfaces\IRepository.cs" />
     <Compile Include="Models\Interfaces\IWeatherRepository.cs" />
     <Compile Include="Models\OpenWeatherMapModels\City.cs" />
     <Compile Include="Models\OpenWeatherMapModels\Coord.cs" />
@@ -190,8 +194,10 @@
     <Compile Include="Models\Entities\SingleDayInfoEntity.cs" />
     <Compile Include="Models\Entities\WeatherEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\IWeatherService.cs" />
-    <Compile Include="Services\OpenWeatherMapService.cs" />
+    <Compile Include="Services\Implementations\UnitOfWorkService.cs" />
+    <Compile Include="Services\Interfaces\IUnitOfWorkService.cs" />
+    <Compile Include="Services\Interfaces\IWeatherService.cs" />
+    <Compile Include="Services\Implementations\OpenWeatherMapService.cs" />
     <Compile Include="Models\Implementations\WeatherCitiesInitializer.cs" />
     <Compile Include="Models\Implementations\WeatherContext.cs" />
   </ItemGroup>

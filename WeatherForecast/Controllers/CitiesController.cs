@@ -1,24 +1,26 @@
 ﻿using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using WeatherForecast.Models.Implementations;
 using WeatherForecast.Models.Interfaces;
 using WeatherForecast.Models.OpenWeatherMapModels;
+using WeatherForecast.Services.Interfaces;
 
 namespace WeatherForecast.Controllers
 {
     public class CitiesController : Controller
     {
-        private readonly IWeatherRepository _repository;
+        private readonly IUnitOfWorkService _unitOfWorkService;
 
-        public CitiesController(IWeatherRepository repository)
+        public CitiesController(IUnitOfWorkService unitOfWorkService)
         {
-            _repository = repository;
+            _unitOfWorkService = unitOfWorkService;
         }
 
         // GET: Cities
         public ActionResult Index()
         {
-            return View(_repository.GetAllCities().ToList());
+            return View(_unitOfWorkService.GetAllCities());
         }
 
         // GET: Cities/Create
@@ -36,7 +38,7 @@ namespace WeatherForecast.Controllers
         {
             if (ModelState.IsValid)
             {
-                _repository.AddCity(city);
+                _unitOfWorkService.AddCity(city);
                 return RedirectToAction("Index");
             }
 
@@ -48,7 +50,7 @@ namespace WeatherForecast.Controllers
         {
             if (cityName == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            var city = _repository.FindCity(cityName);
+            var city = _unitOfWorkService.FindCity(cityName);
             if (city == null)
                 return HttpNotFound();
             return View(city);
@@ -63,7 +65,7 @@ namespace WeatherForecast.Controllers
         {
             if (ModelState.IsValid)
             {
-                _repository.UpdateCity(city);
+                _unitOfWorkService.UpdateCity(city);
                 return RedirectToAction("Index");
             }
             return View(city);
@@ -74,7 +76,7 @@ namespace WeatherForecast.Controllers
         {
             if (cityName == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            var city = _repository.FindCity(cityName);
+            var city = _unitOfWorkService.FindCity(cityName);
             if (city == null)
                 return HttpNotFound();
             return View(city);
@@ -87,7 +89,14 @@ namespace WeatherForecast.Controllers
         public ActionResult DeleteConfirmed(string cityName)
         {
             if (cityName != null)
-                _repository.RemoveCity(cityName);
+            {
+                City city = _unitOfWorkService.FindCity(cityName);
+
+                if (city != null)
+                {
+                    _unitOfWorkService.RemoveCity(city);
+                }
+            }
 
             return RedirectToAction("Index");
         }

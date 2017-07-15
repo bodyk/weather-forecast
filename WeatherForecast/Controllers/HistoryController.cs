@@ -1,23 +1,27 @@
 ﻿using System.Web.Mvc;
+using WeatherForecast.Models.Implementations;
 using WeatherForecast.Models.Interfaces;
+using WeatherForecast.Services.Interfaces;
 
 namespace WeatherForecast.Controllers
 {
     public class HistoryController : Controller
     {
-        private readonly IWeatherRepository _repository;
+        private readonly IUnitOfWorkService _unitOfWorkService;
 
-        public HistoryController(IWeatherRepository repository)
+        public HistoryController(IUnitOfWorkService unitOfWorkService)
         {
-            _repository = repository;
+            _unitOfWorkService = unitOfWorkService;
         }
 
         // GET: History/Index
         public ActionResult Index(bool bClear = false)
         {
             if (bClear)
-                _repository.ClearHistory();
-            var history = _repository.GetHistory();
+            {
+                _unitOfWorkService.ClearHistory();
+            }
+            var history = _unitOfWorkService.GetHistory();
             if (history == null)
                 return HttpNotFound();
 
