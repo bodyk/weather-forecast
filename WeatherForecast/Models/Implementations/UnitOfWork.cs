@@ -7,7 +7,18 @@ namespace WeatherForecast.Models.Implementations
 {
     public class UnitOfWork : IDisposable
     {
-        private readonly WeatherContext _context = new WeatherContext();
+        private readonly WeatherContext _context;
+
+        public UnitOfWork()
+        {
+            _context = new WeatherContext();
+        }
+
+        public UnitOfWork(WeatherContext context)
+        {
+            _context = context;
+        }
+
         private CityRepository _cityRepository;
         private RequestHistoryRepository _historyRepository;
         private WeatherRepository _weatherRepository;

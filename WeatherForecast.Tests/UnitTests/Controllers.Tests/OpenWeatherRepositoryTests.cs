@@ -10,13 +10,15 @@ using WeatherForecast.Models.Entities;
 using WeatherForecast.Models.Implementations;
 using WeatherForecast.Models.Interfaces;
 using WeatherForecast.Models.OpenWeatherMapModels;
+using WeatherForecast.Services.Implementations;
+using WeatherForecast.Services.Interfaces;
 
 namespace WeatherForecast.Tests.UnitTests.Controllers.Tests
 {
     class OpenWeatherRepositoryTests
     {
         private WeatherContext _context;
-        private IWeatherRepository _repository;
+        private IUnitOfWorkService _service;
 
 
         [SetUp]
@@ -24,7 +26,7 @@ namespace WeatherForecast.Tests.UnitTests.Controllers.Tests
         {
             var connection = DbConnectionFactory.CreateTransient();
             _context = new WeatherContext(connection);
-            _repository = new OpenWeatherRepository(_context);
+            _service = new UnitOfWorkService(new UnitOfWork(_context));
         }
 
         [Test]
@@ -34,7 +36,7 @@ namespace WeatherForecast.Tests.UnitTests.Controllers.Tests
             // Empty
 
             //Act
-            var citiesCount = _repository.GetAllCities().Count();
+            var citiesCount = _service.GetAllCities().Count();
 
             // Assert
             Assert.AreEqual(0, citiesCount);
@@ -48,8 +50,8 @@ namespace WeatherForecast.Tests.UnitTests.Controllers.Tests
             City city = new City { Name = "Lviv" };
 
             //Act
-            _repository.AddCity(city);
-            var cities = _repository.GetAllCities();
+            _service.AddCity(city);
+            var cities = _service.GetAllCities();
 
             // Assert
             Assert.AreEqual(1, cities.Count());
@@ -61,11 +63,11 @@ namespace WeatherForecast.Tests.UnitTests.Controllers.Tests
             // Arrange
             var cityName = "Lviv";
             City city = new City { Name = cityName };
-            _repository.AddCity(city);
+            _service.AddCity(city);
 
             //Act
-            _repository.RemoveCity(cityName);
-            var cities = _repository.GetAllCities();
+            _service.RemoveCity(city);
+            var cities = _service.GetAllCities();
 
             // Assert
             Assert.AreEqual(0, cities.Count());
@@ -77,13 +79,13 @@ namespace WeatherForecast.Tests.UnitTests.Controllers.Tests
             // Arrange
             var cityName = "Lviv";
             City city = new City { Name = cityName, country = "UA" };
-            _repository.AddCity(city);
+            _service.AddCity(city);
             var newCountryCode = "EU";
             city.country = newCountryCode;
 
             //Act
-            _repository.UpdateCity(city);
-            var cities = _repository.GetAllCities();
+            _service.UpdateCity(city);
+            var cities = _service.GetAllCities();
 
             // Assert
             Assert.AreNotEqual(null, cities.FirstOrDefault(c => c.country == newCountryCode));
@@ -95,10 +97,10 @@ namespace WeatherForecast.Tests.UnitTests.Controllers.Tests
             // Arrange
             var cityName = "Lviv";
             City city = new City { Name = cityName, country = "UA" };
-            _repository.AddCity(city);
+            _service.AddCity(city);
 
             //Act
-            var returnedCity = _repository.FindCity(cityName);
+            var returnedCity = _service.FindCity(cityName);
 
             // Assert
             Assert.AreEqual(city, returnedCity);
@@ -111,56 +113,10 @@ namespace WeatherForecast.Tests.UnitTests.Controllers.Tests
             // Empty
 
             //Act
-            var history = _repository.GetHistory();
+            var history = _service.GetHistory();
 
             // Assert
-            Assert.AreEqual(0, history.Count);
-        }
-
-        [Test]
-        public void GetHistory_When_Call_AddHistoryItem_funtion_once_Then_Returns_exactly_one_history_instance()
-        {
-            // Arrange
-            _repository.AddWeatherEntity(new WeatherEntity()
-            {
-                DayInfoEntities_Id = 1,
-                CityName = "Lviv",
-                CountryCode = "UA",
-                CountForecastDays = 1,
-                DayInfoEntities = new List<SingleDayInfoEntity>()
-            });
-
-            _repository.AddHistoryItem(new RequestHistoryEntity()
-            {
-                WeatherEntity_Id = 1
-            });
-
-            //Act
-            var history = _repository.GetHistory();
-
-            // Assert
-            Assert.AreEqual(1, history.Count);
-        }
-
-        [Test]
-        public void ClearHistory_When_clear_not_empty_history_collection_Then_history_info_correctly_updated()
-        {
-            // Arrange
-            _repository.AddWeatherEntity(new WeatherEntity()
-            {
-                DayInfoEntities_Id = 1,
-                CityName = "Lviv",
-                CountryCode = "UA",
-                CountForecastDays = 1,
-                DayInfoEntities = new List<SingleDayInfoEntity>()
-            });
-            _repository.AddHistoryItem(new RequestHistoryEntity() { WeatherEntity_Id = 1 });
-
-            //Act
-            _repository.ClearHistory();
-
-            // Assert
-            Assert.AreEqual(0, _repository.GetHistory().Count);
+            Assert.AreEqual(0, history.Count());
         }
     }
 }

@@ -5,25 +5,26 @@ using NUnit.Framework;
 using WeatherForecast.Controllers;
 using WeatherForecast.Models.Interfaces;
 using WeatherForecast.Models.OpenWeatherMapModels;
+using WeatherForecast.Services.Interfaces;
 
 namespace WeatherForecast.Tests.UnitTests.Controllers.Tests
 {
     [TestFixture]
     class CitiesControllerTests
     {
-        private readonly Mock<IWeatherRepository> _repoMock;
+        private readonly Mock<IUnitOfWorkService> _unitOfWorkMock;
         private readonly CitiesController _controller;
 
         public CitiesControllerTests()
         {
-            _repoMock = new Mock<IWeatherRepository>();
-            _controller = new CitiesController(_repoMock.Object);
+            _unitOfWorkMock = new Mock<IUnitOfWorkService>();
+            _controller = new CitiesController(_unitOfWorkMock.Object);
         }
 
         [SetUp]
         public void TestSetup()
         {
-            _repoMock.Setup(x => x.GetAllCities())
+            _unitOfWorkMock.Setup(x => x.GetAllCities())
                 .Returns(new List<City>
                 {
                     new City{Name = "Lviv"}
@@ -33,7 +34,7 @@ namespace WeatherForecast.Tests.UnitTests.Controllers.Tests
         [TearDown]
         public void TestTearDown()
         {
-            _repoMock.Reset();
+            _unitOfWorkMock.Reset();
         }
 
         [Test]

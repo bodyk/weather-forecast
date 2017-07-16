@@ -17,6 +17,11 @@ namespace WeatherForecast.Services.Implementations
             _unitOfWork = new UnitOfWork();
         }
 
+        public UnitOfWorkService(UnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
         public void AddCity(City item)
         {
             _unitOfWork.Cities.Create(item);
