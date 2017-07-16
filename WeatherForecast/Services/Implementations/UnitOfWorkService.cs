@@ -66,5 +66,10 @@ namespace WeatherForecast.Services.Implementations
         {
             return _unitOfWork.HistoryItems.GetAll();
         }
+
+        public void Dispose()
+        {
+            _unitOfWork.Dispose();
+        }
     }
 }

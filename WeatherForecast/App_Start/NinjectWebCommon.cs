@@ -63,6 +63,7 @@ namespace WeatherForecast.App_Start
         {
             System.Web.Mvc.DependencyResolver.SetResolver(new
                 WeatherForecast.Infrastructure.NinjectDependencyResolver(kernel));
+            System.Web.Http.GlobalConfiguration.Configuration.DependencyResolver = new Ninject.WebApi.DependencyResolver.NinjectDependencyResolver(kernel);
         }        
     }
 }

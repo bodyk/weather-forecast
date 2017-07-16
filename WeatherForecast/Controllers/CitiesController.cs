@@ -1,8 +1,5 @@
-﻿using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Web.Mvc;
-using WeatherForecast.Models.Implementations;
-using WeatherForecast.Models.Interfaces;
 using WeatherForecast.Models.OpenWeatherMapModels;
 using WeatherForecast.Services.Interfaces;
 

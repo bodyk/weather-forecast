@@ -2,9 +2,7 @@
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using WeatherForecast.Models.Entities;
-using WeatherForecast.Models.Implementations;
 using WeatherForecast.Models.Interfaces;
-using WeatherForecast.Services;
 using WeatherForecast.Services.Interfaces;
 
 namespace WeatherForecast.Controllers

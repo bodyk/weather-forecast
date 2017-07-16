@@ -1,11 +1,9 @@
-﻿using System;
+﻿using Ninject;
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using Ninject;
-using WeatherForecast.Models.Implementations;
 using WeatherForecast.Models.Interfaces;
 using WeatherForecast.Models.OpenWeatherMapModels;
-using WeatherForecast.Services;
 using WeatherForecast.Services.Implementations;
 using WeatherForecast.Services.Interfaces;
 

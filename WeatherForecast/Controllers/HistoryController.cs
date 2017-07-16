@@ -1,6 +1,4 @@
 ﻿using System.Web.Mvc;
-using WeatherForecast.Models.Implementations;
-using WeatherForecast.Models.Interfaces;
 using WeatherForecast.Services.Interfaces;
 
 namespace WeatherForecast.Controllers

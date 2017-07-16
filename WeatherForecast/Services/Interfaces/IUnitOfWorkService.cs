@@ -8,7 +8,7 @@ using WeatherForecast.Models.OpenWeatherMapModels;
 
 namespace WeatherForecast.Services.Interfaces
 {
-    public interface IUnitOfWorkService
+    public interface IUnitOfWorkService : IDisposable
     {
         void AddCity(City item);
 
