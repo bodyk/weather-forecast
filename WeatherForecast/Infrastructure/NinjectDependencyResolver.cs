@@ -1,39 +1,39 @@
-﻿using System;
+﻿using Ninject;
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using Ninject;
-using WeatherForecast.Models.Implementations;
 using WeatherForecast.Models.Interfaces;
 using WeatherForecast.Models.OpenWeatherMapModels;
-using WeatherForecast.Services;
+using WeatherForecast.Services.Implementations;
+using WeatherForecast.Services.Interfaces;
 
 namespace WeatherForecast.Infrastructure
 {
     public class NinjectDependencyResolver : IDependencyResolver
     {
-        private readonly IKernel kernel;
+        private readonly IKernel _kernel;
 
         public NinjectDependencyResolver(IKernel kernelParam)
         {
-            kernel = kernelParam;
+            _kernel = kernelParam;
             AddBindings();
         }
 
         public object GetService(Type serviceType)
         {
-            return kernel.TryGet(serviceType);
+            return _kernel.TryGet(serviceType);
         }
 
         public IEnumerable<object> GetServices(Type serviceType)
         {
-            return kernel.GetAll(serviceType);
+            return _kernel.GetAll(serviceType);
         }
 
         private void AddBindings()
         {
-            kernel.Bind<IWeatherService>().To<OpenWeatherMapService>();
-            kernel.Bind<IDetailedWeatherInfo>().To<OpenWeatherDetailedInfo>();
-            kernel.Bind<IWeatherRepository>().To<OpenWeatherRepository>();
+            _kernel.Bind<IWeatherService>().To<OpenWeatherMapService>();
+            _kernel.Bind<IDetailedWeatherInfo>().To<OpenWeatherDetailedInfo>();
+            _kernel.Bind<IUnitOfWorkService>().To<UnitOfWorkService>();
         }
     }
 }

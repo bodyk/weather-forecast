@@ -8,7 +8,7 @@ namespace WeatherForecast.Models.Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int DayInfoEntities_Id { get; set; }
+        public int Id { get; set; }
 
         public string CityName { get; set; }
 

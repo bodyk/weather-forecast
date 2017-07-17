@@ -8,13 +8,15 @@ using WeatherForecast.Models.Entities;
 using WeatherForecast.Models.Implementations;
 using WeatherForecast.Models.Interfaces;
 using WeatherForecast.Models.OpenWeatherMapModels;
+using WeatherForecast.Services.Implementations;
+using WeatherForecast.Services.Interfaces;
 
 namespace WeatherForecast.Tests.IntegrationTests
 {
     class CitiesControllerIntegrationsTests
     {
         private WeatherContext _context;
-        private IWeatherRepository _repository;
+        private IUnitOfWorkService _service;
         private CitiesController _citiesController;
 
 
@@ -23,8 +25,8 @@ namespace WeatherForecast.Tests.IntegrationTests
         {
             var connection = DbConnectionFactory.CreateTransient();
             _context = new WeatherContext(connection);
-            _repository = new OpenWeatherRepository(_context);
-            _citiesController = new CitiesController(_repository);
+            _service = new UnitOfWorkService(new UnitOfWork(_context));
+            _citiesController = new CitiesController(_service);
         }
 
         [Test]
@@ -42,7 +44,7 @@ namespace WeatherForecast.Tests.IntegrationTests
             {
                 // Expected exception
             }
-            var cities = _repository.GetAllCities();
+            var cities = _service.GetAllCities();
 
             // Assert
             Assert.AreEqual(0, cities.Count());
@@ -56,7 +58,7 @@ namespace WeatherForecast.Tests.IntegrationTests
 
             //Act
             _citiesController.Create(city);
-            var cities = _repository.GetAllCities();
+            var cities = _service.GetAllCities();
 
             // Assert
             Assert.AreEqual(1, cities.Count());
@@ -72,7 +74,7 @@ namespace WeatherForecast.Tests.IntegrationTests
 
             //Act
             _citiesController.DeleteConfirmed(cityName);
-            var cities = _repository.GetAllCities();
+            var cities = _service.GetAllCities();
 
             // Assert
             Assert.AreEqual(0, cities.Count());
@@ -90,7 +92,7 @@ namespace WeatherForecast.Tests.IntegrationTests
 
             //Act
             _citiesController.Edit(city);
-            var cities = _repository.GetAllCities();
+            var cities = _service.GetAllCities();
 
             // Assert
             Assert.AreNotEqual(null, cities.FirstOrDefault(c => c.country == newCountryCode));
@@ -106,7 +108,7 @@ namespace WeatherForecast.Tests.IntegrationTests
 
             //Act
             _citiesController.DeleteConfirmed(null);
-            var cities = _repository.GetAllCities();
+            var cities = _service.GetAllCities();
 
             // Assert
             Assert.AreEqual(1, cities.Count());

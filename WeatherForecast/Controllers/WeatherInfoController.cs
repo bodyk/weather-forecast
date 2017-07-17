@@ -3,34 +3,35 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using WeatherForecast.Models.Entities;
 using WeatherForecast.Models.Interfaces;
-using WeatherForecast.Services;
+using WeatherForecast.Services.Interfaces;
 
 namespace WeatherForecast.Controllers
 {
     public class WeatherInfoController : Controller
     {
         private readonly IWeatherService _infoService;
-        private readonly IWeatherRepository _repository;
+        private readonly IUnitOfWorkService _unitOfWorkService;
         private IDetailedWeatherInfo _detailedInfo;
 
         public WeatherInfoController(IWeatherService serviceParam, IDetailedWeatherInfo detailedInfo,
-            IWeatherRepository repository)
+            IUnitOfWorkService unitOfWorkService)
         {
             _infoService = serviceParam;
             _detailedInfo = detailedInfo;
-            _repository = repository;
+            _unitOfWorkService = unitOfWorkService;
         }
 
         public async Task<ActionResult> Index(string customCityName, int time = 1)
         {
-            ViewBag.StartupCities = _repository.GetAllCities();
+            ViewBag.StartupCities = _unitOfWorkService.GetAllCities();
 
             try
             {
                 if (customCityName != null)
                 {
                     _detailedInfo = await _infoService.GetInfoByCity(customCityName, time);
-                    _repository.AddHistoryItem(new RequestHistoryEntity
+
+                    _unitOfWorkService.AddHistoryItem(new RequestHistoryEntity
                     {
                         RequestTime = DateTime.Now,
                         WeatherEntity = _detailedInfo.GetEntity()

@@ -13,7 +13,7 @@
         <div class="table-responsive">
             <table class="table table-striped">
                 <tr>
-                    @foreach (var city in (List<City>) ViewBag.StartupCities)
+                    @foreach (var city in (IEnumerable<City>) ViewBag.StartupCities)
                     {
                         <th>@Html.ActionLink(city.Name, "Index", new {customCityName = city.Name}, null)</th>
                     }
