@@ -5,33 +5,24 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
-
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th></th>
-    </tr>
-
+<div  class="divTable">
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
+        <div class="divTableRow">
+            <div class="divTableCell">
                 @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
+            </div>
+            <div class="divTableCell">
                 @Html.ActionLink("Edit", "Edit", new {cityName = item.Name}) |
                 @Html.ActionLink("Delete", "Delete", new {cityName = item.Name})
-            </td>
-        </tr>
+            </div>
+        </div>
     }
 
-</table>
+</div>
 
 <div>
     @Html.ActionLink("Back to Weather Forecast", "Index", "WeatherInfo")

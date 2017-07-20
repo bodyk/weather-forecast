@@ -22,10 +22,6 @@
 @if (Model.Count() != 0)
 {
     <table class="table">
-        <tr>
-            <td>Time</td>
-            <td colspan="2">RequestInfo</td>
-        </tr>
         @foreach (var historyItem in Model)
         {
             <tr>
@@ -63,42 +59,38 @@
                             <div class="divParent">
                                 @foreach (var dayWeather in historyItem.WeatherEntity.DayInfoEntities)
                                 {
-                                    <table class="table table-condensed">
-                                        <thead>
-                                        <tr>
-                                            <th>
-                                                @dayWeather.Date
-                                            </th>
-                                            <th>
-                                                <img src="@($"{dayWeather.IconPath}")"/>
-                                            </th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>Temperature:</td>
-                                            <td>@dayWeather.Temperature °C</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Humidity:</td>
-                                            <td>@dayWeather.Humidity %</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Pressure:</td>
-                                            <td>@dayWeather.Pressure hPa</td>
-                                        </tr>
-                                        <tr>
-                                            <td>WindSpeed:</td>
-                                            <td>@dayWeather.WindSpeed meter/sec</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Clouds:</td>
-                                            <td>@dayWeather.Clouds %</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-
-                                    <hr class="half-rule"/>
+                                    <div class="divTable">
+                                        <div class="divTableHeading">
+                                            <div class="divTableRow">
+                                                <div class="divTableHead">@dayWeather.Date</div>
+                                                <div class="divTableHead">
+                                                    <img src="@($"{dayWeather.IconPath}")" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="divTableBody">
+                                            <div class="divTableRow">
+                                                <div class="divTableCell">Temperature:</div>
+                                                <div class="divTableCell">@dayWeather.Temperature &deg;C</div>
+                                            </div>
+                                            <div class="divTableRow">
+                                                <div class="divTableCell">Humidity:</div>
+                                                <div class="divTableCell">@dayWeather.Humidity %</div>
+                                            </div>
+                                            <div class="divTableRow">
+                                                <div class="divTableCell">Pressure:</div>
+                                                <div class="divTableCell">@dayWeather.Pressure hPa</div>
+                                            </div>
+                                            <div class="divTableRow">
+                                                <div class="divTableCell">WindSpeed:</div>
+                                                <div class="divTableCell">@dayWeather.WindSpeed meter/sec</div>
+                                            </div>
+                                            <div class="divTableRow">
+                                                <div class="divTableCell">Clouds:</div>
+                                                <div class="divTableCell">@dayWeather.Clouds %</div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 }
                             </div>
                         }
