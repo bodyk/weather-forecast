@@ -60,7 +60,7 @@ hr.half-rule {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #000000;
+    background-color: #222930;
     box-shadow: 0px 1px 10px #5E5E5E;
     top: 0px;
     position: fixed;
@@ -89,7 +89,7 @@ hr.half-rule {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #262626;
+    background-color: #222930;
     box-shadow: 0px 1px 10px #5E5E5E;
     bottom: 0px;
 }
@@ -112,16 +112,19 @@ hr.half-rule {
     display: flex;
     flex-direction: column;
     width: 100%;
+    padding: 2em;
     justify-content: center;
-    padding: 10px;
 }
 
 #options {
-    background-color: #a1e8fc;
+    background-color: #4EB1BA;
     margin-bottom: 1em;
-    border: 3px solid black;
     border-radius: 1em;
 }
+#default-cities > div > a {
+    color: #eeeeee;
+}
+
 
 #default-cities {
     margin: 20%;
