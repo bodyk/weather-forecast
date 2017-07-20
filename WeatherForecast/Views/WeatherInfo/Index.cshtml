@@ -8,96 +8,89 @@
     var cityName = Model.CityName;
     var countryCode = Model.CountryCode;
 }
-<div>
-    <div class="well well-sm">
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <tr>
-                    @foreach (var city in (IEnumerable<City>) ViewBag.StartupCities)
-                    {
-                        <th>@Html.ActionLink(city.Name, "Index", new {customCityName = city.Name}, null)</th>
-                    }
-                    <th style="background: gold">@Html.ActionLink("✎", "Index", "Cities")</th>
-                </tr>
-            </table>
-        </div>
-        <div id="cityInputForm">
-            @using (Html.BeginForm("Index", "WeatherInfo"))
-            {
+<div id="options">
+    <div id="default-cities">
+
+        @foreach (var city in (IEnumerable<City>)ViewBag.StartupCities)
+        {
+            <div>@Html.ActionLink(city.Name, "Index", new { customCityName = city.Name }, null)</div>
+        }
+        <div>@Html.ActionLink("✎", "Index", "Cities")</div>
+
+    </div>
+    <div id="cityInputForm">
+        @using (Html.BeginForm("Index", "WeatherInfo"))
+        {
+            <div id="chooseCountDays">
+                <div class="chooseCountDaysElem"><label>@Html.RadioButton("time", 1, true) Current Day</label></div>
+                <div class="chooseCountDaysElem"><label>@Html.RadioButton("time", 3) 3 Days</label></div>
+                <div class="chooseCountDaysElem"><label>@Html.RadioButton("time", 7) 7 Days</label></div>
+            </div>
+            <div id="cityInput">
                 <div id="cityEditDiv">
-                    @Html.TextBox("customCityName", cityName, new {@class = "form-control col-xs-12", id = "cityEdit", required = "required"})
+                    @Html.TextBox("customCityName", cityName, new { @class = "form-control", id = "cityEdit", required = "required" })
                 </div>
                 <div id="citySubmitDiv">
-                    <input type="submit" value="Show weather" class="form-control btn-success" id="btnShow"/>
+                    <input type="submit" value="Show weather" class="form-control btn-success" id="btnShow" />
                 </div>
-            }
-        </div>
+            </div>
+        }
     </div>
+
+</div>
+<div id="weather-Details">
     @if (Model.GetWeatherParams().Count != 0)
     {
-        <div>
-            <table class="table table-striped">
-                <tr>
-                    <th>@Html.ActionLink("Current Day", "Index", new {time = 1, customCityName = cityName})</th>
-                    <th>@Html.ActionLink("3 Days", "Index", new {time = 3, customCityName = cityName})</th>
-                    <th>@Html.ActionLink("7 Days", "Index", new {time = 7, customCityName = cityName})</th>
-                </tr>
-            </table>
-        </div>
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <tr>
-                    <th>
+        <div class="divTable">
+            <div class="divTableBody">
+                <div class="divTableRow">
+                    <div class="divTableHead">
                         <h3>@cityName</h3>
-                    </th>
-
-                    <th id="countryCode">
+                    </div>
+                    <div class="divTableHead">
                         <h3>@countryCode</h3>
-                    </th>
-                </tr>
-            </table>
+                    </div>
+                </div>
+            </div>
         </div>
         <h4>Weather forecast for @Model.CountForecastDays days</h4>
-        <div class="divParent">
-            @foreach (var dayWeather in Model.GetWeatherParams())
-            {
-                <table class="table table-condensed">
-                    <thead>
-                    <tr>
-                        <th>
-                            @dayWeather.Date
-                        </th>
-                        <th>
-                            <img src="@($"{dayWeather.IconPath}")"/>
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="divTableKey">Temperature:</td>
-                        <td class="divTableValue">@dayWeather.Temperature °C</td>
-                    </tr>
-                    <tr>
-                        <td class="divTableKey">Humidity:</td>
-                        <td class="divTableValue">@dayWeather.Humidity %</td>
-                    </tr>
-                    <tr>
-                        <td class="divTableKey">Pressure:</td>
-                        <td class="divTableValue">@dayWeather.Pressure hPa</td>
-                    </tr>
-                    <tr>
-                        <td class="divTableKey">WindSpeed:</td>
-                        <td class="divTableValue">@dayWeather.WindSpeed meter/sec</td>
-                    </tr>
-                    <tr>
-                        <td class="divTableKey">Clouds:</td>
-                        <td class="divTableValue">@dayWeather.Clouds %</td>
-                    </tr>
-                    </tbody>
-                </table>
-
-                <hr class="half-rule"/>
-            }
-        </div>
+            <div class="divParent">
+                @foreach (var dayWeather in Model.GetWeatherParams())
+                {
+                    <div class="divTable">
+                        <div class="divTableHeading">
+                            <div class="divTableRow">
+                                <div class="divTableHead">@dayWeather.Date</div>
+                                <div class="divTableHead">
+                                    <img src="@($"{dayWeather.IconPath}")" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="divTableBody">
+                            <div class="divTableRow">
+                                <div class="divTableCell">Temperature:</div>
+                                <div class="divTableCell">@dayWeather.Temperature &deg;C</div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell">Humidity:</div>
+                                <div class="divTableCell">@dayWeather.Humidity %</div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell">Pressure:</div>
+                                <div class="divTableCell">@dayWeather.Pressure hPa</div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell">WindSpeed:</div>
+                                <div class="divTableCell">@dayWeather.WindSpeed meter/sec</div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell">Clouds:</div>
+                                <div class="divTableCell">@dayWeather.Clouds %</div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="half-rule" />
+                }
+            </div>
     }
 </div>

@@ -1,6 +1,7 @@
 ﻿body {
-    padding-bottom: 20px;
-    padding-top: 50px;
+    padding-top: 5em;
+    width: 100%;
+    min-width: 1em;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -14,38 +15,17 @@
    will truncate terms that are too long to fit in the left column 
 */
 
-.dl-horizontal dt { white-space: normal; }
+.dl-horizontal dt {
+    white-space: normal;
+}
 
 /* Set width on the form input elements since they're 100% wide by default */
 
 input,
 select,
-textarea { max-width: 280px; }
-
-.divTableRow { display: table-cell; }
-
-.divTableHeading { display: table-header-group; }
-
-.divTableCell, .divTableHead {
-    border: 1px solid #000080;
-    display: table-row;
-    margin: auto;
-    width: calc(100% - 40px);
+textarea {
+    max-width: 280px;
 }
-
-.divParent { font-size: 150%; }
-
-.divTableKey {
-    text-align: left;
-    width: 100%;
-}
-
-.divTableValue {
-    text-align: left;
-    width: 100%;
-}
-
-.cityInputForm { text-align: center; }
 
 #cityEditDiv, #citySubmitDiv {
     display: inline-block;
@@ -60,40 +40,166 @@ hr.half-rule {
     height: 30px;
 }
 
-hr.half-rule:before {
-    border-color: #8c8b8b;
-    border-radius: 20px;
-    border-style: solid;
-    border-width: 0 0 1px 0;
-    content: "";
-    display: block;
-    height: 30px;
-    margin-top: -31px;
+    hr.half-rule:before {
+        border-color: #8c8b8b;
+        border-radius: 20px;
+        border-style: solid;
+        border-width: 0 0 1px 0;
+        content: "";
+        display: block;
+        height: 30px;
+        margin-top: -31px;
+    }
+
+#countryCode {
+    text-align: right;
 }
 
-table {
-    background-color: cadetblue;
-    border-collapse: collapse;
-    border-spacing: 0;
-    color: #333;
-    font-family: Helvetica, Arial, sans-serif;
-    width: 640px;
+#page-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #222930;
+    box-shadow: 0px 1px 10px #5E5E5E;
+    top: 0px;
+    position: fixed;
+    resize: both;
 }
 
-td, th { height: 30px; }
-
-td {
-    background: #FAFAFA;
-    text-align: center;
+#logo {
+    height: 100%;
+    width: 50px;
+    float: left;
+    margin: 10px;
 }
 
-tr:nth-child(even) td { background: #F1F1F1; }
-
-tr:nth-child(odd) td { background: #FEFEFE; }
-
-tr td:hover {
-    background: #666;
-    color: #FFF;
+#navmenu {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
 }
 
-#countryCode { text-align: right; }
+    #navmenu li {
+        margin: 1em 1em;
+    }
+
+#page-footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #222930;
+    box-shadow: 0px 1px 10px #5E5E5E;
+    bottom: 0px;
+}
+
+#company-info {
+    float: left;
+    color: white;
+    margin: 2em;
+}
+
+#contact-info {
+    float: right;
+    color: white;
+    margin: 2em;
+}
+
+#page-content {
+    margin: 2em auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 2em;
+    justify-content: center;
+}
+
+#options {
+    background-color: #4EB1BA;
+    margin-bottom: 1em;
+    border-radius: 1em;
+}
+#default-cities > div > a {
+    color: #eeeeee;
+}
+
+
+#default-cities {
+    margin: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#chooseCountDays {
+    display: flex;
+    flex-direction: row;
+    margin: 1%;
+    justify-content: center;
+}
+
+.chooseCountDaysElem {
+    margin: 1px 20px;
+}
+
+#cityInput {
+    display: flex;
+    justify-content: center;
+}
+
+#cityEdit {
+    width: 250em;
+    margin: 5px 10px;
+}
+
+#citySubmitDiv {
+    width: 8em;
+    margin: 5px 10px;
+}
+
+#default-cities {
+    margin: 10px;
+}
+
+.divTable {
+    display: table;
+    width: 100%;
+}
+
+.divTableRow {
+    display: table-row;
+    background-color: #b6d0f9;
+    border: 1px solid black;
+}
+
+.divTableRow:nth-child(even) {
+    background-color: #f2f2f2
+}
+
+.divTableHeading {
+    background-color: #EEE;
+    display: table-header-group;
+}
+
+.divTableCell, .divTableHead {
+    display: table-cell;
+    padding: 3px 10px;
+}
+
+.divTableHeading {
+    background-color: #EEE;
+    display: table-header-group;
+    font-weight: bold;
+}
+
+.divTableFoot {
+    background-color: #EEE;
+    display: table-footer-group;
+    font-weight: bold;
+}
+
+.divTableBody {
+    display: table-row-group;
+}
