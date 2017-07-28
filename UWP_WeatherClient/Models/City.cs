@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using WeatherForecast.Models.OpenWeatherMapModels;
 
 namespace UWP_WeatherClient.Models
 {

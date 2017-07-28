@@ -1,4 +1,4 @@
-﻿namespace WeatherForecast.Models.OpenWeatherMapModels
+﻿namespace UWP_WeatherClient.Models
 {
     public class Coord
     {
