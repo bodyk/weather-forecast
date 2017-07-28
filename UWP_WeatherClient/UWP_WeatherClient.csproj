@@ -108,7 +108,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Implementations\CityService.cs" />
     <Compile Include="Services\Implementations\HistoryService.cs" />
-    <Compile Include="Services\Implementations\OpenWeatherService.cs" />
+    <Compile Include="Services\Implementations\WeatherBaseService.cs" />
     <Compile Include="Services\Implementations\WeatherDataService.cs" />
     <Compile Include="Services\Interfaces\ICityService.cs" />
     <Compile Include="Services\Interfaces\IHistoryService.cs" />

@@ -10,7 +10,7 @@ using UWP_WeatherClient.Services.Interfaces;
 
 namespace UWP_WeatherClient.Services.Implementations
 {
-    class WeatherDataService : OpenWeatherService, IWeatherDataService
+    class WeatherDataService : WeatherBaseService, IWeatherDataService
     {
         public async Task<IDetailedWeatherInfo> GetInfoByCity(string cityName, int countDays)
         {

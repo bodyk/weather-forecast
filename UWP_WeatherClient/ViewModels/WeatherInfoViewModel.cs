@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.Views;
 using UWP_WeatherClient.Models;
 using UWP_WeatherClient.Services;
 using UWP_WeatherClient.Services.Implementations;
+using UWP_WeatherClient.Services.Interfaces;
 
 namespace UWP_WeatherClient.ViewModels
 {
@@ -14,7 +15,7 @@ namespace UWP_WeatherClient.ViewModels
     {
         private List<City> _model;
         private readonly INavigationService _navigationService;
-        private readonly WeatherDataService _service;
+        private readonly ICityService _service;
 
         public WeatherInfoViewModel(INavigationService navigationService)
         {
@@ -22,14 +23,15 @@ namespace UWP_WeatherClient.ViewModels
 
             _navigationService = navigationService;
 
-            _service = new WeatherDataService();
+            _service = new CityService();
             GetCities();
             Title = "Weather Info";
         }
 
         public async void GetCities()
         {
-            var res = await _service.GetInfoByCity("Lviv", 3);
+            var cities = await _service.GetCities();
+            var res = await _service.PostCity(new City{Name = "Adler", Id = 10});
 
             int a = 2;
         }

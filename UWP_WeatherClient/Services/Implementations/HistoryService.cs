@@ -8,7 +8,7 @@ using UWP_WeatherClient.Services.Interfaces;
 
 namespace UWP_WeatherClient.Services.Implementations
 {
-    class HistoryService : OpenWeatherService, IHistoryService
+    class HistoryService : WeatherBaseService, IHistoryService
     {
         public async Task<List<RequestHistoryEntity>> GetHistory()
         {

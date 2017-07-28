@@ -10,5 +10,11 @@ namespace UWP_WeatherClient.Services.Interfaces
     interface ICityService
     {
         Task<List<City>> GetCities();
+
+        Task<City> GetCity(string cityName);
+
+        Task<bool> PostCity(City city);
+
+        Task<bool> DeleteCity(string cityName);
     }
 }
