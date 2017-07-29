@@ -17,12 +17,12 @@ namespace UWP_WeatherClient.ViewModels
         private readonly IHistoryService _service;
 
 
-        public HistoryViewModel(INavigationService navigationService)
+        public HistoryViewModel(INavigationService navigationService, IHistoryService service)
         {
             _model = new List<RequestHistoryEntity>();
 
             _navigationService = navigationService;
-            _service = new HistoryService();
+            _service = service;
             Title = "History Info";
         }
 

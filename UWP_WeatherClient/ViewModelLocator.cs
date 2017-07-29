@@ -7,6 +7,8 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
+using UWP_WeatherClient.Services.Implementations;
+using UWP_WeatherClient.Services.Interfaces;
 using UWP_WeatherClient.ViewModels;
 using UWP_WeatherClient.Views;
 
@@ -41,6 +43,10 @@ namespace UWP_WeatherClient
             SimpleIoc.Default.Register<WeatherInfoViewModel>();
             SimpleIoc.Default.Register<CitiesViewModel>();
             SimpleIoc.Default.Register<HistoryViewModel>();
+
+            SimpleIoc.Default.Register<IWeatherDataService, WeatherDataService>();
+            SimpleIoc.Default.Register<IHistoryService, HistoryService>();
+            SimpleIoc.Default.Register<ICityService, CityService>();
         }
 
 

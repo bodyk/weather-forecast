@@ -18,13 +18,13 @@ namespace UWP_WeatherClient.ViewModels
         private readonly ICityService _service;
 
 
-        public CitiesViewModel(INavigationService navigationService)
+        public CitiesViewModel(INavigationService navigationService, ICityService service)
         {
             _model = new List<City>();
 
             _navigationService = navigationService;
 
-            _service = new CityService();
+            _service = service;
             Title = "Default Cities";
         }
 

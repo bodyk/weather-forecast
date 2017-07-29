@@ -24,13 +24,13 @@ namespace UWP_WeatherClient.ViewModels
 
         public int CountDays { get; set; }
 
-        public WeatherInfoViewModel(INavigationService navigationService)
+        public WeatherInfoViewModel(INavigationService navigationService, IWeatherDataService service)
         {
             _model = new List<IDetailedWeatherInfo>();
 
             _navigationService = navigationService;
 
-            _service = new WeatherDataService();
+            _service = service;
 
             ShowWeatherCommand = new RelayCommand(showWeather);
 
