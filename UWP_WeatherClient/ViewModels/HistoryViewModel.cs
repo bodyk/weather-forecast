@@ -13,22 +13,28 @@ namespace UWP_WeatherClient.ViewModels
     class HistoryViewModel : BaseViewModel
     {
         private List<RequestHistoryEntity> _model;
-        private readonly INavigationService _navigationService;
         private readonly IHistoryService _service;
 
+        public List<RequestHistoryEntity> History { get; private set; }
 
         public HistoryViewModel(INavigationService navigationService, IHistoryService service)
+            : base(navigationService)
         {
             _model = new List<RequestHistoryEntity>();
 
-            _navigationService = navigationService;
             _service = service;
             Title = "History Info";
         }
 
-        public async Task<List<RequestHistoryEntity>> GetHistory()
+        private async void GetHistory()
         {
-            return await _service.GetHistory();
+            History =  await _service.GetHistory();
+            RaisePropertyChanged(() => History);
+        }
+
+        protected override void OnPageLoad()
+        {
+            GetHistory();
         }
     }
 }

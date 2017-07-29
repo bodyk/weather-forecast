@@ -17,7 +17,6 @@ namespace UWP_WeatherClient.ViewModels
     class WeatherInfoViewModel : BaseViewModel
     {
         private List<IDetailedWeatherInfo> _model;
-        private readonly INavigationService _navigationService;
         private readonly IWeatherDataService _service;
 
         public string CityName { get; set; }
@@ -25,10 +24,9 @@ namespace UWP_WeatherClient.ViewModels
         public int CountDays { get; set; }
 
         public WeatherInfoViewModel(INavigationService navigationService, IWeatherDataService service)
+            : base(navigationService)
         {
             _model = new List<IDetailedWeatherInfo>();
-
-            _navigationService = navigationService;
 
             _service = service;
 
@@ -51,6 +49,11 @@ namespace UWP_WeatherClient.ViewModels
         {
             WeatherForecast = await GetInfoByCity(CityName, CountDays);
             RaisePropertyChanged(() => WeatherForecast);
+        }
+
+        protected override void OnPageLoad()
+        {
+            showWeather();
         }
     }
 }

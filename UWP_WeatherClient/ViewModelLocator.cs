@@ -23,10 +23,7 @@ namespace UWP_WeatherClient
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            var navigationService = new NavigationService();
-            navigationService.Configure(nameof(WeatherInfoViewModel), typeof(WeatherInfoView));
-            navigationService.Configure(nameof(CitiesViewModel), typeof(CitiesView));
-            navigationService.Configure(nameof(HistoryViewModel), typeof(HistoryView));
+            SetupNavigation();
 
             if (ViewModelBase.IsInDesignModeStatic)
             {
@@ -37,9 +34,6 @@ namespace UWP_WeatherClient
                 // Create run time view services and models
             }
 
-            //Register your services used here
-            //SimpleIoc.Default.Register<INavigationService, NavigationService>();
-            SimpleIoc.Default.Register<INavigationService>(() => navigationService);
             SimpleIoc.Default.Register<WeatherInfoViewModel>();
             SimpleIoc.Default.Register<CitiesViewModel>();
             SimpleIoc.Default.Register<HistoryViewModel>();
@@ -47,6 +41,16 @@ namespace UWP_WeatherClient
             SimpleIoc.Default.Register<IWeatherDataService, WeatherDataService>();
             SimpleIoc.Default.Register<IHistoryService, HistoryService>();
             SimpleIoc.Default.Register<ICityService, CityService>();
+        }
+
+        private static void SetupNavigation()
+        {
+            var navigationService = new NavigationService();
+            navigationService.Configure(nameof(WeatherInfoViewModel), typeof(WeatherInfoView));
+            navigationService.Configure(nameof(CitiesViewModel), typeof(CitiesView));
+            navigationService.Configure(nameof(HistoryViewModel), typeof(HistoryView));
+
+            SimpleIoc.Default.Register<INavigationService>(() => navigationService);
         }
 
 

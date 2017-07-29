@@ -5,10 +5,51 @@
     xmlns:local="using:UWP_WeatherClient.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d"
-    DataContext="{Binding CityVMInstance, Source={StaticResource Locator}}">
-
+    DataContext="{Binding CityVMInstance, Source={StaticResource Locator}}"
+    >
+    <interactivity:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding OnLoadCommand}" />
+        </core:EventTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
+        <ListView Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Cities}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="{Binding Name}"
+                                   Grid.Column="0"
+                                   Grid.Row="0"/>
+                        <TextBlock Text="Some History Binding Value"
+                                   Foreground="Black"
+                                   FontSize="16"
+                                   Padding="20,0,0,0"
+                                   Grid.Column="1"
+                                   Grid.Row="0"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>
