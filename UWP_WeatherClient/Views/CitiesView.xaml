@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:interop="using:Windows.UI.Xaml.Interop"
     mc:Ignorable="d"
     DataContext="{Binding CityVMInstance, Source={StaticResource Locator}}"
     >
@@ -15,41 +16,41 @@
             <core:InvokeCommandAction Command="{Binding OnLoadCommand}" />
         </core:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
 
-        <ListView Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Cities}">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ListView x:Name="CitiesListView" ItemsSource="{Binding Cities}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Margin="16">
+                    <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
 
                         </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="1*"/>
-                            <RowDefinition Height="1*"/>
+                        <TextBox x:Name="txtCityName" HorizontalAlignment="Stretch" 
+                                 Grid.Column="0" Text="{Binding Name, Mode=TwoWay}" IsReadOnly="True"/>
+                        <StackPanel Grid.Column="1" >
+                            <Button x:Name="btnSaveCity" HorizontalAlignment="Center" 
+                                    Margin="10 0" Content="Edit" Click="ButtonEdit_OnClick" Visibility="Collapsed">
+                                
+                            </Button>
+                            <Button x:Name="btnEditCity" HorizontalAlignment="Center" 
+                                    Margin="10 0" Content="Edit" Click="ButtonEdit_OnClick"></Button>
+                        </StackPanel>
+                        
+                        <Button  x:Name="btnDeleteCity" HorizontalAlignment="Center" 
+                                Grid.Column="2" Content="Delete" Command="{Binding DataContext.DeleteCityCommand, ElementName=CitiesListView}" 
+                                 CommandParameter="{Binding Name}"></Button>
 
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Text="{Binding Name}"
-                                   Grid.Column="0"
-                                   Grid.Row="0"/>
-                        <TextBlock Text="Some History Binding Value"
-                                   Foreground="Black"
-                                   FontSize="16"
-                                   Padding="20,0,0,0"
-                                   Grid.Column="1"
-                                   Grid.Row="0"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
         </ListView>
     </Grid>
 </Page>

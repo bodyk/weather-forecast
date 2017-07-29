@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
+using UWP_WeatherClient.Commands;
 using UWP_WeatherClient.Models;
 using UWP_WeatherClient.Services;
 using UWP_WeatherClient.Services.Implementations;
@@ -27,13 +28,23 @@ namespace UWP_WeatherClient.ViewModels
 
             GetCitiesCommand = new RelayCommand(GetCities);
 
+            DeleteCityCommand = new DelegateCommand(ExecuteDeleteCommand);
+
             _service = service;
             Title = "Default Cities";
         }
 
         public ICommand GetCitiesCommand { get; set; }
 
+        public ICommand DeleteCityCommand { set; get; }
+
         public List<City> Cities { get; private set; }
+
+        private void ExecuteDeleteCommand(object param)
+        {
+            _service.DeleteCity((string) param);
+            GetCities();
+        }
 
         public async void GetCities()
         {
