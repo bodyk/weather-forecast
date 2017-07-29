@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace UWP_WeatherClient.Models
 {
@@ -12,8 +13,6 @@ namespace UWP_WeatherClient.Models
 
         int CountForecastDays { get; set; }
 
-        List<SingleDayInfoEntity> GetWeatherParams();
-
-        WeatherEntity GetEntity();
+        List<SingleDayInfoEntity> WeatherParams { get; set; }
     }
 }

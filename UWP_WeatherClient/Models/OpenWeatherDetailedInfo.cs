@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 
@@ -49,6 +50,15 @@ namespace UWP_WeatherClient.Models
             set { cnt = value; }
         }
 
+        public List<SingleDayInfoEntity> WeatherParams
+        {
+            get
+            {
+                return GetWeatherParams();
+            }
+            set { }
+        }
+
         public WeatherEntity GetEntity()
         {
             return new WeatherEntity
@@ -63,6 +73,23 @@ namespace UWP_WeatherClient.Models
         public List<SingleDayInfoEntity> GetWeatherParams()
         {
             var allDaysWeather = new List<SingleDayInfoEntity>();
+
+            if (list == null)
+                return allDaysWeather;
+
+            foreach (var info in list)
+            {
+                allDaysWeather.Add(new SingleDayInfoEntity
+                {
+                    Date = UnixTimeStampToDateTime(info.dt),
+                    IconPath = "",
+                    Temperature = info.temp.day.ToString(CultureInfo.InvariantCulture),
+                    Humidity = info.humidity.ToString(),
+                    Pressure = info.pressure.ToString(CultureInfo.InvariantCulture),
+                    WindSpeed = info.speed.ToString(CultureInfo.InvariantCulture),
+                    Clouds = info.clouds.ToString(CultureInfo.InvariantCulture)
+                });
+            }
 
             return allDaysWeather;
         }

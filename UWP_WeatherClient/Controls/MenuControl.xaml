@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="UWP_WeatherClient.Controls.MenuControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="using:UWP_WeatherClient"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
+
+    <CommandBar Background="DarkSlateGray">
+        <AppBarButton Label="Weather Info">
+            <AppBarButton.Icon>
+                <BitmapIcon UriSource="ms-appx:///Assets/Weather.png"/>
+            </AppBarButton.Icon>
+        </AppBarButton>
+        <AppBarSeparator/>
+        <AppBarButton Label="Show History">
+            <AppBarButton.Icon>
+                <BitmapIcon UriSource="ms-appx:///Assets/Cities.png"/>
+            </AppBarButton.Icon>
+        </AppBarButton>
+        <AppBarSeparator/>
+        <AppBarButton Label="Cities">
+            <AppBarButton.Icon>
+                <BitmapIcon UriSource="ms-appx:///Assets/history.png"/>
+            </AppBarButton.Icon>
+        </AppBarButton>
+
+        <CommandBar.Content>
+            <TextBlock Text="Weather Forecast" Margin="12,14"/>
+        </CommandBar.Content>
+    </CommandBar>
+</UserControl>

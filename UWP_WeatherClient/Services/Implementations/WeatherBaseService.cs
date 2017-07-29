@@ -1,7 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
+using Windows.Web.Http;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
+using UWP_WeatherClient.Models;
+using HttpClient = System.Net.Http.HttpClient;
+using HttpResponseMessage = System.Net.Http.HttpResponseMessage;
 
 namespace UWP_WeatherClient.Services.Implementations
 {
@@ -27,26 +38,26 @@ namespace UWP_WeatherClient.Services.Implementations
             return responseInstance;
         }
 
-        public async Task<bool> PostResponse<T>(T data, string request)
+        public async Task<bool> PostResponse(Dictionary<string, string> dict, string request)
         {
-            HttpResponseMessage response = new HttpResponseMessage();
             using (var client = new HttpClient())
             {
-
-                string json = JsonConvert.SerializeObject(data);
-                response = await client.PostAsync(request, new StringContent(json));
-
-                try
+                using (var content = new FormUrlEncodedContent(dict))
                 {
-                    response.EnsureSuccessStatusCode();
-                }
-                catch (Exception e)
-                {
-                    return false;
+                    using (var response = await client.PostAsync(request, content))
+                    {
+                        try
+                        {
+                            response.EnsureSuccessStatusCode();
+                        }
+                        catch (Exception e)
+                        {
+                            return false;
+                        }
+                        return response.StatusCode == System.Net.HttpStatusCode.OK;
+                    }
                 }
             }
-
-            return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
 
         public async Task<bool> DeleteResponse(string request)

@@ -26,12 +26,12 @@ namespace UWP_WeatherClient.Services.Implementations
 
         public async Task<bool> PostCity(City city)
         {
-            return await PostResponse(city, $"{ApiPath}{_detailedPath}/");
+            return await PostResponse(new Dictionary<string, string>{{nameof(city.Name), city.Name }}, $"{ApiPath}{_detailedPath}/0");
         }
 
         public async Task<bool> DeleteCity(string cityName)
         {
-            return await DeleteResponse($"{ApiPath}{_detailedPath}/{cityName}");
+            return await DeleteResponse($"{ApiPath}{_detailedPath}/{cityName}/");
         }
     }
 }

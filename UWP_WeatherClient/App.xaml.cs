@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using UWP_WeatherClient.ViewModels;
+using UWP_WeatherClient.Views;
 
 namespace UWP_WeatherClient
 {

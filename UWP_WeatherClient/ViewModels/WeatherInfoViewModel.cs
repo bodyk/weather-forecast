@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Windows.Foundation.Metadata;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
 using UWP_WeatherClient.Models;
 using UWP_WeatherClient.Services;
@@ -13,27 +16,41 @@ namespace UWP_WeatherClient.ViewModels
 {
     class WeatherInfoViewModel : BaseViewModel
     {
-        private List<City> _model;
+        private List<IDetailedWeatherInfo> _model;
         private readonly INavigationService _navigationService;
-        private readonly ICityService _service;
+        private readonly IWeatherDataService _service;
+
+        public string CityName { get; set; }
+
+        public int CountDays { get; set; }
 
         public WeatherInfoViewModel(INavigationService navigationService)
         {
-            _model = new List<City>();
+            _model = new List<IDetailedWeatherInfo>();
 
             _navigationService = navigationService;
 
-            _service = new CityService();
-            GetCities();
+            _service = new WeatherDataService();
+
+            ShowWeatherCommand = new RelayCommand(showWeather);
+
             Title = "Weather Info";
         }
 
-        public async void GetCities()
+        public async Task<IDetailedWeatherInfo> GetInfoByCity(string cityName, int countDays)
         {
-            var cities = await _service.GetCities();
-            var res = await _service.PostCity(new City{Name = "Adler", Id = 10});
+            return await _service.GetInfoByCity(cityName, countDays);
+        }
 
-            int a = 2;
+        public ICommand ShowWeatherCommand { get; set; }
+
+        public IDetailedWeatherInfo WeatherForecast { get; private set; }
+
+
+        private async void showWeather()
+        {
+            WeatherForecast = await GetInfoByCity(CityName, CountDays);
+            RaisePropertyChanged(() => WeatherForecast);
         }
     }
 }

@@ -8,6 +8,7 @@ using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
 using UWP_WeatherClient.ViewModels;
+using UWP_WeatherClient.Views;
 
 namespace UWP_WeatherClient
 {
@@ -21,9 +22,9 @@ namespace UWP_WeatherClient
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             var navigationService = new NavigationService();
+            navigationService.Configure(nameof(WeatherInfoViewModel), typeof(WeatherInfoView));
             navigationService.Configure(nameof(CitiesViewModel), typeof(CitiesView));
             navigationService.Configure(nameof(HistoryViewModel), typeof(HistoryView));
-            navigationService.Configure(nameof(WeatherInfoViewModel), typeof(WeatherInfoView));
 
             if (ViewModelBase.IsInDesignModeStatic)
             {
@@ -37,11 +38,9 @@ namespace UWP_WeatherClient
             //Register your services used here
             //SimpleIoc.Default.Register<INavigationService, NavigationService>();
             SimpleIoc.Default.Register<INavigationService>(() => navigationService);
+            SimpleIoc.Default.Register<WeatherInfoViewModel>();
             SimpleIoc.Default.Register<CitiesViewModel>();
             SimpleIoc.Default.Register<HistoryViewModel>();
-            SimpleIoc.Default.Register<WeatherInfoViewModel>();
-
-            ServiceLocator.Current.GetInstance<WeatherInfoViewModel>();
         }
 
 

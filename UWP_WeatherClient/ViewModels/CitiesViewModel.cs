@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.Views;
 using UWP_WeatherClient.Models;
 using UWP_WeatherClient.Services;
 using UWP_WeatherClient.Services.Implementations;
+using UWP_WeatherClient.Services.Interfaces;
 
 namespace UWP_WeatherClient.ViewModels
 {
@@ -14,7 +15,8 @@ namespace UWP_WeatherClient.ViewModels
     {
         private List<City> _model;
         private readonly INavigationService _navigationService;
-        private readonly WeatherDataService _service;
+        private readonly ICityService _service;
+
 
         public CitiesViewModel(INavigationService navigationService)
         {
@@ -22,9 +24,13 @@ namespace UWP_WeatherClient.ViewModels
 
             _navigationService = navigationService;
 
-            _service = new WeatherDataService();
+            _service = new CityService();
             Title = "Default Cities";
         }
 
+        public async Task<List<City>> GetCities()
+        {
+            return await _service.GetCities();
+        }
     }
 }
