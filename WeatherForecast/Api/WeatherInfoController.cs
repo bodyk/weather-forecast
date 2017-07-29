@@ -1,7 +1,9 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using WeatherForecast.Models.Entities;
 using WeatherForecast.Models.Interfaces;
 using WeatherForecast.Services.Implementations;
 using WeatherForecast.Services.Interfaces;
@@ -11,10 +13,13 @@ namespace WeatherForecast.Api
     public class WeatherInfoController : ApiController
     {
         private readonly IWeatherService _weatherService;
+        private readonly IUnitOfWorkService _unitOfWorkService;
 
-        public WeatherInfoController(IWeatherService weatherService)
+
+        public WeatherInfoController(IWeatherService weatherService, IUnitOfWorkService unitOfWorkService)
         {
             _weatherService = weatherService;
+            _unitOfWorkService = unitOfWorkService;
         }
 
         // GET: api/WeatherInfo/{cityName}/{countDays}
@@ -28,6 +33,12 @@ namespace WeatherForecast.Api
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "The forecast can only be given in the next 1-7 days");
 
             var res = await _weatherService.GetInfoByCity(cityName, countDays);
+
+            _unitOfWorkService.AddHistoryItem(new RequestHistoryEntity
+            {
+                RequestTime = DateTime.Now,
+                WeatherEntity = res.GetEntity()
+            });
 
             if (res == null)
             {
