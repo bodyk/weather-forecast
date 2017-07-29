@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     DataContext="{Binding HistoryVMInstance, Source={StaticResource Locator}}"
     >
@@ -17,41 +18,142 @@
     </interactivity:Interaction.Behaviors>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="8*"/>
 
-        <ListView Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding History}">
+        </Grid.RowDefinitions>
+        <Button Grid.Row="0" Grid.Column="0"
+                   Content="CLEAR HISTORY"
+                Command="{Binding ClearHistoryCommand}"
+                BorderBrush="CornflowerBlue"
+                HorizontalAlignment="Center"
+                   FontSize="20">
+
+        </Button>
+
+        
+
+        <ListView Grid.Column="0" Grid.Row="1" 
+                  ItemsSource="{Binding History}"
+                  HorizontalAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Margin="16">
+                    <Grid Margin="20" >
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*"/>
-
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="1*"/>
-                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
 
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="Some History Binding Name"
-                                   Grid.Column="0"
-                                   Grid.Row="0"/>
-                        <TextBlock Text="Some History Binding Value"
-                                   Foreground="Black"
-                                   FontSize="16"
-                                   Padding="20,0,0,0"
-                                   Grid.Column="1"
-                                   Grid.Row="0"/>
+                        <controls:Expander Grid.Column="0" Grid.Row="0" 
+                                           Header="{Binding WeatherEntity.CountForecastDays}"
+                                           Foreground="White"
+                                           Background="CornflowerBlue"
+                                           IsExpanded="False">
+                            <ListView ItemsSource="{Binding WeatherEntity.DayInfoEntities}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="20" >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*"/>
+
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="2*"/>
+                                                <RowDefinition Height="1*"/>
+                                                <RowDefinition Height="1*"/>
+                                                <RowDefinition Height="1*"/>
+                                                <RowDefinition Height="1*"/>
+                                                <RowDefinition Height="1*"/>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Text="{Binding Date}"
+                                                       Grid.ColumnSpan="2"
+                                                       Grid.Column="0"
+                                                       Grid.Row="0"
+                                                       FontSize="20"
+                                                       TextAlignment="Center"/>
+
+                                            <TextBlock Text="Temperature"
+                                                       Grid.Column="0"
+                                                       Grid.Row="1"
+                                                       TextAlignment="Center"/>
+                                            <TextBlock Text="{Binding Temperature}"
+                                                       Foreground="Black"
+                                                       FontSize="16"
+                                                       Padding="100 0 0 0"
+                                                       Grid.Column="1"
+                                                       Grid.Row="1"
+                                                       TextAlignment="Center"/>
+
+                                            <TextBlock Text="Humidity"
+                                                       Grid.Column="0"
+                                                       Grid.Row="2"
+                                                       TextAlignment="Center"/>
+                                            <TextBlock Text="{Binding Humidity}"
+                                                       Foreground="Black"
+                                                       FontSize="16"
+                                                       Padding="100 0 0 0"
+                                                       Grid.Column="1"
+                                                       Grid.Row="2"
+                                                       TextAlignment="Center"/>
+
+                                            <TextBlock Text="Pressure"
+                                                       Grid.Column="0"
+                                                       Grid.Row="3"
+                                                       TextAlignment="Center"/>
+                                            <TextBlock Text="{Binding Pressure}"
+                                                       Foreground="Black"
+                                                       FontSize="16"
+                                                       Padding="100 0 0 0"
+                                                       Grid.Column="1"
+                                                       Grid.Row="3"
+                                                       TextAlignment="Center"/>
+
+                                            <TextBlock Text="Wind Speed"
+                                                       Grid.Column="0"
+                                                       Grid.Row="4"
+                                                       TextAlignment="Center"/>
+                                            <TextBlock Text="{Binding WindSpeed}"
+                                                       Foreground="Black"
+                                                       FontSize="16"
+                                                       Padding="100 0 0 0"
+                                                       Grid.Column="1"
+                                                       Grid.Row="4"
+                                                       TextAlignment="Center"/>
+
+                                            <TextBlock Text="Clouds"
+                                                       Grid.Column="0"
+                                                       Grid.Row="5"
+                                                       TextAlignment="Center"/>
+                                            <TextBlock Text="{Binding Clouds}"
+                                                       Foreground="Black"
+                                                       FontSize="16"
+                                                       Padding="100 0 0 0"
+                                                       Grid.Column="1"
+                                                       Grid.Row="5"
+                                                       TextAlignment="Center"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+                            </ListView>
+                        </controls:Expander>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
         </ListView>
     </Grid>
 </Page>

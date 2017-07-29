@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
 using UWP_WeatherClient.Models;
 using UWP_WeatherClient.Services.Implementations;
@@ -23,6 +25,9 @@ namespace UWP_WeatherClient.ViewModels
             _model = new List<RequestHistoryEntity>();
 
             _service = service;
+
+            ClearHistoryCommand = new RelayCommand(ClearHistory);
+
             Title = "History Info";
         }
 
@@ -30,6 +35,15 @@ namespace UWP_WeatherClient.ViewModels
         {
             History =  await _service.GetHistory();
             RaisePropertyChanged(() => History);
+        }
+
+        public ICommand ClearHistoryCommand { get; set; }
+
+
+        private async void ClearHistory()
+        {
+            await _service.ClearHistory();
+            GetHistory();
         }
 
         protected override void OnPageLoad()

@@ -15,5 +15,10 @@ namespace UWP_WeatherClient.Services.Implementations
             var rootObject = await GetResponse(new List<RequestHistoryEntity>(), $"{ApiPath}History/");
             return rootObject;
         }
+
+        public async Task<bool> ClearHistory()
+        {
+            return await DeleteResponse($"{ApiPath}History/");
+        }
     }
 }

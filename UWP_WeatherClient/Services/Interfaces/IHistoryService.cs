@@ -10,5 +10,6 @@ namespace UWP_WeatherClient.Services.Interfaces
     interface IHistoryService
     {
         Task<List<RequestHistoryEntity>> GetHistory();
+        Task<bool> ClearHistory();
     }
 }
