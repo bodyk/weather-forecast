@@ -13,6 +13,8 @@ namespace UWP_WeatherClient.Services.Interfaces
 
         Task<City> GetCity(string cityName);
 
+        Task<bool> PutCity(City cityName);
+
         Task<bool> PostCity(City city);
 
         Task<bool> DeleteCity(string cityName);

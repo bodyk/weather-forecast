@@ -44,11 +44,15 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="2*"/>
+                            <RowDefinition Height="2*"/>
 
                         </Grid.RowDefinitions>
-
-                        <controls:Expander Grid.Column="0" Grid.Row="0" 
-                                           Header="{Binding WeatherEntity.CountForecastDays}"
+                        <TextBlock Grid.Row="0"
+                            Text="{Binding WeatherEntity.CityName}"
+                                 Margin="10"
+                                 HorizontalAlignment="Center"/>
+                        <controls:Expander Grid.Column="0" Grid.Row="1" 
+                                           Header="{Binding RequestTime}"
                                            Foreground="White"
                                            Background="CornflowerBlue"
                                            IsExpanded="False">

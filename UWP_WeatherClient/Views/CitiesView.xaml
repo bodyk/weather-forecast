@@ -18,30 +18,39 @@
     </interactivity:Interaction.Behaviors>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ListView x:Name="CitiesListView" ItemsSource="{Binding Cities}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="9*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <TextBox Text="{Binding NewCityName, Mode=TwoWay}"
+                     Margin="18"
+                     TextAlignment="Left"
+                     PlaceholderText="New city name..."
+                     Width="200"/>
+            <Button Content="Add"
+                    Command="{Binding AddCityCommand}"
+                    HorizontalAlignment="Stretch"
+                    Foreground="White"
+                    Background="Green"
+                    Margin="18"
+            />
+        </StackPanel>
+        <ListView Grid.Row="1" x:Name="CitiesListView" ItemsSource="{Binding Cities}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
 
                         </Grid.ColumnDefinitions>
                         <TextBox x:Name="txtCityName" HorizontalAlignment="Stretch" 
                                  Grid.Column="0" Text="{Binding Name, Mode=TwoWay}" IsReadOnly="True"/>
-                        <StackPanel Grid.Column="1" >
-                            <Button x:Name="btnSaveCity" HorizontalAlignment="Center" 
-                                    Margin="10 0" Content="Edit" Click="ButtonEdit_OnClick" Visibility="Collapsed">
-                                
-                            </Button>
-                            <Button x:Name="btnEditCity" HorizontalAlignment="Center" 
-                                    Margin="10 0" Content="Edit" Click="ButtonEdit_OnClick"></Button>
-                        </StackPanel>
-                        
+
                         <Button  x:Name="btnDeleteCity" HorizontalAlignment="Center" 
-                                Grid.Column="2" Content="Delete" Command="{Binding DataContext.DeleteCityCommand, ElementName=CitiesListView}" 
-                                 CommandParameter="{Binding Name}"></Button>
+                            Grid.Column="2" Content="Delete" Command="{Binding DataContext.DeleteCityCommand, ElementName=CitiesListView}" 
+                                CommandParameter="{Binding Name}"></Button>
 
                     </Grid>
                 </DataTemplate>

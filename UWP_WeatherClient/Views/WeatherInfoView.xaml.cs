@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using UWP_WeatherClient.ViewModels;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -74,6 +75,25 @@ namespace UWP_WeatherClient.Views
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
+        }
+
+        private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+        }
+
+        private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        {
+            var selectedItem = args.SelectedItem.ToString();
+            sender.Text = selectedItem;
+        }
+
+        private void AutoSeggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            if (args.ChosenSuggestion != null)
+            {
+                AutoSeggestBox.Text = args.ChosenSuggestion.ToString();
+            }
+
         }
     }
 }

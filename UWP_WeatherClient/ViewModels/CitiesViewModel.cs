@@ -29,16 +29,17 @@ namespace UWP_WeatherClient.ViewModels
             GetCitiesCommand = new RelayCommand(GetCities);
 
             DeleteCityCommand = new DelegateCommand(ExecuteDeleteCommand);
+            AddCityCommand = new RelayCommand(AddCity);
 
             _service = service;
             Title = "Default Cities";
         }
 
         public ICommand GetCitiesCommand { get; set; }
-
+        public ICommand AddCityCommand { get; set; }
         public ICommand DeleteCityCommand { set; get; }
 
-        public List<City> Cities { get; private set; }
+        public string NewCityName { get; set; }
 
         private void ExecuteDeleteCommand(object param)
         {
@@ -46,11 +47,26 @@ namespace UWP_WeatherClient.ViewModels
             GetCities();
         }
 
+        public List<City> Cities { get; set; }
+
         public async void GetCities()
         {
             Cities = await _service.GetCities();
             RaisePropertyChanged(() => Cities);
         }
+
+        public async void AddCity()
+        {
+            if (!string.IsNullOrEmpty(NewCityName))
+            {
+                await _service.PostCity(new City { Name = NewCityName });
+                GetCities();
+                NewCityName = "";
+                RaisePropertyChanged(() => NewCityName);
+            }
+        }
+
+
 
         protected override void OnPageLoad()
         {

@@ -24,6 +24,18 @@ namespace UWP_WeatherClient.Services.Implementations
             return rootObject;
         }
 
+        public async Task<bool> PutCity(City city)
+        {
+            return await PutResponse(new Dictionary<string, string> {
+                {
+                    nameof(city.Name), city.Name
+                },
+                {
+                    nameof(city.Id), city.Id.ToString()
+                }
+            }, $"{ApiPath}{_detailedPath}/{city.Id}");
+        }
+
         public async Task<bool> PostCity(City city)
         {
             return await PostResponse(new Dictionary<string, string>{{nameof(city.Name), city.Name }}, $"{ApiPath}{_detailedPath}/0");

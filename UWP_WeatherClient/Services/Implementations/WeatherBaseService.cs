@@ -60,6 +60,28 @@ namespace UWP_WeatherClient.Services.Implementations
             }
         }
 
+        public async Task<bool> PutResponse(Dictionary<string, string> dict, string request)
+        {
+            using (var client = new HttpClient())
+            {
+                using (var content = new FormUrlEncodedContent(dict))
+                {
+                    using (var response = await client.PutAsync(request, content))
+                    {
+                        try
+                        {
+                            response.EnsureSuccessStatusCode();
+                        }
+                        catch (Exception e)
+                        {
+                            return false;
+                        }
+                        return response.StatusCode == System.Net.HttpStatusCode.OK;
+                    }
+                }
+            }
+        }
+
         public async Task<bool> DeleteResponse(string request)
         {
             HttpResponseMessage response = new HttpResponseMessage();

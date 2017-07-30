@@ -7,6 +7,7 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
+using UWP_WeatherClient.Models;
 
 namespace UWP_WeatherClient.ViewModels
 {
