@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Net;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using WeatherForecast.Models.OpenWeatherMapModels;
 using WeatherForecast.Services.Interfaces;
@@ -17,6 +18,7 @@ namespace WeatherForecast.Api
         }
 
         // GET: api/Cities
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public IQueryable<City> GetCities()
         {
             return (IQueryable<City>)_unitOfWorkService.GetAllCities();

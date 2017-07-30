@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 
 import 'hammerjs';
 
@@ -33,7 +34,8 @@ import { WeatherService} from './services/weather.service';
     BrowserAnimationsModule,
     FormsModule,
     MdInputModule,
-    MdButtonModule
+    MdButtonModule,
+    HttpModule
   ],
   providers: [HistoryService, CitiesService, WeatherService],
   bootstrap: [AppComponent]

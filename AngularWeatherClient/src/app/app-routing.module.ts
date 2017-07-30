@@ -3,12 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { HistoryComponent } from "./history/history.component";
 import { WeatherInfoComponent } from "./weather-info/weather-info.component";
+import { CitiesComponent } from "./cities/cities.component";
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: '/dashboard'
+    redirectTo: '/cities'
   }, {
     path: 'dashboard',
     component: DashboardComponent
@@ -18,6 +19,9 @@ const routes: Routes = [
   }, {
     path: 'weather',
     component: WeatherInfoComponent
+  }, {
+    path: 'cities',
+    component: CitiesComponent
   }
 ];
 
