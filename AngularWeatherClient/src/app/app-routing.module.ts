@@ -1,10 +1,23 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { DashboardComponent } from "./dashboard/dashboard.component";
+import { HistoryComponent } from "./history/history.component";
+import { WeatherInfoComponent } from "./weather-info/weather-info.component";
 
 const routes: Routes = [
   {
     path: '',
-    children: []
+    pathMatch: 'full',
+    redirectTo: '/dashboard'
+  }, {
+    path: 'dashboard',
+    component: DashboardComponent
+  }, {
+    path: 'history',
+    component: HistoryComponent
+  }, {
+    path: 'weather',
+    component: WeatherInfoComponent
   }
 ];
 
