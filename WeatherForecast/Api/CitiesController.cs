@@ -18,7 +18,7 @@ namespace WeatherForecast.Api
         }
 
         // GET: api/Cities
-        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
+        //[EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public IQueryable<City> GetCities()
         {
             return (IQueryable<City>)_unitOfWorkService.GetAllCities();

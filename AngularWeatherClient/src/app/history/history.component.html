@@ -1,5 +1,13 @@
-<p>
-  history works!
-</p>
 
-<router-outlet></router-outlet>
+ <div *ngIf="history">
+    <div *ngFor="let hEntry of history | async">
+
+    </div>
+    <ul *ngFor="let hEntry of history | async">
+        <li>temperature: {{ hEntry.requestTime }}</li>
+        <li>pressure: {{hEntry.pressure}}</li>
+        <li>windSpeed: {{hEntry.windSpeed}}</li>
+        <li>clouds: {{hEntry.clouds}}</li>
+        <li>date: {{hEntry.date}}</li>
+    </ul>
+</div>

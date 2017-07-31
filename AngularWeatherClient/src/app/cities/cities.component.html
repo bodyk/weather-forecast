@@ -1,11 +1,8 @@
-<p>
-  cities works!
-</p>
-
-<div *ngIf="cities">
-  <ul *ngFor="let city of cities | async">
-    <li>City: {{city.name}}</li>
-  </ul>
+ <div *ngIf="cities | async">
+    <ul *ngFor="let city of cities | async">
+        <li>City: {{city.name}}</li>
+    </ul>
+</div> 
+<div>
+    cities
 </div>
-{{cities}}
-<router-outlet></router-outlet>

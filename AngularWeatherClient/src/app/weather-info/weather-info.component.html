@@ -1,5 +1,101 @@
-<p>
-  weather-info works!
-</p>
+<div class="mainWeatherDiv">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <div id="flipkart-navbar">
+        <div class="container">
+            <div class="row row1">
+                <ul class="largenav pull-right" *ngFor="let city of cities | async">
+                    <li class="upper-links"><a class="links" (click)='onCityClick(city.name)' href="javascript:void(0)">{{city.name}}</a></li>
+                </ul>
+            </div>
+            <div class="row row2">
+                <div class="col-sm-2">
+                </div>
+                <div class="flipkart-navbar-search smallsearch col-sm-8 col-xs-11">
+                    <div class="row">
+                        <input class="flipkart-navbar-input col-xs-11 text-primary" type="" placeholder="City Name" [(ngModel)]="curCity">
 
-<router-outlet></router-outlet>
+                        <button class="flipkart-navbar-button col-xs-1" (click)='onShowWeather()'>
+                                    <svg width="15px" height="15px">
+                                        <path d="M11.618 9.897l4.224 4.212c.092.09.1.23.02.312l-1.464 1.46c-.08.08-.222.072-.314-.02L9.868 11.66M6.486 10.9c-2.42 0-4.38-1.955-4.38-4.367 0-2.413 1.96-4.37 4.38-4.37s4.38 1.957 4.38 4.37c0 2.412-1.96 4.368-4.38 4.368m0-10.834C2.904.066 0 2.96 0 6.533 0 10.105 2.904 13 6.486 13s6.487-2.895 6.487-6.467c0-3.572-2.905-6.467-6.487-6.467 "></path>
+                                    </svg>
+                                </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row row3 text-center">
+                <label class="radio-inline"><input type="radio" [(ngModel)]="countForecastDays" 
+                        value="1" name="optradio">1 Day</label>
+                <label class="radio-inline"><input type="radio" [(ngModel)]="countForecastDays"  
+                        value="3" name="optradio">3 Days</label>
+                <label class="radio-inline"><input type="radio" [(ngModel)]="countForecastDays"  
+                        value="7" name="optradio">7 Days</label>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="weather-Details" *ngIf="weatherInfo | async; let weatherInfo;">
+        <div class="divTable">
+            <div class="divTableBody">
+                <div class="divTableRow">
+                    <div class="divTableHead">
+                        <h3>{{weatherInfo.cityName}}</h3>
+                    </div>
+                    <div class="divTableHead">
+                        <h3>{{weatherInfo.countryCode}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h4>Weather forecast for {{weatherInfo.countForecastDays}} days</h4>
+        <div class="divParent" *ngFor="let info of weatherInfo.list">
+            <div class="divTable">
+                <div class="divTableHeading">
+                    <div class="divTableRow">
+                        <div class="divTableHead">{{info.dt | date:'medium'}}</div>
+                        <div class="divTableHead">
+                             <img src= {{formIconPath(info.weather[0].icon)}} /> 
+                        </div>
+                    </div>
+                </div>
+                <div class="divTableBody">
+                    <div class="divTableRow">
+                        <div class="divTableCell">Temperature:</div>
+                        <div class="divTableCell">{{info.temp.day}} &deg;C</div>
+                    </div>
+                    <div class="divTableRow">
+                        <div class="divTableCell">Humidity:</div>
+                        <div class="divTableCell">{{info.humidity}} %</div>
+                    </div>
+                    <div class="divTableRow">
+                        <div class="divTableCell">Pressure:</div>
+                        <div class="divTableCell">{{info.pressure}} hPa</div>
+                    </div>
+                    <div class="divTableRow">
+                        <div class="divTableCell">WindSpeed:</div>
+                        <div class="divTableCell">{{info.speed}} meter/sec</div>
+                    </div>
+                    <div class="divTableRow">
+                        <div class="divTableCell">Clouds:</div>
+                        <div class="divTableCell">{{info.clouds}} %</div>
+                    </div>
+                </div>
+            </div>
+            <hr class="half-rule" />
+        </div>
+    </div>
+
+    <!-- <div class="weather-info" *ngIf="weatherInfo | async; let weatherInfo;">
+        <h1>City: {{weatherInfo.cityName}}</h1>
+        <h1>Country: {{weatherInfo.countryCode}}</h1>
+        <ul *ngFor="let info of weatherInfo.list">
+            <li>Date: {{info.dt | date:'medium'}}</li>
+            <li>Temperature: {{info.temp.day}}</li>
+            <li>Humidity: {{info.humidity}}</li>
+            <li>Pressure: {{info.pressure}}</li>
+            <li>Wind Speed: {{info.speed}}</li>
+            <li>Clouds: {{info.clouds}}</li>
+            <hr/>
+        </ul>
+    </div> -->
+</div>

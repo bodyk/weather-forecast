@@ -2,7 +2,7 @@ import { City } from './City';
 import { List } from './List';
 
 
-export interface RootObject {
+export interface DetailedWeatherInfo {
         city: City;
         cod: string;
         message: number;

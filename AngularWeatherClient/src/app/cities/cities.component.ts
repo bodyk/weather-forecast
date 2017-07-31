@@ -17,13 +17,6 @@ export class CitiesComponent implements OnInit {
   constructor(private citiesService: CitiesService, private http: Http) { }
 
   ngOnInit() {
-    this.citiesService.getCities()
-    .map(res => res.json())
-    .subscribe(cities => {
-      this.cities = cities;
-      console.log(cities);
-    });
-      console.log(this.cities);
-      debugger;
+    this.cities = this.citiesService.getCities();
   }
 }

@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { WeatherService } from './../services/weather.service'
+import { Component, OnInit, Input } from '@angular/core';
+import { WeatherService } from './../services/weather.service';
+import { CitiesService } from './../services/cities.service';
+import { Observable } from "rxjs/Observable";
+import { City } from "../models/City";
+import { WeatherEntity } from "../models/WeatherEntity";
+import { DetailedWeatherInfo } from "../models/DetailedWeatherInfo";
 
 @Component({
   selector: 'app-weather-info',
@@ -9,13 +14,34 @@ import { WeatherService } from './../services/weather.service'
 })
 export class WeatherInfoComponent implements OnInit {
 
+    cities: Observable<City[]>;
+    @Input() curCity: string;
+    @Input() countForecastDays: string;
+    weatherInfo: Observable<DetailedWeatherInfo>;
+    iconPath: string = "http://openweathermap.org/img/w/";
+    iconExtension: string = ".png";    
 
+    constructor(private weatherService: WeatherService, private citiesService: CitiesService) {
+          this.cities = this.citiesService.getCities();
+          this.countForecastDays = "1"; 
+    }
 
-  constructor(private weatherService: WeatherService) {
+    ngOnInit() {
+    }
 
-  }
+    onCityClick(cityName: string) {
+      this.curCity = cityName;
+    }
 
-  ngOnInit() {
-  }
+    onShowWeather() {
+      if (this.curCity.length != 0)
+      {
+        this.weatherInfo = this.weatherService.getWeather(this.curCity, this.countForecastDays);
+      }
+    }
+
+    formIconPath(iconName: string): string {
+      return this.iconPath + iconName + this.iconExtension;
+    }
 
 }
