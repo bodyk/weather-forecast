@@ -41,7 +41,7 @@ export class WeatherInfoComponent implements OnInit {
     }
 
     formIconPath(iconName: string): string {
-      return this.iconPath + iconName + this.iconExtension;
+      return this.weatherService.formIconPath(iconName);
     }
 
 }

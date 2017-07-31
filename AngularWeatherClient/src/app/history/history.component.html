@@ -1,13 +1,76 @@
+<button (click)="onClearHistory()">Clear History</button>
+<div *ngIf="history | async; let history;">
+    <table class="table table-striped">
+        <div *ngFor="let historyItem of history">
+            <tr>
+                <td>
+                    <div>{{historyItem.requestTime}}</div>
+                </td>
+                 <td>
+                    <div>{{historyItem.weatherEntity.cityName}}</div>
+                </td> 
+                 <td>
+                    <div>
+                        <button (click)= "showHide(this, 'detailed_' + historyItem.id)">more...</button>
+                    </div>
+                </td> 
+            </tr>
+             <tr>
+                <td colspan="3">
+                    <div [id] = "'detailed_'+ historyItem.id" style="display: none" >
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <tr>
+                                     <th>
+                                        <h3><div> {{historyItem.weatherEntity.cityName}} </div></h3>
+                                    </th>
 
- <div *ngIf="history">
-    <div *ngFor="let hEntry of history | async">
-
-    </div>
-    <ul *ngFor="let hEntry of history | async">
-        <li>temperature: {{ hEntry.requestTime }}</li>
-        <li>pressure: {{hEntry.pressure}}</li>
-        <li>windSpeed: {{hEntry.windSpeed}}</li>
-        <li>clouds: {{hEntry.clouds}}</li>
-        <li>date: {{hEntry.date}}</li>
-    </ul>
+                                    <th id="countryCode">
+                                        <h3><div> {{historyItem.weatherEntity.countryCode}} </div></h3>
+                                    </th> 
+                                </tr>
+                            </table>
+                        </div>
+                         <h4>Weather forecast for {{historyItem.weatherEntity.countForecastDays}} days</h4>
+                        <div *ngIf="historyItem.weatherEntity.dayInfoEntities; let dayInfoEntities;">
+                            <div class="divParent" *ngFor="let info of dayInfoEntities">
+                                <div class="divTable">
+                                    <div class="divTableHeading">
+                                        <div class="divTableRow">
+                                            <div class="divTableHead">{{info.date}}</div>
+                                            <div class="divTableHead">
+                                                <img src= {{formIconPath(info.iconPath)}} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="divTableBody">
+                                        <div class="divTableRow">
+                                            <div class="divTableCell">Temperature:</div>
+                                            <div class="divTableCell">{{info.temperature}} &deg;C</div>
+                                        </div>
+                                        <div class="divTableRow">
+                                            <div class="divTableCell">Humidity:</div>
+                                            <div class="divTableCell">{{info.humidity}} %</div>
+                                        </div>
+                                        <div class="divTableRow">
+                                            <div class="divTableCell">Pressure:</div>
+                                            <div class="divTableCell">{{info.pressure}} hPa</div>
+                                        </div>
+                                        <div class="divTableRow">
+                                            <div class="divTableCell">WindSpeed:</div>
+                                            <div class="divTableCell">{{info.windSpeed}} meter/sec</div>
+                                        </div>
+                                        <div class="divTableRow">
+                                            <div class="divTableCell">Clouds:</div>
+                                            <div class="divTableCell">{{info.clouds}} %</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </td>
+            </tr> 
+        </div>
+    </table>
 </div>
