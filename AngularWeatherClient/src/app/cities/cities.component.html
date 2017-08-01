@@ -1,0 +1,31 @@
+<div class="cityInput">
+    <div>
+        <div class="col-sm-12">
+            <div class="text-center">
+                <input class="col-xs-11 text-primary form-control" type="" placeholder="City Name" [(ngModel)]="curCity">
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="col-sm-12">
+            <div class="text-center">
+                <button (click)="onAddCity()" class="btn btn-primary btn-outline-primary btn-md">Add New City</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" *ngIf="cities | async; let cities;">
+    <div class="row"  *ngFor="let city of cities">
+        <div class="col-xs-12 col-sm-12">
+            <div class="row">
+                <div class="column col-xs-4 col-sm-8">
+                    {{city.name}}
+                </div>
+                <div class="column columnDelete col-xs-4 col-sm-2">
+                    <button (click)="onDeleteCity(city.name)">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

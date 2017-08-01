@@ -1,0 +1,82 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="text-center">
+    <button (click)="onClearHistory()" class="btn btn-primary btn-danger btn-lg">Clear History</button>
+    </div>
+</div>
+</div>
+<div *ngIf="history | async; let history;">
+    <div *ngFor="let historyItem of history">
+        <table class="table-responsive table">
+            <tr>
+                <td>
+                    <div>{{historyItem.requestTime | date:'medium'}}</div>
+                </td>
+                <td>
+                    <div>{{historyItem.weatherEntity.cityName}}</div>
+                </td> 
+                <td>
+                    <div>
+                        <button (click)= "showHide(this, 'detailed_' + historyItem.id)">more...</button>
+                    </div>
+                </td> 
+            </tr>
+            <tr [id] = "'detailed_'+ historyItem.id" style="display: none">
+                <td colspan="3">
+                    <div class="divParent">
+                        <div class="divTable">
+                            <div class="divTableHeading">
+                            <div class="divTableRow">
+                                <div class="divTableCell">
+                                    <h3>{{historyItem.weatherEntity.cityName}} </h3>
+                                </div>
+
+                                <div class="divTableCell" id="countryCode">
+                                    <h3> {{historyItem.weatherEntity.countryCode}} </h3>
+                                </div> 
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Weather forecast for {{historyItem.weatherEntity.countForecastDays}} days</h4>
+                    <div *ngIf="historyItem.weatherEntity.dayInfoEntities; let dayInfoEntities;">
+                        <div class="divParent" *ngFor="let info of dayInfoEntities">
+                            <div class="divTable">
+                                <div class="divTableHeading">
+                                    <div class="divTableRow">
+                                        <div class="divTableHead">{{info.date}}</div>
+                                        <div class="divTableHead">
+                                            <img src= {{info.iconPath}} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="divTableBody">
+                                    <div class="divTableRow">
+                                        <div class="divTableCell">Temperature:</div>
+                                        <div class="divTableCell">{{info.temperature}} &deg;C</div>
+                                    </div>
+                                    <div class="divTableRow">
+                                        <div class="divTableCell">Humidity:</div>
+                                        <div class="divTableCell">{{info.humidity}} %</div>
+                                    </div>
+                                    <div class="divTableRow">
+                                        <div class="divTableCell">Pressure:</div>
+                                        <div class="divTableCell">{{info.pressure}} hPa</div>
+                                    </div>
+                                    <div class="divTableRow">
+                                        <div class="divTableCell">WindSpeed:</div>
+                                        <div class="divTableCell">{{info.windSpeed}} meter/sec</div>
+                                    </div>
+                                    <div class="divTableRow">
+                                        <div class="divTableCell">Clouds:</div>
+                                        <div class="divTableCell">{{info.clouds}} %</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </td>
+            </tr> 
+        </table>
+    </div>
+</div>

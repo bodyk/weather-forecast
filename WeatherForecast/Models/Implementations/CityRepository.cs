@@ -35,7 +35,10 @@ namespace WeatherForecast.Models.Implementations
 
         public void Create(City item)
         {
-            _context.Cities.Add(item);
+            if (item != null)
+            {
+                _context.Cities.Add(item);
+            }
         }
 
         public void Update(City item)
