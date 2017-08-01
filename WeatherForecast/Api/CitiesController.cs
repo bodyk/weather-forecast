@@ -55,7 +55,6 @@ namespace WeatherForecast.Api
         }
 
         // POST: api/Cities
-        [ResponseType(typeof(City))]
         [HttpPost]
         [Route("api/Cities/{city}")]
         public IHttpActionResult PostCity(City city)
@@ -67,7 +66,7 @@ namespace WeatherForecast.Api
 
             _unitOfWorkService.AddCity(city);
 
-            return CreatedAtRoute("DefaultApi", new { id = city.Id }, city);
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         // DELETE: api/Cities/Lviv
@@ -84,7 +83,7 @@ namespace WeatherForecast.Api
 
             _unitOfWorkService.RemoveCity(city);
 
-            return Ok(city);
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         protected override void Dispose(bool disposing)
