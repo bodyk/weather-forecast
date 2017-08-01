@@ -1,6 +1,6 @@
 import { Coord } from './Coord';
 
-export interface City {
+export class City {
     id: number;
     name: string;
     coord?: Coord;

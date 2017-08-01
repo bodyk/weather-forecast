@@ -25,18 +25,14 @@ export class HistoryComponent implements OnInit {
   }
 
   onClearHistory() {
-    debugger;
-    this.historyService.deleteHistory();
-    this.updateHistory();
+    this.historyService.deleteHistory().then(() => this.updateHistory());
   }
 
   showHide(buttonMoreLess, elementid: string) : void {
       if (document.getElementById(elementid).style.display === 'none') {
           document.getElementById(elementid).style.display = '';
-          buttonMoreLess.value = 'less';
       } else {
           document.getElementById(elementid).style.display = 'none';
-          buttonMoreLess.value = 'more...';
       }
   }
 

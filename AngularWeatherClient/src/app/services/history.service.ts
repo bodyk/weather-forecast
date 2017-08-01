@@ -9,14 +9,14 @@ import { ApiBaseService } from './api-base.service'
 export class HistoryService extends ApiBaseService {
   constructor(protected http: Http) {
     super(http);
-    this.apiDetailedGetRequest = this.apiDetailedDeleteRequest = this.apiBaseRequest + "History/";
+    this.baseRequest += "History/";
   }
 
   getHistory() {
-    return this.get();
+    return this.get(this.baseRequest);
   }
 
-  deleteHistory() {
-    this.delete();
+  deleteHistory() : Promise<any> {
+    return this.delete(this.baseRequest);
   }
 }

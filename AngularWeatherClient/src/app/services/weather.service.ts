@@ -10,7 +10,6 @@ export class WeatherService extends ApiBaseService {
     }
 
   getWeather(cityName: string, countDays: string) {
-    this.apiDetailedGetRequest = this.apiBaseRequest +"/WeatherInfo/" + cityName + "/" + countDays;    
-    return super.get();
+    return super.get(this.baseRequest + "/WeatherInfo/" + cityName + "/" + countDays);
   }
 }

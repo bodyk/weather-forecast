@@ -1,24 +1,29 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, RequestOptions } from '@angular/http';
+
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class ApiBaseService {
-  protected apiBaseRequest: string = "http://localhost:3344/api/";
-  protected apiDetailedGetRequest: string;
-  protected apiDetailedDeleteRequest: string;  
+  protected baseRequest: string = "http://localhost:3344/api/";
+  
 
   iconPath: string = "http://openweathermap.org/img/w/";
   iconExtension: string = ".png";    
   
   constructor(protected http: Http) { }
 
-  protected get() {
-    return this.http.get(this.apiDetailedGetRequest)
+  protected get(getRequest: string) {
+    return this.http.get(getRequest)
         .map(res => res.json());
   }
 
-  protected delete() {
-    this.http.delete(this.apiDetailedDeleteRequest).subscribe((res) => { console.log(res)});
+  protected delete(deleteRequest: string) : Promise<any>  {
+    return this.http.delete(deleteRequest).toPromise();
+  }
+
+  protected post(postRequest: string, content: any) : Promise<any> {
+    return this.http.post(postRequest, content).toPromise();
   }
 
   formIconPath(iconName: string): string {
