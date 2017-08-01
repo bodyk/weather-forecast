@@ -9,10 +9,14 @@ import { ApiBaseService } from './api-base.service'
 export class HistoryService extends ApiBaseService {
   constructor(protected http: Http) {
     super(http);
-    this.apiDetailedGetRequest = this.apiBaseRequest + "History/";
+    this.apiDetailedGetRequest = this.apiDetailedDeleteRequest = this.apiBaseRequest + "History/";
   }
 
   getHistory() {
     return this.get();
+  }
+
+  deleteHistory() {
+    this.delete();
   }
 }

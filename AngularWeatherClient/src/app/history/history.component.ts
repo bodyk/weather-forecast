@@ -17,17 +17,18 @@ export class HistoryComponent implements OnInit {
   constructor(private historyService: HistoryService) { }
 
   ngOnInit() {
+    this.updateHistory();
+  }
+
+  updateHistory() {
     this.history = this.historyService.getHistory();
-    this.history.subscribe(data => console.log(data));
   }
 
   onClearHistory() {
-
+    debugger;
+    this.historyService.deleteHistory();
+    this.updateHistory();
   }
-
-  formIconPath(iconName: string): string {
-      return this.historyService.formIconPath(iconName);
-    }
 
   showHide(buttonMoreLess, elementid: string) : void {
       if (document.getElementById(elementid).style.display === 'none') {

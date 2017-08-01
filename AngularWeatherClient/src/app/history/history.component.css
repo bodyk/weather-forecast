@@ -46,3 +46,14 @@
 .divTableBody {
     display: table-row-group;
 }
+
+.table {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+    align-content: space-around;
+}
+
+.btn {
+    margin-bottom: 2%;
+}
