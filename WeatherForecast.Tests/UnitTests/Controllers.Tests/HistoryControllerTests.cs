@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using Moq;
 using NUnit.Framework;
@@ -25,14 +26,14 @@ namespace WeatherForecast.Tests.UnitTests.Controllers.Tests
         [SetUp]
         public void TestSetup()
         {
-            _unitOfWorkMock.Setup(x => x.GetAllCities())
-                .Returns(new List<City>
+            _unitOfWorkMock.Setup(x => (x.GetAllCities()))
+                .ReturnsAsync(new List<City>
                 {
                     new City{Name = "Lviv"}
                 });
 
             _unitOfWorkMock.Setup(x => x.GetHistory())
-                .Returns(new List<RequestHistoryEntity>());
+                .ReturnsAsync(new List<RequestHistoryEntity>());
         }
 
         [TearDown]
@@ -42,10 +43,10 @@ namespace WeatherForecast.Tests.UnitTests.Controllers.Tests
         }
 
         [Test]
-        public void Index_View_Contains_ICollectionOfRequestHistoryEntity_Model()
+        public async Task Index_View_Contains_ICollectionOfRequestHistoryEntity_Model()
         {
             //Act
-            var result = ((ViewResult)_controller.Index()).Model;
+            var result = ((ViewResult) await _controller.Index()).Model;
 
             //Assert
             Assert.IsInstanceOf<ICollection<RequestHistoryEntity>>(result);

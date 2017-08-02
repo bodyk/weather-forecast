@@ -23,7 +23,7 @@ namespace WeatherForecast.Controllers
 
         public async Task<ActionResult> Index(string customCityName, int time = 1)
         {
-            ViewBag.StartupCities = _unitOfWorkService.GetAllCities();
+            ViewBag.StartupCities = await _unitOfWorkService.GetAllCities();
 
             try
             {
@@ -31,7 +31,7 @@ namespace WeatherForecast.Controllers
                 {
                     _detailedInfo = await _infoService.GetInfoByCity(customCityName, time);
 
-                    _unitOfWorkService.AddHistoryItem(new RequestHistoryEntity
+                    await _unitOfWorkService.AddHistoryItem(new RequestHistoryEntity
                     {
                         RequestTime = DateTime.Now,
                         WeatherEntity = _detailedInfo.GetEntity()

@@ -8,9 +8,9 @@ namespace WeatherForecast.Models.Interfaces
 {
     interface IRepository<T> where T : class
     {
-        IEnumerable<T> GetAll();
-        T Get(int id);
-        T Get(string name);
+        Task<IEnumerable<T>> GetAll();
+        Task<T> Get(int id);
+        Task<T> Get(string name);
         void Create(T item);
         void Update(T item);
         void Delete(T item);

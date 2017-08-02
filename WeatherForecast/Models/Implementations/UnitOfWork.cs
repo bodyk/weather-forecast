@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace WeatherForecast.Models.Implementations
@@ -32,9 +33,9 @@ namespace WeatherForecast.Models.Implementations
         public WeatherRepository WetherInfos => 
             _weatherRepository ?? (_weatherRepository = new WeatherRepository(_context));
 
-        public void Save()
+        public async Task SaveAsync()
         {
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         private bool _disposed = false;

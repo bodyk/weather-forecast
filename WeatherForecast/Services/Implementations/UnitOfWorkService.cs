@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using WeatherForecast.Models.Entities;
 using WeatherForecast.Models.Implementations;
@@ -22,49 +23,49 @@ namespace WeatherForecast.Services.Implementations
             _unitOfWork = unitOfWork;
         }
 
-        public void AddCity(City item)
+        public async Task AddCity(City item)
         {
             _unitOfWork.Cities.Create(item);
-            _unitOfWork.Save();
+            await _unitOfWork.SaveAsync();
         }
 
-        public IEnumerable<City> GetAllCities()
+        public async Task<IEnumerable<City>> GetAllCities()
         {
-            return _unitOfWork.Cities.GetAll();
+            return await _unitOfWork.Cities.GetAll();
         }
 
-        public City FindCity(string cityName)
+        public async Task<City> FindCity(string cityName)
         {
-            return _unitOfWork.Cities.Get(cityName);
+            return await _unitOfWork.Cities.Get(cityName);
         }
 
-        public void RemoveCity(City city)
+        public async Task RemoveCity(City city)
         {
             _unitOfWork.Cities.Delete(city);
-            _unitOfWork.Save();
+            await _unitOfWork.SaveAsync();
         }
 
-        public void UpdateCity(City item)
+        public async Task UpdateCity(City item)
         {
             _unitOfWork.Cities.Update(item);
-            _unitOfWork.Save();
+            await _unitOfWork.SaveAsync();
         }
 
-        public void AddHistoryItem(RequestHistoryEntity item)
+        public async Task AddHistoryItem(RequestHistoryEntity item)
         {
             _unitOfWork.HistoryItems.Create(item);
-            _unitOfWork.Save();
+            await _unitOfWork.SaveAsync();
         }
 
-        public void ClearHistory()
+        public async Task ClearHistory()
         {
             _unitOfWork.HistoryItems.Clear();
-            _unitOfWork.Save();
+            await _unitOfWork.SaveAsync();
         }
 
-        public IEnumerable<RequestHistoryEntity> GetHistory()
+        public async Task<IEnumerable<RequestHistoryEntity>> GetHistory()
         {
-            return _unitOfWork.HistoryItems.GetAll();
+            return await _unitOfWork.HistoryItems.GetAll();
         }
 
         public void Dispose()

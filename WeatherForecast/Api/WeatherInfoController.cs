@@ -34,7 +34,7 @@ namespace WeatherForecast.Api
 
             var res = await _weatherService.GetInfoByCity(cityName, countDays);
 
-            _unitOfWorkService.AddHistoryItem(new RequestHistoryEntity
+            await _unitOfWorkService.AddHistoryItem(new RequestHistoryEntity
             {
                 RequestTime = DateTime.Now,
                 WeatherEntity = res.GetEntity()
