@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using WeatherForecast.Models.Entities;
 using WeatherForecast.Models.Interfaces;
@@ -18,17 +19,17 @@ namespace WeatherForecast.Models.Implementations
             _context = context;
         }
 
-        public IEnumerable<WeatherEntity> GetAll()
+        public async Task<IEnumerable<WeatherEntity>> GetAll()
         {
-            return _context.Infos;
+            return await _context.Infos.ToArrayAsync();
         }
 
-        WeatherEntity IRepository<WeatherEntity>.Get(int id)
+        async Task<WeatherEntity> IRepository<WeatherEntity>.Get(int id)
         {
-            return _context.Infos.FirstOrDefault(c => c.Id == id);
+            return await _context.Infos.FirstOrDefaultAsync(c => c.Id == id);
         }
 
-        public WeatherEntity Get(string name)
+        public Task<WeatherEntity> Get(string name)
         {
             throw new NotImplementedException();
         }

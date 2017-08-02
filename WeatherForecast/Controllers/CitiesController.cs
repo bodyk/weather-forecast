@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using WeatherForecast.Models.OpenWeatherMapModels;
 using WeatherForecast.Services.Interfaces;
@@ -15,9 +16,9 @@ namespace WeatherForecast.Controllers
         }
 
         // GET: Cities
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View(_unitOfWorkService.GetAllCities());
+            return View(await _unitOfWorkService.GetAllCities());
         }
 
         // GET: Cities/Create
@@ -43,11 +44,11 @@ namespace WeatherForecast.Controllers
         }
 
         // GET: Cities/Edit/5
-        public ActionResult Edit(string cityName)
+        public async Task<ActionResult> Edit(string cityName)
         {
             if (cityName == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            var city = _unitOfWorkService.FindCity(cityName);
+            var city = await _unitOfWorkService.FindCity(cityName);
             if (city == null)
                 return HttpNotFound();
             return View(city);
@@ -58,22 +59,22 @@ namespace WeatherForecast.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] City city)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name")] City city)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWorkService.UpdateCity(city);
+                await _unitOfWorkService.UpdateCity(city);
                 return RedirectToAction("Index");
             }
             return View(city);
         }
 
         // GET: Cities/Delete/5
-        public ActionResult Delete(string cityName)
+        public async Task<ActionResult> Delete(string cityName)
         {
             if (cityName == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            var city = _unitOfWorkService.FindCity(cityName);
+            var city = await _unitOfWorkService.FindCity(cityName);
             if (city == null)
                 return HttpNotFound();
             return View(city);
@@ -83,15 +84,15 @@ namespace WeatherForecast.Controllers
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string cityName)
+        public async Task<ActionResult> DeleteConfirmed(string cityName)
         {
             if (cityName != null)
             {
-                City city = _unitOfWorkService.FindCity(cityName);
+                City city = await _unitOfWorkService.FindCity(cityName);
 
                 if (city != null)
                 {
-                    _unitOfWorkService.RemoveCity(city);
+                    await _unitOfWorkService.RemoveCity(city);
                 }
             }
 

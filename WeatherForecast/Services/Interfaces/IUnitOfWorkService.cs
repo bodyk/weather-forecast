@@ -10,20 +10,20 @@ namespace WeatherForecast.Services.Interfaces
 {
     public interface IUnitOfWorkService : IDisposable
     {
-        void AddCity(City item);
+        Task AddCity(City item);
 
-        IEnumerable<City> GetAllCities();
+        Task<IEnumerable<City>> GetAllCities();
 
-        City FindCity(string cityName);
+        Task<City> FindCity(string cityName);
 
-        void RemoveCity(City city);
+        Task RemoveCity(City city);
 
-        void UpdateCity(City item);
+        Task UpdateCity(City item);
 
-        void AddHistoryItem(RequestHistoryEntity item);
+        Task AddHistoryItem(RequestHistoryEntity item);
 
-        void ClearHistory();
+        Task ClearHistory();
 
-        IEnumerable<RequestHistoryEntity> GetHistory();
+        Task<IEnumerable<RequestHistoryEntity>> GetHistory();
     }
 }

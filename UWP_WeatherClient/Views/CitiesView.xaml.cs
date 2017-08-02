@@ -23,8 +23,6 @@ namespace UWP_WeatherClient.Views
     /// </summary>
     public sealed partial class CitiesView : Page
     {
-        private Button editButton;
-
         public CitiesView()
         {
             this.InitializeComponent();

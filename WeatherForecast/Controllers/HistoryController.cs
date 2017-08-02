@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Threading.Tasks;
+using System.Web.Mvc;
 using WeatherForecast.Services.Interfaces;
 
 namespace WeatherForecast.Controllers
@@ -13,17 +14,17 @@ namespace WeatherForecast.Controllers
         }
 
         // GET: History/Index
-        public ActionResult Index(bool bClear = false)
+        public async Task<ActionResult> Index(bool bClear = false)
         {
             if (bClear)
             {
-                _unitOfWorkService.ClearHistory();
+                await _unitOfWorkService.ClearHistory();
             }
             var history = _unitOfWorkService.GetHistory();
             if (history == null)
                 return HttpNotFound();
 
-            return View(history);
+            return View(await history);
         }
     }
 }

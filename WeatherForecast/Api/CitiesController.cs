@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
@@ -19,17 +20,17 @@ namespace WeatherForecast.Api
 
         // GET: api/Cities
         //[EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
-        public IQueryable<City> GetCities()
+        public async Task<IQueryable<City>> GetCities()
         {
-            return (IQueryable<City>)_unitOfWorkService.GetAllCities();
+            return (IQueryable<City>) await _unitOfWorkService.GetAllCities();
         }
 
         // GET: api/Cities/Lviv
         [ResponseType(typeof(City))]
         [Route("api/Cities/{cityName}")]
-        public IHttpActionResult GetCity(string cityName)
+        public async Task<IHttpActionResult> GetCity(string cityName)
         {
-            City city = _unitOfWorkService.FindCity(cityName);
+            City city = await _unitOfWorkService.FindCity(cityName);
             if (city == null)
             {
                 return NotFound();
@@ -42,14 +43,14 @@ namespace WeatherForecast.Api
         [ResponseType(typeof(void))]
         [HttpPut]
         [Route("api/Cities/{city}")]
-        public IHttpActionResult PutCity(City city)
+        public async Task<IHttpActionResult> PutCity(City city)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _unitOfWorkService.UpdateCity(city);
+            await _unitOfWorkService.UpdateCity(city);
 
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -57,14 +58,14 @@ namespace WeatherForecast.Api
         // POST: api/Cities
         [HttpPost]
         [Route("api/Cities/{city}")]
-        public IHttpActionResult PostCity(City city)
+        public async Task<IHttpActionResult> PostCity(City city)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _unitOfWorkService.AddCity(city);
+            await _unitOfWorkService.AddCity(city);
 
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -73,15 +74,15 @@ namespace WeatherForecast.Api
         [ResponseType(typeof(City))]
         [HttpDelete]
         [Route("api/Cities/{cityName}")]
-        public IHttpActionResult DeleteCity(string cityName)
+        public async Task<IHttpActionResult> DeleteCity(string cityName)
         {
-            City city = _unitOfWorkService.FindCity(cityName);
+            City city = await _unitOfWorkService.FindCity(cityName);
             if (city == null)
             {
                 return NotFound();
             }
 
-            _unitOfWorkService.RemoveCity(city);
+            await _unitOfWorkService.RemoveCity(city);
 
             return StatusCode(HttpStatusCode.NoContent);
         }

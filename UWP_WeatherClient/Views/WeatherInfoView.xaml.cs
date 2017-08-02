@@ -24,14 +24,9 @@ namespace UWP_WeatherClient.Views
     /// </summary>
     public sealed partial class WeatherInfoView : Page
     {
-
-        int startindex;
-        string s;
         public WeatherInfoView()
         {
             this.InitializeComponent();
-            startindex = 0;
-            s = numbertextBox.Text;
         }
 
         private void textBox_KeyDown(object sender, KeyRoutedEventArgs e)

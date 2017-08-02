@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using Moq;
 using NUnit.Framework;
@@ -25,7 +26,7 @@ namespace WeatherForecast.Tests.UnitTests.Controllers.Tests
         public void TestSetup()
         {
             _unitOfWorkMock.Setup(x => x.GetAllCities())
-                .Returns(new List<City>
+                .ReturnsAsync(new List<City>
                 {
                     new City{Name = "Lviv"}
                 });
@@ -38,43 +39,43 @@ namespace WeatherForecast.Tests.UnitTests.Controllers.Tests
         }
 
         [Test]
-        public void Index_Returns_ActionResult()
+        public async Task Index_Returns_ActionResult()
         {
             //Act
-            var actual = _controller.Index();
+            var actual = await _controller.Index();
 
             //Assert
             Assert.IsInstanceOf<ViewResult>(actual);
         }
 
         [Test]
-        public void EditPost_Returns_ViewResult_When_ModelState_Is_Invalid()
+        public async Task EditPost_Returns_ViewResult_When_ModelState_Is_Invalid()
         {
             // Arrange
             _controller.ModelState.AddModelError("CityName", "Required");
 
             //Act
-            var actual = _controller.Edit(city:new City());
+            var actual = await _controller.Edit(city:new City());
 
             //Assert
             Assert.IsInstanceOf<ViewResult>(actual);
         }
 
         [Test]
-        public void EditPost_Returns_RedirectToAction_Index_WhenModelState_Is_Valid()
+        public async Task EditPost_Returns_RedirectToAction_Index_WhenModelState_Is_Valid()
         {
             //Act
-            var actual = _controller.Edit(city: new City());
+            var actual = await _controller.Edit(city: new City());
 
             //Assert
             Assert.IsInstanceOf<RedirectToRouteResult>(actual);
         }
 
         [Test]
-        public void Delete_Returns_HttpStatusCodeResult_When_cityName_Is_Null()
+        public async Task Delete_Returns_HttpStatusCodeResult_When_cityName_Is_Null()
         {
             //Act
-            var actual = _controller.Delete(null);
+            var actual = await _controller.Delete(null);
 
             //Assert
             Assert.IsInstanceOf<HttpStatusCodeResult>(actual);
