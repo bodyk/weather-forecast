@@ -20,9 +20,9 @@ namespace WeatherForecast.Api
 
         // GET: api/Cities
         //[EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
-        public async Task<IQueryable<City>> GetCities()
+        public async Task<IEnumerable<City>> GetCities()
         {
-            return (IQueryable<City>) await _unitOfWorkService.GetAllCities();
+            return await _unitOfWorkService.GetAllCities();
         }
 
         // GET: api/Cities/Lviv
